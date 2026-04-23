@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Portfolio — Header motion lab</title>
+    <link rel="stylesheet" href="styles/header-motion-lab.css" />
+  </head>
+  <body>
+    <div class="motion-lab" data-motion-lab>
+      <header class="motion-lab__chrome">
+        <div class="motion-lab__title">
+          <div class="motion-lab__kicker">Debug</div>
+          <h1 class="motion-lab__heading">Header motion</h1>
+        </div>
+        <p class="motion-lab__note">
+          This page embeds <code>index.html</code> in an <code>iframe</code> and reads
+          <code>scripts/header-theme.js</code> — rail pinning is <strong>exact</strong> (no spring
+          simulation). Use <strong>Copy JSON</strong> to capture <code>appliedTop</code> /
+          <code>topStep</code> or <strong>Sync geometry</strong> to force a one-shot overlay
+          resync in the preview.
+        </p>
+      </header>
+
+      <aside
+        class="motion-lab__panel"
+        aria-label="Header motion controls"
+        data-motion-panel
+      >
+        <div class="motion-lab__panel-header">
+          <h2 class="motion-lab__panel-title">Readout</h2>
+          <div class="motion-lab__panel-actions">
+            <button type="button" class="motion-lab__button" data-action="copy">Copy JSON</button>
+            <button type="button" class="motion-lab__button" data-action="sync">Sync geometry</button>
+          </div>
+        </div>
+
+        <p class="motion-lab__status" data-status>Loading…</p>
+
+        <ul class="motion-lab__readout" data-readout>
+          <li>
+            <span class="motion-lab__readout-k">mode</span>
+            <code data-field="mode">—</code>
+          </li>
+          <li>
+            <span class="motion-lab__readout-k">appliedTop</span>
+            <code data-field="appliedTop">—</code>
+          </li>
+          <li>
+            <span class="motion-lab__readout-k">topStep</span>
+            <code data-field="topStep">—</code>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="motion-lab__stage">
+        <iframe
+          class="motion-lab__frame"
+          title="Portfolio home (embedded for motion tuning)"
+          src="index.html"
+          data-preview-frame
+        ></iframe>
+      </main>
+    </div>
+
+    <script src="scripts/header-motion-lab.js" defer></script>
+  </body>
+</html>

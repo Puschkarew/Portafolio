@@ -1,0 +1,22 @@
+.tmp-humans-shader/
+
+# Dependencies
+node_modules/
+
+# Logs and caches
+*.log
+.cache/
+
+# Playwright
+playwright-report/
+test-results/
+
+# macOS
+.DS_Store
+
+# Local env (secrets)
+.env
+.env.local
+
+# Cursor local debug logs
+.cursor/debug-*.log

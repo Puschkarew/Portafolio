@@ -1,0 +1,62 @@
+{
+  "390": {
+    "landmarks": [
+      "header",
+      "nav[aria-label='Primary']",
+      "main#main-content",
+      "footer"
+    ],
+    "skipLinkFocused": true,
+    "scrollWidth": 390,
+    "clientWidth": 390,
+    "horizontalOverflow": false
+  },
+  "1512": {
+    "landmarks": [
+      "header",
+      "nav[aria-label='Primary']",
+      "main#main-content",
+      "footer"
+    ],
+    "skipLinkFocused": true,
+    "scrollWidth": 1512,
+    "clientWidth": 1512,
+    "horizontalOverflow": false
+  },
+  "1919": {
+    "landmarks": [
+      "header",
+      "nav[aria-label='Primary']",
+      "main#main-content",
+      "footer"
+    ],
+    "skipLinkFocused": true,
+    "scrollWidth": 1919,
+    "clientWidth": 1919,
+    "horizontalOverflow": false
+  },
+  "1920": {
+    "landmarks": [
+      "header",
+      "nav[aria-label='Primary']",
+      "main#main-content",
+      "footer"
+    ],
+    "skipLinkFocused": true,
+    "scrollWidth": 1920,
+    "clientWidth": 1920,
+    "horizontalOverflow": false
+  },
+  "2560": {
+    "landmarks": [
+      "header",
+      "nav[aria-label='Primary']",
+      "main#main-content",
+      "footer"
+    ],
+    "skipLinkFocused": true,
+    "scrollWidth": 2560,
+    "clientWidth": 2560,
+    "horizontalOverflow": false
+  }
+}

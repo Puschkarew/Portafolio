@@ -1,0 +1,29 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio handoff and quality gate scaffolding.",
+  "scripts": {
+    "smoke": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:perf",
+    "verify:slice": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:live",
+    "lint:css": "stylelint \"styles/**/*.css\"",
+    "lint:html": "html-validate \"index.html\" \"tests/fixtures/**/*.html\"",
+    "lint:quality": "npm run lint:css && npm run lint:html",
+    "smoke:visual": "playwright test tests/smoke/home.visual.spec.ts",
+    "smoke:a11y": "playwright test tests/smoke/home.a11y.spec.ts",
+    "smoke:token-semantic": "playwright test tests/smoke/home.token-semantic.spec.ts",
+    "smoke:structure": "node scripts/quality/check-html-structure.mjs && node scripts/quality/check-css-consistency.mjs",
+    "smoke:live": "playwright test tests/smoke/home.live-parity.spec.ts",
+    "smoke:perf": "node scripts/quality/collect-performance-metrics.mjs",
+    "quality:check": "npm run lint:quality && npm run smoke:structure && npm run smoke:a11y",
+    "validate:live-parity": "node scripts/quality/validate-live-parity.mjs",
+    "verify:live-dod": "npm run validate:live-parity",
+    "validate:waivers": "node scripts/quality/validate-waivers.mjs"
+  },
+  "private": true,
+  "devDependencies": {
+    "@playwright/test": "^1.59.1",
+    "html-validate": "^9.7.1",
+    "stylelint": "^16.26.1",
+    "stylelint-config-standard": "^39.0.1"
+  }
+}

@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>blend + blur header test</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #111;
+      color: white;
+      min-height: 100vh;
+    }
+
+    main {
+      position: relative;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 40px;
+      font-size: clamp(32px, 7vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    .hero {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.25), transparent 30%),
+        linear-gradient(135deg, #9fe5e3 0%, #b8d9e3 40%, #7ca6d9 100%);
+      color: #132026;
+    }
+
+    .light {
+      background:
+        radial-gradient(circle at 70% 30%, rgba(255,255,255,0.8), transparent 25%),
+        linear-gradient(180deg, #f5f5f5 0%, #d8dce2 100%);
+      color: #222;
+    }
+
+    .dark {
+      background:
+        radial-gradient(circle at 60% 60%, rgba(255,180,120,0.18), transparent 30%),
+        linear-gradient(135deg, #2e0f08 0%, #6b1a0b 50%, #22100a 100%);
+      color: #f2d8d0;
+    }
+
+    .teal {
+      background:
+        radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08), transparent 25%),
+        linear-gradient(160deg, #002c2a 0%, #0b5450 100%);
+      color: #d9fffb;
+    }
+
+    /* Хедер специально НЕ sticky/fixed */
+    .site-header {
+      position: absolute;
+      inset-inline: 0;
+      top: 0;
+      padding: 24px;
+      pointer-events: none;
+      /* ВАЖНО: без z-index */
+    }
+
+    .site-header__inner {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      pointer-events: auto;
+    }
+
+    .site-header__nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-radius: 999px;
+      position: relative;
+      /* без isolation */
+      /* без z-index */
+    }
+
+    .site-header__nav::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      mix-blend-mode: plus-lighter;
+      pointer-events: none;
+    }
+
+    .site-header__link {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: inherit;
+      /* ВАЖНО: без position: relative + z-index на внутренних обертках,
+         если у тебя в проекте они не нужны */
+    }
+
+    .site-header__text {
+      display: inline-block;
+      color: white;
+      mix-blend-mode: difference;
+      font-size: 16px;
+      line-height: 1;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .content-label {
+      padding: 16px 22px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .note {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      max-width: 300px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      font-size: 13px;
+      line-height: 1.4;
+      z-index: 9999;
+    }
+
+    @supports not (mix-blend-mode: plus-lighter) {
+      .site-header__nav::before {
+        mix-blend-mode: normal;
+      }
+    }
+
+    @supports not (mix-blend-mode: difference) {
+      .site-header__text {
+        mix-blend-mode: normal;
+        color: #111;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+    <section class="section hero">
+      <div class="content-label">cyan / light background</div>
+    </section>
+
+    <section class="section light">
+      <div class="content-label">light gray background</div>
+    </section>
+
+    <section class="section dark">
+      <div class="content-label">dark warm background</div>
+    </section>
+
+    <section class="section teal">
+      <div class="content-label">dark teal background</div>
+    </section>
+  </main>
+
+  <!-- ВАЖНО: хедер стоит ПОСЛЕ main -->
+  <header class="site-header" id="siteHeader">
+    <div class="site-header__inner">
+      <nav class="site-header__nav" aria-label="Primary">
+        <a class="site-header__link" href="#">
+          <span class="site-header__text">about</span>
+        </a>
+        <a class="site-header__link" href="#">
+          <span class="site-header__text">work</span>
+        </a>
+        <a class="site-header__link" href="#">
+          <span class="site-header__text">contact</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="note">
+    Прокрути страницу. Текст в плашке должен менять визуальный цвет на разных фонах.
+    <br><br>
+    Для проверки поломки:
+    <br>1) поставь у <code>.site-header</code> <code>position: sticky</code>
+    <br>2) или добавь <code>z-index: 10</code>
+    <br>3) или перенеси <code>&lt;header&gt;</code> выше <code>&lt;main&gt;</code>
+  </div>
+
+  <script>
+    const header = document.getElementById("siteHeader");
+    let ticking = false;
+
+    function pinHeader() {
+      header.style.top = `${window.scrollY}px`;
+      ticking = false;
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(pinHeader);
+        ticking = true;
+      }
+    }
+
+    pinHeader();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", pinHeader);
+  </script>
+</body>
+</html>

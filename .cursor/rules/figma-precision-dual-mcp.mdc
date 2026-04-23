@@ -1,0 +1,50 @@
+---
+description: Dual-MCP workflow for Figma-accurate frontend implementation and validation
+alwaysApply: true
+---
+
+# Figma Precision With Dual MCP
+
+This project is Figma-first and hand-coded. Follow `AGENTS.md` and existing project rules first; this rule defines the browser validation workflow.
+
+## Tool split (mandatory)
+
+- Use `cursor-ide-browser` for fast flow checks: navigate, interact, snapshot, quick visual loop.
+- Use `user-chrome-devtools` for deep diagnostics: emulation, console/network analysis, Lighthouse, performance trace, memory snapshot.
+- Do not treat these tools as substitutes. Use both in sequence when UI is changed.
+
+## Required workflow for UI tasks
+
+1. Confirm exact Figma scope (frame/node), then capture design context and screenshot.
+2. Implement only requested section/block and preserve existing project conventions.
+3. Run quick interaction smoke with `cursor-ide-browser`.
+4. Run deep validation with `user-chrome-devtools`.
+5. Iterate until mismatch is removed or explicitly accepted by user.
+
+## Deep validation checklist (chrome-devtools MCP)
+
+- Viewports (minimum): `375x812`, `768x1024`, `1440x900` unless Figma defines others.
+- States: default, hover, focus, active, disabled, error (if relevant).
+- Emulation when needed: dark/light mode, cpu/network throttling, mobile-like viewport.
+- Console hygiene: no new errors in changed scope.
+- Network hygiene: no failed critical requests in changed scope.
+- Lighthouse sanity (desktop minimum): accessibility + best practices.
+
+## Figma parity acceptance gates
+
+- Geometry/spacing drift: max 2px.
+- Typography drift: size max 1px, line-height max 2px, intended weight/family preserved.
+- Colors, radii, borders, shadows follow design tokens/components when available.
+- DOM order and keyboard focus remain logical and accessible.
+- Do not close task as complete if known mismatches remain without explicit user approval.
+
+## Reporting requirements after UI change
+
+Always include:
+
+- changed files list
+- checked viewports/states
+- which tool was used for each validation step
+- remaining deltas (if any) with reason
+
+If parity is partial, explicitly say so and list exact gaps.

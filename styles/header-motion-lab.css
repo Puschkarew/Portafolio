@@ -1,0 +1,246 @@
+/* Debug-only: header motion tuning shell (does not affect production pages). */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0b1020;
+  color: #e6e8ef;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
+  font-size: 0.95em;
+}
+
+.motion-lab {
+  min-height: 100%;
+  position: relative;
+}
+
+.motion-lab__chrome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(11, 16, 32, 0.72);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.motion-lab__kicker {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.motion-lab__heading {
+  margin: 2px 0 0;
+  font-size: 16px;
+  line-height: 1.1;
+  font-weight: 650;
+}
+
+.motion-lab__note {
+  margin: 0;
+  max-width: 62ch;
+  font-size: 12px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.motion-lab__stage {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: #000;
+}
+
+.motion-lab__frame {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #fff;
+}
+
+/* Leave room for the top chrome + keep the page usable on small viewports. */
+.motion-lab__panel {
+  position: fixed;
+  top: 76px;
+  right: 12px;
+  z-index: 2;
+  width: min(420px, calc(100vw - 24px));
+  max-height: min(78vh, 900px);
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(11, 16, 32, 0.9);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+}
+
+.motion-lab__panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.motion-lab__panel-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.motion-lab__panel-actions {
+  display: flex;
+  gap: 8px;
+  flex: none;
+}
+
+.motion-lab__button {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e6e8ef;
+  border-radius: 9px;
+  padding: 6px 10px;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.motion-lab__button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.motion-lab__status {
+  margin: 0 0 10px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.motion-lab__readout {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.motion-lab__readout li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.motion-lab__readout li:last-child {
+  border-bottom: 0;
+}
+
+.motion-lab__readout code {
+  font-variant-numeric: tabular-nums;
+  color: #b8c7ff;
+  word-break: break-all;
+  text-align: right;
+  max-width: 65%;
+}
+
+.motion-lab__readout-k {
+  color: rgba(255, 255, 255, 0.6);
+  flex: none;
+}
+
+.motion-lab__field {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0;
+}
+
+.motion-lab__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.motion-lab__value {
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.66);
+  white-space: nowrap;
+}
+
+.motion-lab__hint {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #7c9cff;
+}
+
+.motion-lab__details {
+  margin-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 8px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.motion-lab__details summary {
+  cursor: pointer;
+}
+
+.motion-lab__list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+}
+
+@media (max-width: 900px) {
+  .motion-lab__chrome {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .motion-lab__panel {
+    top: auto;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    max-height: 44vh;
+    width: auto;
+  }
+}

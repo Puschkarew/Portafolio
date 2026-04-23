@@ -1,0 +1,233 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+  /* `hidden` breaks `position: sticky` on descendants in Chromium; `clip` suppresses horizontal bleed without that bug. */
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  background: var(--color-surface-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Shared page shell keeps the header in the same stacking context as the page content. */
+.site-shell {
+  position: relative;
+  z-index: var(--layer-main);
+}
+
+/* Main stays in normal paint order so the late DOM header can sit above it. */
+main#main-content.site-main {
+  position: relative;
+  background: var(--color-surface-page);
+  z-index: var(--layer-main);
+}
+
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateY(-200%);
+  background: var(--color-black);
+  color: var(--color-white);
+  padding: var(--space-200) var(--space-300);
+  z-index: var(--layer-sticky);
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.container {
+  max-inline-size: var(--grid-max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-page-padding);
+}
+
+.container--wide {
+  max-inline-size: 1920px;
+}
+
+.container--fullbleed {
+  max-inline-size: none;
+  padding-inline: 0;
+}
+
+.section {
+  padding-block: var(--space-section-gap-md);
+}
+
+/* Desktop: #work matches Figma Subheader (481:111) — single top rhythm, ~182px band, centered label, page fill */
+@media (min-width: 1024px) {
+  #work.section {
+    padding-block: 0;
+    padding-block-start: var(--space-section-gap-md);
+
+    /* Was 0: gap to first project block now comes from here so `.section--featured` can use `padding-block: 0` for full-viewport headers */
+    padding-block-end: var(--space-section-gap-md);
+    background: var(--color-surface-page);
+    text-align: center;
+  }
+}
+
+.site-header {
+  position: absolute;
+  top: 0;
+  inset-inline: 0;
+  padding-block: var(--space-600);
+  pointer-events: none;
+}
+
+.site-header__pin,
+.site-header__grid,
+.site-header__menu,
+.site-header__list {
+  pointer-events: none;
+}
+
+.site-footer {
+  padding-block: var(--space-1200);
+}
+
+/* Footer: full viewport band; inner wrapper keeps min 910px content (Figma 1428:13607).
+ * Sticky bottom; lower z than `main` for area17-style reveal on scroll. */
+.section.section--footer.site-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--layer-footer-under);
+  padding-block: 0;
+  min-block-size: 100vh;
+  display: flex;
+  flex-direction: column;
+  scroll-margin-block-start: var(--space-600);
+}
+
+#footer-meta {
+  scroll-margin-block-start: var(--space-600);
+}
+
+.section--hero {
+  background: var(--hero-background);
+  box-shadow: var(--hero-glow-shadow);
+}
+
+.section--footer {
+  background: var(--footer-background);
+  box-shadow: var(--footer-glow-shadow);
+}
+
+.section--featured {
+  background: var(--color-surface-featured);
+  --section-accent: var(--color-text-primary);
+  --section-text: var(--color-text-primary);
+  --section-meta: var(--color-text-muted);
+}
+
+.section--madebymad {
+  background: var(--color-surface-made-by-mad);
+  --section-accent: var(--color-text-accent-iris);
+  --section-text: var(--color-text-primary);
+  --section-meta: var(--color-text-accent-iris);
+}
+
+.section--odds {
+  position: relative;
+  background: var(--color-surface-odds-ends);
+  --section-accent: var(--color-text-accent-seafoam);
+  --section-text: var(--color-text-inverse);
+  --section-meta: var(--color-text-accent-seafoam);
+}
+
+.section--curves {
+  background: var(--color-surface-in-curves);
+  --section-accent: var(--color-text-accent-lemon);
+  --section-text: var(--color-text-primary);
+  --section-meta: var(--color-text-accent-lemon);
+}
+
+/* Project blocks use a sticky 100vh `.section-header`; default `.section` vertical padding (--space-section-gap-md, 160px)
+ * stacks with that height and breaks the viewport fit. Rhythm between bands stays on `.cards-grid` and #work end padding. */
+@media (min-width: 1024px) {
+  .section:has(> .section-header) {
+    padding-block: 0;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--space-grid-gap);
+  margin-block-start: var(--space-1200);
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --grid-columns: 8;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --grid-columns: 4;
+    --space-section-gap-md: var(--space-2400);
+  }
+}
+
+.prose {
+  max-inline-size: 60ch;
+}
+
+@media (max-width: 767px) {
+  .prose {
+    max-inline-size: 90%;
+  }
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  gap: var(--space-grid-gap);
+}
+
+.section__inner {
+  padding-inline: var(--space-page-padding);
+}
+
+.section__inner > .container {
+  padding-inline: 0;
+}
+
+.section-header {
+  position: sticky;
+  inset-block-start: 0;
+  min-block-size: var(--section-header-min-height);
+  display: grid;
+  place-items: center;
+  overflow: clip;
+}
+
+@media (max-width: 1023px) {
+  .section-header {
+    position: static;
+    min-block-size: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section--madebymad .section-header {
+    overflow: visible;
+  }
+}
+

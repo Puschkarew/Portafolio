@@ -1,0 +1,156 @@
+/* Scroll-driven project background/art (desktop + JS). */
+.project-background-stage {
+  display: none;
+}
+
+html.has-project-sticky-scrub main#main-content.site-main {
+  isolation: isolate;
+}
+
+html.has-project-sticky-scrub .project-background-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Solid base so footer is never seen through the project stack. */
+html.has-project-sticky-scrub .project-background-layer--base {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--color-surface-page);
+  opacity: 1;
+  transition: none;
+}
+
+html.has-project-sticky-scrub [data-bg-layer] {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0;
+  transition: none;
+  pointer-events: none;
+}
+
+html.has-project-sticky-scrub [data-bg-layer="prelude"] {
+  background: var(--color-surface-page);
+}
+
+html.has-project-sticky-scrub [data-bg-layer="featured"] {
+  background: var(--color-surface-featured);
+}
+
+html.has-project-sticky-scrub [data-bg-layer="madebymad"] {
+  background: var(--color-surface-made-by-mad);
+}
+
+html.has-project-sticky-scrub [data-bg-layer="odds"] {
+  background: var(--color-surface-odds-ends);
+}
+
+html.has-project-sticky-scrub [data-bg-layer="curves"] {
+  background: var(--color-surface-in-curves);
+}
+
+html.has-project-sticky-scrub .project-background-art {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  opacity: 0;
+  transition: none;
+  pointer-events: none;
+}
+
+html.has-project-sticky-scrub .project-background-art__inner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+}
+
+/* Match in-section art framing (Figma 1512 frame). */
+html.has-project-sticky-scrub .project-background-art--featured img {
+  inline-size: 100%;
+  max-inline-size: none;
+  block-size: auto;
+}
+
+html.has-project-sticky-scrub .project-background-art--madebymad img {
+  --madebymad-frame: 1512;
+  position: absolute;
+  inline-size: min(948px, calc(100vw * 948 / var(--madebymad-frame)));
+  max-inline-size: none;
+  block-size: auto;
+  aspect-ratio: 948 / 1279;
+  object-fit: cover;
+  object-position: 0.04% 0.02%;
+  inset: auto;
+  right: calc(-100vw * 420 / var(--madebymad-frame));
+  top: calc(-100vw * 62 / var(--madebymad-frame));
+  left: auto;
+}
+
+html.has-project-sticky-scrub .project-background-art--curves img {
+  --in-curves-frame: 1512;
+  position: absolute;
+  inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-frame)));
+  max-inline-size: none;
+  block-size: auto;
+  aspect-ratio: 2185 / 1448;
+  object-fit: cover;
+  inset: auto;
+  left: calc(54.17% + 100vw * 10.5 / var(--in-curves-frame));
+  top: calc(50% - 100vw * 117.25 / var(--in-curves-frame));
+  transform: translate(-50%, -50%);
+}
+
+html.has-project-sticky-scrub [data-color-ref] {
+  background: var(--color-surface-page, var(--color-white));
+}
+
+/* Prelude reference = page / index band before the first project. */
+html.has-project-sticky-scrub .section--prelude-color-ref {
+  background: var(--color-surface-page);
+  --section-accent: var(--color-text-primary);
+  --section-text: var(--color-text-primary);
+  --section-meta: var(--color-text-muted);
+}
+
+html.has-project-sticky-scrub .project-color-refs {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  pointer-events: none;
+}
+
+/* Section sits above the fixed background stack. */
+html.has-project-sticky-scrub [data-project] {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  transition: none;
+}
+
+/* Bitmap art comes from the stage; keep DOM for a11y / fallback. */
+html.has-project-sticky-scrub [data-project] .section-header__art {
+  opacity: 0;
+  transition: none;
+  pointer-events: none;
+}
+
+html.has-project-sticky-scrub [data-project="odds"] .section--odds__shader {
+  opacity: var(--project-art-opacity, 1);
+  transition: none;
+}

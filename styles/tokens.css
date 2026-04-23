@@ -1,0 +1,420 @@
+/*
+ * tokens.css — single source of truth for the Portfolio design system.
+ *
+ * Layered architecture:
+ *   1. Primitive — raw values (colors, sizes, weights). Do not use in components directly.
+ *   2. Semantic  — intent-based (color-text-primary, space-page-padding, type-display-xl-*).
+ *   3. Component — local tokens for specific components (card-*, tag-*, hero-*, footer-*).
+ *
+ * Breakpoints override typography and spacing at `max-width: 767px` (mobile) and
+ * `max-width: 1023px` (tablet) per docs/figma-audit/layout-rules.md.
+ *
+ * Source: Figma "Starting Point" (fileKey: OrSenMzG1cZgmJzjvi7ikP)
+ * Updated: 2026-04-21
+ */
+
+:root {
+  /* ============================================================
+   * 1. PRIMITIVE
+   * ============================================================ */
+
+  /* 1.1 Colors — neutrals */
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  /* 1.2 Colors — olive */
+  --color-olive-300: #d8d8d0;
+  --color-olive-400: #abab9c;
+
+  /* 1.3 Colors — teal */
+  --color-teal-950: #022f2e;
+
+  /* 1.4 Colors — orange */
+  --color-orange-500: #ff6900;
+  --color-orange-900: #7e2a0c;
+
+  /* 1.5 Colors — rose */
+  --color-rose-900: #8b0836;
+
+  /* 1.6 Colors — blue */
+  --color-blue-900: #1c398e;
+
+  /* 1.7 Colors — grayscale helpers */
+  --color-zinc-50: #fafafa;
+  --color-gray-400: #99a1af;
+  --color-gray-500: #767676; /* currently hardcoded as #767676 */
+  --color-gray-600: #696773; /* currently hardcoded as #696773 */
+  --color-gray-650: #7a7a74; /* currently hardcoded as #7a7a74 */
+
+  /* 1.8 Colors — section accents (all currently hardcoded on Home) */
+  --color-hero-blue-50: #cbf7ff;
+  --color-hero-glow: #81baff;
+  --color-accent-red: #b70025;
+  --color-accent-iris: #454add;
+  --color-accent-seafoam: #93e2ee;
+  --color-accent-pink: #fdb4df;
+  --color-accent-lemon: #fff36e;
+
+  /* 1.9 Colors — surfaces */
+  --color-surface-featured-raw: #f2f4f7;
+  --color-surface-cream-raw: #fcf9ef;
+  --color-surface-bark-raw: #652316;
+  --color-surface-taupe-raw: #968978;
+
+  /* 1.10 Color — semi-transparent */
+  --color-tag-overlay: rgba(0, 0, 0, 0.001);
+
+  /* 2. Typography — families */
+  --font-family-sans: "American Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-family-serif: "Society Trial", "JT Javel", "Georgia", "Times New Roman", serif;
+
+  /* 2.1 Typography — weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+
+  /* 2.2 Typography — sizes */
+  --font-size-16: 1rem; /* 16px */
+  --font-size-18: 1.125rem; /* 18px — mobile body */
+  --font-size-20: 1.25rem; /* 20px — desktop body */
+  --font-size-22: 1.375rem; /* 22px — legacy fallback */
+  --font-size-24: 1.5rem; /* 24px — mobile display-md */
+  --font-size-28: 1.75rem; /* 28px */
+  --font-size-36: 2.25rem; /* 36px */
+  --font-size-44: 2.75rem; /* 44px — mobile display-xl */
+  --font-size-48: 3rem; /* 48px — mobile display-2xl */
+  --font-size-56: 3.5rem; /* 56px */
+  --font-size-72: 4.5rem; /* 72px */
+
+  /* 2.3 Typography — line-heights */
+  --line-height-22: 1.375rem;
+  --line-height-26: 1.625rem;
+  --line-height-28: 1.75rem;
+  --line-height-30: 1.875rem;
+  --line-height-32: 2rem;
+  --line-height-40: 2.5rem;
+  --line-height-42: 2.625rem;
+  --line-height-44: 2.75rem;
+  --line-height-56: 3.5rem;
+  --line-height-68: 4.25rem;
+  --line-height-80: 5rem;
+
+  /* 2.4 Typography — tracking */
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.1em;
+  --tracking-wider: 0.01875em; /* 0.3px at 16px: keeps labels readable without oversized gaps */
+  --tracking-caps: 0.25em; /* "caps/16" in Figma = 4px on 16px ≈ 0.25em */
+
+  /* 3. Spacing — 4-based scale */
+  --space-0: 0;
+  --space-50: 2px;
+  --space-100: 4px;
+  --space-150: 6px;
+  --space-200: 8px;
+  --space-300: 12px;
+  --space-400: 16px;
+  --space-500: 20px;
+  --space-600: 24px;
+  --space-800: 32px;
+  --space-1200: 48px;
+  --space-1600: 64px;
+  --space-2400: 96px;
+  --space-3200: 128px;
+  --space-4000: 160px;
+
+  /* 4. Radii */
+  --radius-xs: 2px;
+  --radius-sm: 4px; /* current Figma radius/100 */
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* 5. Breakpoints (informational; use in @media queries) */
+  --bp-sm: 480px;
+  --bp-md: 767px;
+  --bp-lg: 1023px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1512px;
+
+  /* 6. Motion (starter defaults; adjust later) */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-entrance: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ============================================================
+   * 2. SEMANTIC
+   * ============================================================ */
+
+  /* 2.1 Text colors */
+  --color-text-primary: var(--color-black);
+  --color-text-inverse: var(--color-white);
+  --color-text-muted: var(--color-gray-500);
+  --color-text-olive: var(--color-olive-400);
+  --color-text-brand-blue: var(--color-blue-900);
+  --color-text-accent-red: var(--color-accent-red);
+  --color-text-accent-iris: var(--color-accent-iris);
+  --color-text-accent-seafoam: var(--color-accent-seafoam);
+  --color-text-accent-lemon: var(--color-accent-lemon);
+  --color-focus: var(--color-blue-900);
+
+  /* 2.2 Surfaces (backgrounds) */
+  --color-surface-page: var(--color-white);
+  --color-surface-hero: var(--color-hero-blue-50);
+  --color-surface-featured: var(--color-surface-featured-raw);
+  --color-surface-made-by-mad: var(--color-surface-cream-raw);
+  --color-surface-odds-ends: var(--color-surface-bark-raw);
+  --color-surface-in-curves: var(--color-surface-taupe-raw);
+  --color-surface-footer: var(--color-teal-950);
+
+  /* 2.3 Card fills (used on Project Card) */
+  --color-card-default: var(--color-black);
+  --color-card-dim: var(--color-gray-600);
+  --color-card-pink: var(--color-accent-pink);
+  --color-card-lemon: var(--color-accent-lemon);
+
+  /* 2.4 Typography — composite */
+  --type-display-2xl-family: var(--font-family-sans);
+  --type-display-2xl-weight: var(--font-weight-medium);
+  --type-display-2xl-size: var(--font-size-72);
+  --type-display-2xl-line-height: var(--line-height-80);
+  --type-display-2xl-tracking: var(--tracking-tight);
+
+  --type-display-xl-family: var(--font-family-sans);
+  --type-display-xl-weight: var(--font-weight-medium);
+  --type-display-xl-size: var(--font-size-56);
+  --type-display-xl-line-height: var(--line-height-68);
+  --type-display-xl-tracking: var(--tracking-tight);
+
+  --type-display-md-family: var(--font-family-sans);
+  --type-display-md-weight: var(--font-weight-medium);
+  --type-display-md-size: var(--font-size-28);
+  --type-display-md-line-height: var(--line-height-32);
+  --type-display-md-tracking: var(--tracking-normal);
+
+  --type-heading-lg-family: var(--font-family-serif);
+  --type-heading-lg-weight: var(--font-weight-regular);
+  --type-heading-lg-size: var(--font-size-36);
+  --type-heading-lg-line-height: var(--line-height-42);
+  --type-heading-lg-tracking: var(--tracking-normal);
+
+  --type-body-lg-family: var(--font-family-serif);
+  --type-body-lg-weight: var(--font-weight-regular);
+  --type-body-lg-size: var(--font-size-20);
+  --type-body-lg-line-height: var(--line-height-30);
+  --type-body-lg-tracking: 0.5px; /* Figma body/lg tracking */
+  --type-body-lg-style: normal;
+
+  --type-body-md-italic-family: var(--font-family-serif);
+  --type-body-md-italic-weight: var(--font-weight-regular);
+  --type-body-md-italic-size: var(--font-size-20);
+  --type-body-md-italic-line-height: var(--line-height-30);
+  --type-body-md-italic-tracking: var(--tracking-wide);
+  --type-body-md-italic-style: italic;
+
+  --type-caption-family: var(--font-family-sans);
+  --type-caption-weight: var(--font-weight-regular);
+  --type-caption-size: var(--font-size-16);
+  --type-caption-line-height: var(--line-height-22);
+  --type-caption-tracking: var(--tracking-wider);
+
+  --type-caps-family: var(--font-family-sans);
+  --type-caps-weight: var(--font-weight-medium);
+  --type-caps-size: var(--font-size-16);
+  --type-caps-line-height: var(--line-height-22);
+  --type-caps-tracking: var(--tracking-caps);
+  --type-caps-transform: uppercase;
+
+  /* 2.4.1 Typography — mobile aliases (Figma mobile column) */
+  --type-display-2xl-size-mobile: var(--font-size-48);
+  --type-display-2xl-line-height-mobile: var(--line-height-56);
+
+  --type-display-xl-size-mobile: var(--font-size-36);
+  --type-display-xl-line-height-mobile: var(--line-height-40);
+
+  --type-display-md-size-mobile: var(--font-size-24);
+  --type-display-md-line-height-mobile: var(--line-height-28);
+
+  --type-heading-lg-size-mobile: var(--font-size-28);
+  --type-heading-lg-line-height-mobile: var(--line-height-32);
+
+  --type-body-lg-size-mobile: var(--font-size-18);
+  --type-body-lg-line-height-mobile: var(--line-height-26);
+
+  --type-body-md-italic-size-mobile: var(--font-size-18);
+  --type-body-md-italic-line-height-mobile: var(--line-height-26);
+
+  --type-caption-size-mobile: var(--font-size-16);
+  --type-caption-line-height-mobile: var(--line-height-22);
+
+  --type-caps-size-mobile: var(--font-size-16);
+  --type-caps-line-height-mobile: var(--line-height-22);
+
+  /* 2.5 Spacing — intent aliases */
+  --space-page-padding: var(--space-600);
+  --space-grid-gap: var(--space-300);
+  --space-section-gap-sm: var(--space-2400);
+  --space-section-gap-md: var(--space-4000);
+  --space-card-padding: var(--space-600);
+  --space-stack-sm: var(--space-300);
+  --space-stack-md: var(--space-600);
+  --space-stack-lg: var(--space-1200);
+
+  /* 2.6 Grid */
+  --grid-columns: 12;
+  --grid-max-width: var(--bp-2xl);
+
+  /* 2.7 Shadows / effects (hero, footer, tag/header overlays; project cards have no drop shadow) */
+  --shadow-hero-glow: inset 0 0 24px 0 var(--color-hero-glow);
+  --shadow-footer-glow: inset 0 0 24px 0 var(--color-gray-650);
+
+  /* 2.8 Tag overlay (глянцевая плашка поверх карточки) */
+  --tag-overlay-bg: var(--color-tag-overlay);
+  --tag-overlay-blur: 32px;
+
+  /* 2.9 Header overlay (стеклянные плашки в шапке) */
+  --header-overlay-bg: var(--color-tag-overlay);
+  --header-overlay-blur: 48px;
+
+  /* Header nav text: driven by `data-header-theme` on `<html>` (scripts/header-theme.js) */
+  --header-fg: var(--color-text-primary);
+
+  /* ============================================================
+   * 3. COMPONENT
+   * ============================================================ */
+
+  /* 3.1 Project Card */
+  --card-radius: var(--radius-sm);
+  --card-padding: var(--space-card-padding);
+
+  /* 3.2 Project Tag */
+  --tag-radius: var(--radius-sm);
+  --tag-padding-block-start: var(--space-150);
+  --tag-padding-block-end: var(--space-200);
+  --tag-padding-inline: var(--space-300);
+  --tag-gap: var(--space-200);
+
+  /* 3.3 Section header */
+  --section-header-title-color-default: var(--color-text-primary);
+  --section-header-title-line-height: var(--type-display-2xl-line-height);
+
+  /* Figma Main Container → Description Container (1282:2462): fixed content width */
+  --section-header-intro-max-width: 726px;
+
+  /* 3.4 Hero */
+  --hero-background: var(--color-surface-hero);
+  --hero-glow-shadow: var(--shadow-hero-glow);
+  --hero-headline-color: var(--color-text-brand-blue);
+  --hero-accent-color: var(--color-text-accent-red);
+  --hero-padding-block-start: 84px;
+  --hero-padding-block-end: 64px;
+  --hero-padding-block-end-mobile: 0;
+  --hero-wrapper-height-desktop: 713px;
+  --hero-wrapper-height-mobile: 871px;
+  --hero-wrapper-max-width: 1968px;
+  --hero-profile-size-desktop: 326px;
+  --hero-headline-size-mobile-override: var(--font-size-56);
+  --hero-headline-line-height-mobile-override: var(--line-height-68);
+  --hero-mobile-inset: 56px;
+  --hero-mobile-profile-size: 233px;
+  --hero-mobile-profile-offset-inline: -103.5px;
+  --hero-mobile-profile-offset-end: 317px;
+
+  /* 3.5 Footer */
+  --footer-background: var(--color-surface-footer);
+  --footer-glow-shadow: var(--shadow-footer-glow);
+  --footer-tagline-color: var(--color-text-olive);
+  --footer-wrapper-min-height-desktop: 910px;
+  --footer-meta-stack-gap: var(--space-400);
+  --footer-meta-tracking: 0.5px;
+  --footer-wrapper-min-height-mobile: 740px;
+
+  /* 3.6 Layout utilities
+   * `.site-shell` establishes the shared stacking context for content + header.
+   * Sticky footer sits under `main` so the area17-style reveal (main slides, footer shows) works.
+   */
+  --layer-footer-under: 1;
+  --layer-main: 2;
+  --layer-sticky: 1000;
+
+  /* Fixed header overlays only — do not use on .site-header (Chromium mix-blend) */
+  --layer-header-glass: 2147483000;
+  --layer-header-text: 2147483001;
+  --layer-header-hit: 2147483002;
+  --site-header-margin-offset: -84px;
+  --section-header-min-height: 100vh;
+}
+
+/* `dark` = dark foreground on light section backgrounds; `light` = light fg on dark sections */
+:root[data-header-theme="light"] {
+  --header-fg: var(--color-text-inverse);
+
+  /* Contact/nav pills: stronger tint so white label stays readable on the smaller chip */
+  --header-overlay-bg: rgba(0, 0, 0, 0.42);
+}
+
+:root[data-header-theme="dark"] {
+  --header-fg: var(--color-text-primary);
+}
+
+/* ============================================================
+ * 4. BREAKPOINT OVERRIDES
+ * ============================================================ */
+
+@media (max-width: 1023px) {
+  :root {
+    --space-section-gap-sm: var(--space-1600);
+    --space-section-gap-md: var(--space-2400);
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    /* mobile typography — switch semantic tokens to explicit *-mobile aliases */
+    --type-display-2xl-size: var(--type-display-2xl-size-mobile);
+    --type-display-2xl-line-height: var(--type-display-2xl-line-height-mobile);
+
+    --type-display-xl-size: var(--type-display-xl-size-mobile);
+    --type-display-xl-line-height: var(--type-display-xl-line-height-mobile);
+
+    --type-display-md-size: var(--type-display-md-size-mobile);
+    --type-display-md-line-height: var(--type-display-md-line-height-mobile);
+
+    --type-heading-lg-size: var(--type-heading-lg-size-mobile);
+    --type-heading-lg-line-height: var(--type-heading-lg-line-height-mobile);
+
+    --type-body-lg-size: var(--type-body-lg-size-mobile);
+    --type-body-lg-line-height: var(--type-body-lg-line-height-mobile);
+
+    --type-body-md-italic-size: var(--type-body-md-italic-size-mobile);
+    --type-body-md-italic-line-height: var(--type-body-md-italic-line-height-mobile);
+
+    --type-caption-size: var(--type-caption-size-mobile);
+    --type-caption-line-height: var(--type-caption-line-height-mobile);
+
+    --type-caps-size: var(--type-caps-size-mobile);
+    --type-caps-line-height: var(--type-caps-line-height-mobile);
+
+    /* mobile spacing — сжимаем padding и gap */
+    --space-page-padding: var(--space-400);
+    --space-grid-gap: var(--space-200);
+    --space-card-padding: var(--space-400);
+
+    --tag-overlay-blur: 20px;
+    --header-overlay-blur: 24px;
+  }
+}
+
+/* ============================================================
+ * 5. REDUCED MOTION
+ * ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+  }
+}
+

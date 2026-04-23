@@ -1,0 +1,403 @@
+/**
+ * Header: exact rail pinning, fixed glass (backdrop-filter) layer, fixed visual
+ * text clones (mix-blend-mode: difference), and fixed transparent hitbox links.
+ * Theme sampling follows the visible source rail.
+ */
+(function () {
+  var HEADER_SELECTOR = ".site-header";
+  var MOVING_RAIL_SELECTOR = ".site-header__menu";
+  var THEME_SELECTOR = "[data-header-theme]:not(html)";
+  var GLASS_SOURCES = [
+    { name: "nav", selector: ".site-header__nav" },
+    { name: "contact", selector: ".site-header__contact" },
+    { name: "mobile", selector: ".site-header__mobile-trigger" }
+  ];
+  var VALID = { light: true, dark: true };
+  var DEFAULT_HEADER_HEIGHT = 84;
+
+  var headerEl = null;
+  var movingRailEl = null;
+  var themeNodes = [];
+  var observer = null;
+  var resizeRaf = 0;
+  var themeRaf = 0;
+  var pinRaf = 0;
+  var geometryRaf = 0;
+  var headerHeight = DEFAULT_HEADER_HEIGHT;
+  var appliedTop = null;
+  var themeDirty = true;
+  var topStep = 1;
+  var glassItemsByName = Object.create(null);
+  var textPairs = [];
+  var linkPairs = [];
+  var glassResizeObserver = null;
+
+  function updateTopStep() {
+    topStep = 1 / (window.devicePixelRatio || 1);
+  }
+
+  function quantize(value) {
+    return Math.round(value / topStep) * topStep;
+  }
+
+  function currentScrollTop() {
+    return quantize(window.scrollY || window.pageYOffset || 0);
+  }
+
+  function cacheElements() {
+    headerEl = document.querySelector(HEADER_SELECTOR);
+    movingRailEl = document.querySelector(MOVING_RAIL_SELECTOR);
+  }
+
+  function cacheThemeNodes() {
+    themeNodes = Array.prototype.slice.call(document.querySelectorAll(THEME_SELECTOR));
+  }
+
+  function measureHeader() {
+    if (!headerEl) {
+      headerHeight = DEFAULT_HEADER_HEIGHT;
+      return;
+    }
+    headerHeight = Math.max(
+      headerEl.offsetHeight || Math.ceil(headerEl.getBoundingClientRect().height) || DEFAULT_HEADER_HEIGHT,
+      1
+    );
+  }
+
+  function samplePoint() {
+    if (movingRailEl) {
+      var railRect = movingRailEl.getBoundingClientRect();
+      if (railRect.width > 0 && railRect.height > 0) {
+        return {
+          x: Math.min(Math.max(railRect.left + railRect.width / 2, 1), window.innerWidth - 2),
+          y: Math.min(Math.max(railRect.bottom + 2, 1), window.innerHeight - 2)
+        };
+      }
+    }
+    return {
+      x: Math.min(Math.max(window.innerWidth * 0.5, 1), window.innerWidth - 2),
+      y: Math.min(headerHeight + 2, window.innerHeight - 2)
+    };
+  }
+
+  function pickTheme() {
+    var point = samplePoint();
+    var x = point.x;
+    var y = point.y;
+    var i;
+    var el;
+    var r;
+    var t;
+
+    for (i = 0; i < themeNodes.length; i += 1) {
+      el = themeNodes[i];
+      r = el.getBoundingClientRect();
+      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+        t = el.getAttribute("data-header-theme");
+        if (VALID[t]) return t;
+      }
+    }
+
+    var best = null;
+    var bestBottom = -Infinity;
+    for (i = 0; i < themeNodes.length; i += 1) {
+      el = themeNodes[i];
+      r = el.getBoundingClientRect();
+      if (r.bottom <= y && r.bottom > bestBottom) {
+        bestBottom = r.bottom;
+        t = el.getAttribute("data-header-theme");
+        if (VALID[t]) best = t;
+      }
+    }
+    return best || "dark";
+  }
+
+  function applyTheme(theme) {
+    var next = VALID[theme] ? theme : "dark";
+    if (document.documentElement.getAttribute("data-header-theme") !== next) {
+      document.documentElement.setAttribute("data-header-theme", next);
+    }
+  }
+
+  function runThemeFrame() {
+    themeRaf = 0;
+    if (!themeDirty) return;
+    themeDirty = false;
+    applyTheme(pickTheme());
+  }
+
+  function scheduleThemeFrame() {
+    if (themeRaf) return;
+    themeRaf = requestAnimationFrame(runThemeFrame);
+  }
+
+  function writeTop(top) {
+    if (!movingRailEl) return;
+    var nextTop = quantize(top);
+    var zeroSafeTop = Math.abs(nextTop) < topStep / 2 ? 0 : nextTop;
+    movingRailEl.style.top = zeroSafeTop + "px";
+    appliedTop = zeroSafeTop;
+  }
+
+  function setGlassItemRect(glassItem, rect) {
+    if (!glassItem) return;
+    if (rect.width <= 0 || rect.height <= 0) {
+      glassItem.style.display = "none";
+      return;
+    }
+    glassItem.style.display = "block";
+    glassItem.style.left = quantize(rect.left) + "px";
+    glassItem.style.top = quantize(rect.top) + "px";
+    glassItem.style.width = quantize(rect.width) + "px";
+    glassItem.style.height = quantize(rect.height) + "px";
+  }
+
+  function setVisualTextRect(span, rect) {
+    if (!span) return;
+    if (rect.width <= 0 || rect.height <= 0) {
+      span.style.display = "none";
+      return;
+    }
+    span.style.display = "inline-block";
+    span.style.left = quantize(rect.left) + "px";
+    span.style.top = quantize(rect.top) + "px";
+    span.style.width = quantize(rect.width) + "px";
+    span.style.height = quantize(rect.height) + "px";
+  }
+
+  function setHitLinkRect(anchor, rect) {
+    if (!anchor) return;
+    if (rect.width <= 0 || rect.height <= 0) {
+      anchor.style.display = "none";
+      return;
+    }
+    anchor.style.display = "block";
+    anchor.style.left = quantize(rect.left) + "px";
+    anchor.style.top = quantize(rect.top) + "px";
+    anchor.style.width = quantize(rect.width) + "px";
+    anchor.style.height = quantize(rect.height) + "px";
+  }
+
+  function syncGlassGeometry() {
+    var i;
+    var g;
+    var src;
+    for (i = 0; i < GLASS_SOURCES.length; i += 1) {
+      g = GLASS_SOURCES[i];
+      src = headerEl ? headerEl.querySelector(g.selector) : null;
+      setGlassItemRect(glassItemsByName[g.name], src ? src.getBoundingClientRect() : { width: 0, height: 0 });
+    }
+  }
+
+  function syncVisualTextGeometry() {
+    var i;
+    var pair;
+    for (i = 0; i < textPairs.length; i += 1) {
+      pair = textPairs[i];
+      if (!pair.source || !pair.clone) continue;
+      setVisualTextRect(pair.clone, pair.source.getBoundingClientRect());
+    }
+  }
+
+  function syncHitGeometry() {
+    var i;
+    var pair;
+    for (i = 0; i < linkPairs.length; i += 1) {
+      pair = linkPairs[i];
+      if (!pair.source || !pair.clone) continue;
+      if (pair.source.getAttribute("href") !== pair.clone.getAttribute("href")) {
+        pair.clone.setAttribute("href", pair.source.getAttribute("href") || "#");
+      }
+      setHitLinkRect(pair.clone, pair.source.getBoundingClientRect());
+    }
+  }
+
+  function syncAllGeometry() {
+    syncGlassGeometry();
+    syncVisualTextGeometry();
+    syncHitGeometry();
+  }
+
+  function scheduleGeometryFrame() {
+    if (geometryRaf) return;
+    geometryRaf = requestAnimationFrame(function () {
+      geometryRaf = 0;
+      syncAllGeometry();
+    });
+  }
+
+  function buildGlassItemRefs() {
+    var i;
+    var n;
+    glassItemsByName = Object.create(null);
+    for (i = 0; i < GLASS_SOURCES.length; i += 1) {
+      n = GLASS_SOURCES[i].name;
+      glassItemsByName[n] = document.querySelector(
+        '.site-header-glass [data-header-glass-item="' + n + '"]'
+      );
+    }
+  }
+
+  function buildOverlayNodes() {
+    if (!headerEl) return;
+    var existingTextLayer = headerEl.querySelector(".site-header__visual-text-layer");
+    var existingHitLayer = headerEl.querySelector(".site-header__hit-layer");
+    if (existingTextLayer) existingTextLayer.remove();
+    if (existingHitLayer) existingHitLayer.remove();
+
+    var textLayer = document.createElement("div");
+    textLayer.className = "site-header__visual-text-layer";
+    textLayer.setAttribute("aria-hidden", "true");
+    var hitLayer = document.createElement("div");
+    hitLayer.className = "site-header__hit-layer";
+    hitLayer.setAttribute("aria-hidden", "true");
+
+    var sourceTexts = headerEl.querySelectorAll(".site-header__text");
+    textPairs = [];
+    var t;
+    var span;
+    for (t = 0; t < sourceTexts.length; t += 1) {
+      span = document.createElement("span");
+      span.className = "site-header__visual-text";
+      span.textContent = sourceTexts[t].textContent;
+      textLayer.appendChild(span);
+      textPairs.push({ source: sourceTexts[t], clone: span });
+    }
+
+    var sourceLinks = headerEl.querySelectorAll(
+      "a.site-header__link, a.site-header__contact, a.site-header__mobile-trigger"
+    );
+    linkPairs = [];
+    var h;
+    var a;
+    for (h = 0; h < sourceLinks.length; h += 1) {
+      a = document.createElement("a");
+      a.className = "site-header__hit-link";
+      a.href = sourceLinks[h].getAttribute("href") || "#";
+      a.setAttribute("aria-hidden", "true");
+      a.tabIndex = -1;
+      hitLayer.appendChild(a);
+      linkPairs.push({ source: sourceLinks[h], clone: a });
+    }
+
+    headerEl.appendChild(textLayer);
+    headerEl.appendChild(hitLayer);
+    document.documentElement.classList.add("has-header-visual-text");
+  }
+
+  function attachGeometryResizeObserver() {
+    if (glassResizeObserver) {
+      glassResizeObserver.disconnect();
+      glassResizeObserver = null;
+    }
+    if (!headerEl || typeof ResizeObserver === "undefined") return;
+    glassResizeObserver = new ResizeObserver(function () {
+      scheduleGeometryFrame();
+    });
+    glassResizeObserver.observe(headerEl);
+  }
+
+  function attachObserver() {
+    if (observer) {
+      observer.disconnect();
+    }
+    if (!themeNodes.length) {
+      observer = null;
+      return;
+    }
+    var margin = "-" + headerHeight + "px 0px 0px 0px";
+    observer = new IntersectionObserver(function () {
+      themeDirty = true;
+      scheduleThemeFrame();
+    }, {
+      root: null,
+      rootMargin: margin,
+      threshold: 0
+    });
+    for (var j = 0; j < themeNodes.length; j += 1) {
+      observer.observe(themeNodes[j]);
+    }
+    themeDirty = true;
+    scheduleThemeFrame();
+  }
+
+  function pinHeader() {
+    writeTop(currentScrollTop());
+    themeDirty = true;
+    scheduleThemeFrame();
+  }
+
+  function onScroll() {
+    if (pinRaf) {
+      cancelAnimationFrame(pinRaf);
+      pinRaf = 0;
+    }
+    pinHeader();
+  }
+
+  function onResize() {
+    cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(function () {
+      resizeRaf = 0;
+      refreshLayout();
+    });
+  }
+
+  function refreshLayout() {
+    cacheThemeNodes();
+    updateTopStep();
+    measureHeader();
+    writeTop(currentScrollTop());
+    attachObserver();
+    scheduleGeometryFrame();
+  }
+
+  function init() {
+    cacheElements();
+    buildGlassItemRefs();
+    buildOverlayNodes();
+    updateTopStep();
+    measureHeader();
+    writeTop(currentScrollTop());
+    cacheThemeNodes();
+    attachObserver();
+    attachGeometryResizeObserver();
+    scheduleGeometryFrame();
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () {
+        scheduleGeometryFrame();
+      });
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+
+    window.__portfolioHeaderMotion = {
+      getParams: function getParams() {
+        return {
+          mode: "exact",
+          appliedTop: appliedTop,
+          topStep: topStep
+        };
+      },
+      setParams: function setParams() {
+        refreshLayout();
+        return this.getParams();
+      },
+      resetParams: function resetParams() {
+        return this.setParams();
+      },
+      syncGeometry: function syncGeometry() {
+        scheduleGeometryFrame();
+        return this.getParams();
+      }
+    };
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
