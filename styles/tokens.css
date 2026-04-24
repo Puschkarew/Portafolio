@@ -320,15 +320,13 @@
   --hero-padding-block-end: 64px;
   --hero-padding-block-end-mobile: 0;
   --hero-wrapper-height-desktop: 713px;
-  --hero-wrapper-height-mobile: 871px;
   --hero-wrapper-max-width: 1968px;
   --hero-profile-size-desktop: 326px;
-  --hero-headline-size-mobile-override: var(--font-size-56);
-  --hero-headline-line-height-mobile-override: var(--line-height-68);
   --hero-mobile-inset: 56px;
   --hero-mobile-profile-size: 233px;
-  --hero-mobile-profile-offset-inline: -103.5px;
-  --hero-mobile-profile-offset-end: 317px;
+  --hero-mobile-profile-optical-offset-inline: 41px;
+  --hero-mobile-profile-gap-before: 65px;
+  --hero-mobile-profile-gap-after: 7px;
 
   /* 3.5 Footer */
   --footer-background: var(--color-surface-footer);

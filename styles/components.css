@@ -869,7 +869,8 @@
     position: static;
     transform: none;
     margin-block: var(--space-1200);
-    margin-inline: auto;
+    margin-inline-start: calc(-1 * var(--hero-mobile-profile-optical-offset-inline));
+    margin-inline-end: 0;
     inline-size: clamp(140px, 38vw, 196px);
   }
 
@@ -900,14 +901,14 @@
     inline-size: 100%;
     max-inline-size: none;
     margin-inline: 0;
-    block-size: var(--hero-wrapper-height-mobile);
-    padding-block-end: 0;
+    min-block-size: 0;
+    block-size: auto;
+    padding-block: var(--hero-mobile-inset);
   }
 
   .hero__wrapper > .hero__grid:first-of-type {
-    position: absolute;
-    inset-block-start: var(--hero-mobile-inset);
-    inset-inline: var(--space-page-padding);
+    position: relative;
+    inset: auto;
     z-index: 1;
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
@@ -916,25 +917,26 @@
 
   .hero__headline {
     grid-column: 1 / -1;
-    font-size: var(--hero-headline-size-mobile-override);
-    line-height: var(--hero-headline-line-height-mobile-override);
+    font-size: var(--type-display-xl-size);
+    line-height: var(--type-display-xl-line-height);
     letter-spacing: -0.01px;
   }
 
   .hero__profile {
-    position: absolute;
+    position: relative;
     inline-size: var(--hero-mobile-profile-size);
-    inset-inline-start: calc(50% + var(--hero-mobile-profile-offset-inline));
-    inset-block-start: auto;
-    inset-block-end: var(--hero-mobile-profile-offset-end);
+    inset: auto;
     transform: none;
-    margin: 0;
+    margin-block-start: var(--hero-mobile-profile-gap-before);
+    margin-block-end: var(--hero-mobile-profile-gap-after);
+    margin-inline-start: calc(-1 * var(--hero-mobile-profile-optical-offset-inline));
+    margin-inline-end: 0;
   }
 
   .hero__wrapper > .hero__grid:last-of-type {
-    position: absolute;
-    inset-inline: var(--space-page-padding);
-    inset-block-end: var(--hero-mobile-inset);
+    position: relative;
+    inset: auto;
+    margin-block-start: 0;
     display: grid;
     grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
     column-gap: var(--space-200);
@@ -950,6 +952,11 @@
   .hero__caption {
     grid-column: 1 / -1;
     order: 2;
+  }
+
+  .hero__description.prose,
+  .hero__caption.prose {
+    max-inline-size: none;
   }
 
   .cards-grid {
@@ -1102,4 +1109,3 @@
     top: 62%;
   }
 }
-
