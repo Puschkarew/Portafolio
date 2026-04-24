@@ -1,4 +1,4 @@
-/* Scroll-driven project background/art (desktop + JS). Handoff 2026-04-24. */
+/* Scroll-driven project background/art (JS). Handoff 2026-04-24. */
 
 .project-background-stage-shell,
 .project-background-stage {
@@ -20,6 +20,13 @@ html.has-project-sticky-scrub .project-background-stage-shell {
   pointer-events: none;
   overflow: hidden;
   opacity: 1;
+}
+
+@supports (block-size: 100svh) {
+  html.has-project-sticky-scrub .project-background-stage-shell {
+    block-size: 100svh;
+    margin-block-end: -100svh;
+  }
 }
 
 html.has-project-sticky-scrub .project-background-stage {
@@ -88,7 +95,6 @@ html.has-project-sticky-scrub .project-background-art--odds .humans-shader-slot 
   filter: blur(var(--project-art-blur));
 }
 
-/* Match in-section art framing (Figma 1512 frame). */
 html.has-project-sticky-scrub .project-background-art--featured img {
   inline-size: 100%;
   max-inline-size: none;
@@ -96,19 +102,12 @@ html.has-project-sticky-scrub .project-background-art--featured img {
 }
 
 html.has-project-sticky-scrub .project-background-art--madebymad img {
-  --madebymad-frame: 1512;
-
-  position: absolute;
-  inline-size: min(1428px, calc(100vw * 1428 / var(--madebymad-frame)));
-  max-inline-size: none;
+  inline-size: min(100%, 20rem);
+  max-inline-size: 90vw;
   block-size: auto;
   aspect-ratio: 1428 / 1060;
-  object-fit: cover;
+  object-fit: contain;
   object-position: 50% 50%;
-  inset: auto;
-  left: 50%;
-  top: calc(100vw * 325 / var(--madebymad-frame));
-  transform: translateX(-50%);
 }
 
 html.has-project-sticky-scrub .project-background-art--odds .humans-shader-slot {
@@ -125,18 +124,43 @@ html.has-project-sticky-scrub .project-background-art--odds canvas {
 }
 
 html.has-project-sticky-scrub .project-background-art--curves img {
-  --in-curves-frame: 1512;
-
-  position: absolute;
-  inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-frame)));
-  max-inline-size: none;
+  inline-size: min(100%, 22rem);
+  max-inline-size: 92vw;
   block-size: auto;
   aspect-ratio: 2185 / 1448;
-  object-fit: cover;
-  inset: auto;
-  left: calc(54.17% + 100vw * 10.5 / var(--in-curves-frame));
-  top: calc(50% - 100vw * 117.25 / var(--in-curves-frame));
-  transform: translate(-50%, -50%);
+  object-fit: contain;
+  object-position: 50% 50%;
+}
+
+@media (min-width: 1024px) {
+  /* Match in-section art framing (Figma 1512 frame). */
+  html.has-project-sticky-scrub .project-background-art--madebymad img {
+    --madebymad-frame: 1512;
+
+    position: absolute;
+    inline-size: min(1428px, calc(100vw * 1428 / var(--madebymad-frame)));
+    max-inline-size: none;
+    block-size: auto;
+    object-fit: cover;
+    inset: auto;
+    left: 50%;
+    top: calc(100vw * 325 / var(--madebymad-frame));
+    transform: translateX(-50%);
+  }
+
+  html.has-project-sticky-scrub .project-background-art--curves img {
+    --in-curves-frame: 1512;
+
+    position: absolute;
+    inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-frame)));
+    max-inline-size: none;
+    block-size: auto;
+    object-fit: cover;
+    inset: auto;
+    left: calc(54.17% + 100vw * 10.5 / var(--in-curves-frame));
+    top: calc(50% - 100vw * 117.25 / var(--in-curves-frame));
+    transform: translate(-50%, -50%);
+  }
 }
 
 html.has-project-sticky-scrub [data-color-ref] {
@@ -167,7 +191,20 @@ html.has-project-sticky-scrub .project-color-refs {
 html.has-project-sticky-scrub .projects-area [data-project] {
   position: relative;
   z-index: 1;
+  padding-block: 0;
   background: transparent;
+}
+
+html.has-project-sticky-scrub .projects-area .section-header {
+  position: sticky;
+  inset-block-start: 0;
+  min-block-size: 100vh;
+}
+
+@supports (min-block-size: 100svh) {
+  html.has-project-sticky-scrub .projects-area .section-header {
+    min-block-size: 100svh;
+  }
 }
 
 html.has-project-sticky-scrub .projects-area [data-project] .section-header__art {

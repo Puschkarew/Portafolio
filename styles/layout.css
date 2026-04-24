@@ -90,6 +90,12 @@ main#main-content.site-main::after {
   background: var(--color-surface-page);
 }
 
+/* Subheader: top rhythm only; Figma 1294/481 — no block-end gap; label centered (not only 1024+) */
+#work.section {
+  padding-block-end: 0;
+  text-align: center;
+}
+
 #work::before {
   content: "";
   position: absolute;
@@ -100,16 +106,12 @@ main#main-content.site-main::after {
   pointer-events: none;
 }
 
-/* Desktop: #work matches Figma Subheader (481:111) — single top rhythm, ~182px band, centered label, page fill */
+/* Desktop: #work matches Figma Subheader (481:111) — top rhythm, centered label; no padding-block-end */
 @media (min-width: 1024px) {
   #work.section {
     padding-block: 0;
     padding-block-start: var(--space-section-gap-md);
-
-    /* Was 0: gap to first project block now comes from here so `.section--featured` can use `padding-block: 0` for full-viewport headers */
-    padding-block-end: var(--space-section-gap-md);
     background: var(--color-surface-page);
-    text-align: center;
   }
 }
 
@@ -219,6 +221,11 @@ main#main-content.site-main::after {
   :root {
     --grid-columns: 4;
     --space-section-gap-md: var(--space-2400);
+  }
+
+  /* Figma 1294: page padding 24px on Subheader while global mobile page padding stays 16px */
+  #work .container {
+    padding-inline: var(--space-600);
   }
 }
 

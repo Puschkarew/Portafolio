@@ -66,7 +66,7 @@
 
   /* 2. Typography — families */
   --font-family-sans: "American Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-family-serif: "Society Trial", "JT Javel", "Georgia", "Times New Roman", serif;
+  --font-family-serif: "Society Trial", "Georgia", "Times New Roman", serif;
 
   /* 2.1 Typography — weights */
   --font-weight-regular: 400;
@@ -219,6 +219,7 @@
   --type-caption-line-height: var(--line-height-22);
   --type-caption-tracking: var(--tracking-wider);
 
+  /* Figma "Label/MD Caps": font/sans, weight/medium, text-size/xs, line-height/xs, tracking/2xl */
   --type-caps-family: var(--font-family-sans);
   --type-caps-weight: var(--font-weight-medium);
   --type-caps-size: var(--font-size-16);

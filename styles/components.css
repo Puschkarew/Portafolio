@@ -1093,19 +1093,26 @@
     min-block-size: var(--footer-wrapper-min-height-mobile);
   }
 
+  .footer__message-grid {
+    top: 64px;
+  }
+
   .footer__message-grid,
   .footer__meta-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .footer__meta-grid {
-    bottom: 0;
+    bottom: calc(48px + env(safe-area-inset-bottom, 0px));
   }
 
   .footer__model {
-    width: 390px;
-    height: 399px;
+    left: 0;
     right: 0;
-    top: 62%;
+    top: 96px;
+    bottom: 141px;
+    width: auto;
+    height: auto;
+    transform: none;
   }
 }

@@ -160,3 +160,117 @@ test.describe("home project scroll transitions (desktop stage)", () => {
     }
   });
 });
+
+test.describe("home project scroll transitions (mobile stage)", () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test("mobile uses shared stage with 50vh scrub, art blur, and text interpolation", async ({ page }) => {
+    await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+    await page.waitForFunction(
+      () => typeof (window as unknown as { __portfolioProjectScrub?: { getState: () => ScrubState } }).__portfolioProjectScrub !== "undefined",
+      null,
+      { timeout: 10_000 }
+    );
+    await page.waitForFunction(
+      () =>
+        (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState()
+          .projects.length === 4
+    );
+
+    const s0 = await page.evaluate(() => {
+      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState();
+    });
+    expect(s0.mode).toBe("mobile");
+    expect(s0.transitionPx).toBe(844 * 0.5);
+    expect(s0.projects.map((p) => p.id)).toEqual(["featured", "madebymad", "odds", "curves"]);
+
+    const sFeat = s0.projects[0].startY;
+    const sMadebymad = s0.projects[1].startY;
+    const T = s0.transitionPx;
+    const readMobileStage = () =>
+      page.evaluate(() => {
+        const root = document.documentElement;
+        const featuredLayer = document.querySelector('[data-bg-layer="featured"]') as HTMLElement | null;
+        const featuredArt = document.querySelector('[data-art-for="featured"]') as HTMLElement | null;
+        const localArt = document.querySelector('[data-project="featured"] .section-header__art') as HTMLElement | null;
+        const header = document.querySelector('[data-project="featured"] .section-header') as HTMLElement | null;
+        return {
+          hasScrub: root.classList.contains("has-project-sticky-scrub"),
+          headerPosition: header ? getComputedStyle(header).position : "",
+          localArtOpacity: localArt ? getComputedStyle(localArt).opacity : "",
+          layerOpacity: featuredLayer ? Number.parseFloat(featuredLayer.style.opacity || getComputedStyle(featuredLayer).opacity) : 0,
+          blur: featuredArt
+            ? Number.parseFloat(
+                featuredArt.style.getPropertyValue("--project-art-blur") ||
+                  getComputedStyle(featuredArt).getPropertyValue("--project-art-blur")
+              ) || 0
+            : 0
+        };
+      });
+
+    await page.evaluate((y) => {
+      window.scrollTo(0, y);
+    }, sFeat - 10);
+    await new Promise((r) => {
+      setTimeout(r, 100);
+    });
+    const before = await readMobileStage();
+    expect(before.hasScrub).toBe(true);
+    expect(before.headerPosition).toBe("sticky");
+    expect(before.localArtOpacity).toBe("0");
+
+    await page.evaluate((y) => {
+      window.scrollTo(0, y);
+    }, sFeat + T * 0.5);
+    await page.waitForFunction(
+      (y) => {
+        return Math.abs(window.scrollY - (y as number)) < 2;
+      },
+      sFeat + T * 0.5
+    );
+    await new Promise((r) => {
+      setTimeout(r, 100);
+    });
+
+    const midState = await page.evaluate(() => {
+      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState();
+    });
+    expect(midState.pair.from).toBe("prelude");
+    expect(midState.pair.to).toBe("featured");
+    expect(midState.pair.t).toBeCloseTo(0.5, 1);
+
+    const mid = await readMobileStage();
+    expect(mid.layerOpacity).toBeCloseTo(0.5, 1);
+    expect(mid.blur).toBeCloseTo(16, 0);
+
+    await page.evaluate((y) => {
+      window.scrollTo(0, y);
+    }, sMadebymad - 10);
+    await new Promise((r) => {
+      setTimeout(r, 100);
+    });
+    const beforeMadMeta = await page.evaluate(() => {
+      const meta = document.querySelector('[data-project="madebymad"] .section-header__meta') as HTMLElement | null;
+      return meta ? getComputedStyle(meta).color : "";
+    });
+
+    await page.evaluate((y) => {
+      window.scrollTo(0, y);
+    }, sMadebymad + T * 0.5);
+    await new Promise((r) => {
+      setTimeout(r, 100);
+    });
+    const madMidState = await page.evaluate(() => {
+      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState();
+    });
+    expect(madMidState.pair.from).toBe("featured");
+    expect(madMidState.pair.to).toBe("madebymad");
+    expect(madMidState.pair.t).toBeCloseTo(0.5, 1);
+
+    const midMadMeta = await page.evaluate(() => {
+      const meta = document.querySelector('[data-project="madebymad"] .section-header__meta') as HTMLElement | null;
+      return meta ? getComputedStyle(meta).color : "";
+    });
+    expect(midMadMeta).not.toBe(beforeMadMeta);
+  });
+});

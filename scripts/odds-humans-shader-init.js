@@ -1,16 +1,12 @@
 /**
- * Mount humans-shader into the Odds stage on desktop (#humans-shader-stage) or
- * the in-section fallback (#humans-shader) on smaller viewports.
+ * Mount humans-shader into the shared Odds stage. The in-section root remains
+ * as a no-JS/local fallback, but scrub mode owns the live shader on all widths.
  */
 (function () {
-  var MQ = "(min-width: 1024px)";
-  var mql = window.matchMedia(MQ);
   var instance = null;
 
   function getRoot() {
-    return mql.matches
-      ? document.getElementById("humans-shader-stage")
-      : document.getElementById("humans-shader");
+    return document.getElementById("humans-shader-stage") || document.getElementById("humans-shader");
   }
 
   function mount() {
@@ -25,7 +21,7 @@
       instance.destroy();
       instance = null;
     }
-    var other = mql.matches
+    var other = root.id === "humans-shader-stage"
       ? document.getElementById("humans-shader")
       : document.getElementById("humans-shader-stage");
     if (other) {
@@ -39,17 +35,8 @@
     });
   }
 
-  function onMqlChange() {
-    mount();
-  }
-
   function onReady() {
     mount();
-    if (mql.addEventListener) {
-      mql.addEventListener("change", onMqlChange);
-    } else if (mql.addListener) {
-      mql.addListener(onMqlChange);
-    }
   }
 
   if (document.readyState === "loading") {

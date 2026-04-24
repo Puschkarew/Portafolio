@@ -1,15 +1,13 @@
 /**
- * Sticky project stage: scroll progress t drives bg, art blur, and text (desktop).
+ * Sticky project stage: scroll progress t drives bg, art blur, and text.
  * @see artifacts/project-sticky-transition-blur-handoff-2026-04-24.md
  */
 (function () {
   var PROJECT_ORDER = ["featured", "madebymad", "odds", "curves"];
   var PRELUDE = "prelude";
-  var MQ = "(min-width: 1024px)";
   var TRANSITION_RATIO = 0.5;
   var ART_MAX_BLUR_PX = 32;
 
-  var mql;
   var raf = 0;
   var elProjectsArea = null;
   var refMap = null;
@@ -95,6 +93,10 @@
 
   function round3(x) {
     return Math.round(x * 1000) / 1000;
+  }
+
+  function currentMode() {
+    return window.innerWidth < 1024 ? "mobile" : "desktop";
   }
 
   function buildColorRowFromRef(el) {
@@ -377,10 +379,6 @@
       return;
     }
 
-    if (mql && !mql.matches) {
-      return;
-    }
-
     var y = window.scrollY;
     var rootEl = document.documentElement;
     var wasDetached = rootEl.classList.contains("is-project-stage-detached");
@@ -400,7 +398,7 @@
       clearSectionTextColors();
       lastPair = { from: "odds", to: "curves", t: 1 };
       lastDisplayId = "curves";
-      lastMode = "desktop";
+      lastMode = currentMode();
       return;
     }
 
@@ -408,7 +406,7 @@
     p.t = clamp01(p.t);
     lastPair = { from: p.from, to: p.to, t: p.t };
     lastDisplayId = p.displayId;
-    lastMode = "desktop";
+    lastMode = currentMode();
 
     applyStage(lastPair);
     var target = getTargetSectionByDisplay(p.displayId);
@@ -450,14 +448,6 @@
     schedule();
   }
 
-  function onMqLayout() {
-    if (mql && mql.matches) {
-      enable();
-    } else {
-      disable();
-    }
-  }
-
   /**
    * After `load`, double rAF, or bfcache `pageshow`, layout + restored scrollY match
    * reality. Without this, first paint can run with scrollY=0, applyStage "locks" wrong
@@ -465,7 +455,7 @@
    * inlines reappear and cause a split (footer + wrong project art) until the next frame.
    */
   function syncStateAfterLayout() {
-    if (!mql || !mql.matches || !scrollHandler) {
+    if (!scrollHandler) {
       return;
     }
     cacheProjectRows();
@@ -474,9 +464,6 @@
   }
 
   function enable() {
-    if (!mql || !mql.matches) {
-      return;
-    }
     if (!document.querySelector(".project-background-stage") || !document.querySelector(".projects-area")) {
       return;
     }
@@ -523,7 +510,7 @@
     if (red.addEventListener) {
       red.addEventListener("change", reduceHandler);
     }
-    lastMode = "desktop";
+    lastMode = currentMode();
     window.__portfolioProjectScrub = {
       getState: function () {
         return {
@@ -591,9 +578,7 @@
   }
 
   function init() {
-    mql = window.matchMedia(MQ);
-    mql.addEventListener("change", onMqLayout);
-    onMqLayout();
+    enable();
   }
 
   if (document.readyState === "loading") {
