@@ -63,7 +63,7 @@ The header is **working as designed** (glass blur, `mix-blend-mode: difference` 
 
 - **Spec of record:** [artifacts/header-glass-blend-implementation-handoff.md](artifacts/header-glass-blend-implementation-handoff.md) — architecture (four layers: fixed glass, source `header`, fixed visual text clones, fixed hit links), DOM shape, tokens, CSS/JS responsibilities, and validation checklist.
 - **Do not:** put a high `z-index` (or `transform` / `isolation` / `opacity < 1`) on `.site-header`; make the header `position: fixed` or `sticky`; move `backdrop-filter` back into moving rail `::before`; replace fixed **span** visual text with blend on fixed **link** text; run per-scroll geometry sync for overlays when only `scrollY` pin is needed.
-- **Runtime:** [scripts/header-theme.js](scripts/header-theme.js) — exact rail `top = scrollY`, geometry sync on layout events (not every scroll). If you touch header markup or styles, re-run `npm run smoke:structure` and `npm run smoke:visual`.
+- **Runtime:** [scripts/header-theme.js](scripts/header-theme.js) — exact rail `top = scrollY`, geometry sync on layout events (not every scroll). It does **not** set `data-header-theme` (single glass style only). If you touch header markup or styles, re-run `npm run smoke:structure` and `npm run smoke:visual`.
 
 ## Site footer — do not regress
 

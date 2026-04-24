@@ -277,9 +277,6 @@
   --header-overlay-bg: var(--color-tag-overlay);
   --header-overlay-blur: 48px;
 
-  /* Header nav text: driven by `data-header-theme` on `<html>` (scripts/header-theme.js) */
-  --header-fg: var(--color-text-primary);
-
   /* ============================================================
    * 3. COMPONENT
    * ============================================================ */
@@ -344,18 +341,6 @@
   --layer-header-hit: 2147483002;
   --site-header-margin-offset: -84px;
   --section-header-min-height: 100vh;
-}
-
-/* `dark` = dark foreground on light section backgrounds; `light` = light fg on dark sections */
-:root[data-header-theme="light"] {
-  --header-fg: var(--color-text-inverse);
-
-  /* Contact/nav pills: stronger tint so white label stays readable on the smaller chip */
-  --header-overlay-bg: rgba(0, 0, 0, 0.42);
-}
-
-:root[data-header-theme="dark"] {
-  --header-fg: var(--color-text-primary);
 }
 
 /* ============================================================

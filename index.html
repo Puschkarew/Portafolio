@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-header-theme="dark">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,12 +7,13 @@
     <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="stylesheet" href="styles/layout.css" />
     <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/project-background.css" />
   </head>
   <body id="top">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <div class="site-shell">
     <main id="main-content" class="site-main">
-      <section class="section section--hero hero" id="about" data-header-theme="dark">
+      <section class="section section--hero hero" id="about">
         <div class="container container--wide hero__wrapper">
           <div class="hero__grid">
             <h1 class="type-display-xl hero__headline">
@@ -39,13 +40,49 @@
       </section>
 
       <!-- Figma 481:111 "Subheader" — frame 1512×182; label y=160, lh 22; px 24; text centered; fill white -->
-      <section class="section" id="work" data-header-theme="dark">
+      <section class="section" id="work">
         <div class="container container--wide">
           <p class="type-caps">Featured Stories</p>
         </div>
       </section>
 
-      <section class="section section--featured" aria-label="Schrift Collective" data-header-theme="dark" data-project="featured">
+      <div class="projects-area">
+      <div class="project-background-stage-shell" aria-hidden="true">
+        <div class="project-background-stage">
+          <div class="project-background-layer project-background-layer--base"></div>
+          <div class="project-background-layer" data-bg-layer="prelude"></div>
+          <div class="project-background-layer" data-bg-layer="featured"></div>
+          <div class="project-background-layer" data-bg-layer="madebymad"></div>
+          <div class="project-background-layer" data-bg-layer="odds"></div>
+          <div class="project-background-layer" data-bg-layer="curves"></div>
+
+          <div class="project-background-art project-background-art--featured" data-art-for="featured">
+            <div class="project-background-art__inner">
+              <img src="assets/figma/Section/Schrift Collective Background.svg" alt="" width="1336" height="996" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div class="project-background-art project-background-art--madebymad" data-art-for="madebymad">
+            <div class="project-background-art__inner">
+              <img src="assets/figma/Hourglass.png" alt="" width="948" height="1279" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          <div class="project-background-art project-background-art--odds" data-art-for="odds">
+            <div class="project-background-art__inner">
+              <div id="humans-shader-stage" class="humans-shader-slot" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="project-background-art project-background-art--curves" data-art-for="curves">
+            <div class="project-background-art__inner">
+              <img src="assets/figma/Image%20In%20Curves.svg" alt="" width="2185" height="1448" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <section class="section section--featured" aria-label="Schrift Collective" data-project="featured">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
             <img src="assets/figma/Section/Schrift Collective Background.svg" alt="" width="1336" height="996" loading="lazy" decoding="async" />
@@ -120,7 +157,7 @@
         </div>
       </section>
 
-      <section class="section section--madebymad" aria-label="Made by Mad" data-header-theme="dark" data-project="madebymad">
+      <section class="section section--madebymad" aria-label="Made by Mad" data-project="madebymad">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
             <img src="assets/figma/Hourglass.png" alt="" width="948" height="1279" loading="lazy" decoding="async" />
@@ -184,7 +221,7 @@
         </div>
       </section>
 
-      <section class="section section--odds" aria-label="Odds & Ends" data-header-theme="light" data-project="odds">
+      <section class="section section--odds" aria-label="Odds & Ends" data-project="odds">
         <div id="humans-shader" class="section--odds__shader humans-shader-slot" aria-hidden="true"></div>
         <div class="section-header">
           <div class="container container--wide section-header__content">
@@ -242,7 +279,7 @@
         </div>
       </section>
 
-      <section class="section section--curves" aria-label="In Curves" data-header-theme="dark" data-project="curves">
+      <section class="section section--curves" aria-label="In Curves" data-project="curves">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
             <img src="assets/figma/Image%20In%20Curves.svg" alt="" width="2185" height="1448" loading="lazy" decoding="async" />
@@ -311,9 +348,60 @@
           </article>
         </div>
       </section>
+      </div>
+
+      <div class="project-color-refs" aria-hidden="true">
+        <section class="section section--prelude-color-ref project-color-ref" data-color-ref="prelude">
+          <div class="container container--wide section-header__content">
+            <h2 class="type-display-2xl section-title">Index</h2>
+            <p class="type-body-lg prose section-title">Featured stories and project sections below.</p>
+            <p class="type-caption section-header__meta">Portfolio</p>
+          </div>
+        </section>
+        <section class="section section--featured project-color-ref" data-color-ref="featured">
+          <div class="container container--wide section-header__content">
+            <h2 class="type-display-2xl section-title">Schrift Collective</h2>
+            <p class="type-body-lg prose section-title">
+              Works for a collective captivated by typography—from managing socials content to organizing a small
+              team and developing a design system
+            </p>
+            <p class="type-caption section-header__meta">Web, Ecommerce, Design system, Webflow</p>
+          </div>
+        </section>
+        <section class="section section--madebymad project-color-ref" data-color-ref="madebymad">
+          <div class="container container--wide section-header__content">
+            <h2 class="type-display-2xl section-title">Made by Mad</h2>
+            <p class="type-body-lg prose section-title">
+              Product works for a full-stack digital agency, spanning design systems, food tech, telecom, and the
+              redesign of the studio’s own website
+            </p>
+            <p class="type-caption section-header__meta">Web, App, Design system, AI, Branding</p>
+          </div>
+        </section>
+        <section class="section section--odds project-color-ref" data-color-ref="odds">
+          <div class="container container--wide section-header__content">
+            <h2 class="type-display-2xl section-title">Odds &amp; Ends</h2>
+            <p class="type-body-lg prose section-title">
+              Pet projects, experiments, and other work that does not fit neatly into a single category, but still
+              deserves a place here
+            </p>
+            <p class="type-caption section-header__meta">Editorial, Vibe coded, Prompted</p>
+          </div>
+        </section>
+        <section class="section section--curves project-color-ref" data-color-ref="curves">
+          <div class="container container--wide section-header__content">
+            <h2 class="type-display-2xl section-title">In Curves</h2>
+            <p class="type-body-lg prose section-title">
+              Beyond interfaces, I enjoy drawing letterforms whenever I can. This section brings together some of my
+              favorite projects across type design and logos
+            </p>
+            <p class="type-caption section-header__meta">Typeface, Logo</p>
+          </div>
+        </section>
+      </div>
     </main>
 
-    <footer id="contact" class="site-footer section section--footer" data-header-theme="light">
+    <footer id="contact" class="site-footer section section--footer">
       <div class="container container--wide footer__wrapper">
         <div class="footer__message-grid">
           <p class="type-display-xl footer__message">Open to suggestions. <strong><a class="footer__cta" href="#contact-details">Drop me a line</a></strong></p>
@@ -323,7 +411,7 @@
           <div id="footer-meta" class="type-caption footer__meta">
             <p>
               American Grotesk by <strong>Klim Type Foundry</strong><br />
-              JT Javel by <strong>July Type</strong>
+              Society by <strong>AllCaps</strong>
             </p>
             <p id="contact-details">Designed and coded by hand, with AI assistance</p>
           </div>
@@ -369,9 +457,10 @@
     </header>
     </div>
 
-    <script src="scripts/header-theme.js" defer></script>
+    <script src="scripts/header-theme.js?v=no-header-themes" defer></script>
     <script src="assets/humans-shader/humans-shader-embed.js" defer></script>
     <script src="scripts/odds-humans-shader-init.js" defer></script>
+    <script src="scripts/project-sticky-background.js?v=no-header-themes" defer></script>
   </body>
 </html>
 

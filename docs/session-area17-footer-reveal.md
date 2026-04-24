@@ -28,7 +28,7 @@
 
 ### JavaScript
 
-Изменения **не вносились**: [`scripts/header-theme.js`](../scripts/header-theme.js) по-прежнему только выставляет `data-header-theme` на `<html>`. План допускал отсутствие правок HTML/JS.
+Для reveal-футера отдельный JS **не требуется**. [`scripts/header-theme.js`](../scripts/header-theme.js) отвечает за pinning шапки и геометрию glass/клонов текста и **не** управляет `data-header-theme` (атрибут снят из рантайма).
 
 ### HTML
 
