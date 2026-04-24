@@ -420,7 +420,8 @@
 
 .hero__wrapper {
   position: relative;
-  block-size: var(--hero-wrapper-height-desktop);
+  min-block-size: var(--hero-wrapper-height-desktop);
+  block-size: auto;
   max-inline-size: var(--hero-wrapper-max-width);
 }
 
@@ -432,18 +433,15 @@
 }
 
 .hero__profile {
-  position: absolute;
+  position: relative;
   inline-size: var(--hero-profile-size-desktop);
   aspect-ratio: 1 / 1;
   block-size: auto;
   --hero-profile-optical-offset-inline: 80px;
-  inset-inline-start: calc(
-    var(--space-page-padding) +
-    4 * (((100% - 2 * var(--space-page-padding) - 11 * var(--space-grid-gap)) / 12) + var(--space-grid-gap)) -
-    var(--hero-profile-optical-offset-inline)
+  margin-inline-start: calc(
+    4 * (((100% - 11 * var(--space-grid-gap)) / 12) + var(--space-grid-gap)) - var(--hero-profile-optical-offset-inline)
   );
-  inset-block-start: calc(50% + 53.5px);
-  transform: translate(0, -50%);
+  margin-block-start: 111px;
   overflow: hidden;
 }
 
@@ -465,9 +463,8 @@
 }
 
 .hero__wrapper > .hero__grid:last-of-type {
-  position: absolute;
-  inset-inline: var(--space-page-padding);
-  inset-block-end: 0;
+  position: relative;
+  margin-block-start: 20px;
   z-index: 1;
 }
 
@@ -476,6 +473,11 @@
   color: var(--hero-headline-color);
   letter-spacing: -0.01px;
   overflow-wrap: anywhere;
+}
+
+.hero[data-hero-debug="headline-2x"] .hero__headline {
+  font-size: calc(var(--type-display-xl-size) * 2);
+  line-height: calc(var(--type-display-xl-line-height) * 2);
 }
 
 .hero__caption {
@@ -492,24 +494,26 @@
   padding-inline-end: var(--space-400);
 }
 
+.hero[data-hero-debug="description-2x"] .hero__description {
+  font-size: calc(var(--type-body-lg-size) * 2);
+  line-height: calc(var(--type-body-lg-line-height) * 2);
+}
+
 @media (min-width: 1920px) {
   .hero__description {
     grid-column: 6 / span 5;
   }
 
   .hero__profile {
-    inset-inline-start: calc(
-      var(--space-page-padding) +
-      5 * (((100% - 2 * var(--space-page-padding) - 11 * var(--space-grid-gap)) / 12) + var(--space-grid-gap)) -
-      var(--hero-profile-optical-offset-inline)
+    margin-inline-start: calc(
+      5 * (((100% - 11 * var(--space-grid-gap)) / 12) + var(--space-grid-gap)) - var(--hero-profile-optical-offset-inline)
     );
-    inset-block-start: calc(50% + 55.5px);
   }
 }
 
 @media (min-width: 2560px) {
   .hero__profile {
-    inset-block-start: calc(50% + 53.5px);
+    /* Uses flow layout on desktop; keep 2560 block empty for future overrides. */
   }
 }
 
