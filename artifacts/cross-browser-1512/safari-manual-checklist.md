@@ -28,3 +28,10 @@
 - Playwright WebKit captures:
   - `artifacts/cross-browser-1512/post-fix/webkit-home-1512.png`
   - `artifacts/cross-browser-1512/post-fix/webkit-cardsB-1512.png`
+
+## iPhone Safari (bottom chrome / project backgrounds)
+
+- Open the same local URL on a real device.
+- Scroll through **Featured Stories** and project sections with sticky background scrub.
+- While the **bottom** Safari bar (tabs / address) **collapses and expands**, confirm there is **no** empty strip at the lower edge (no “see-through” to the footer or wrong layer).
+- Optionally capture a short screen recording if anything regresses.

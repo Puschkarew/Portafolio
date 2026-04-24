@@ -29,6 +29,13 @@ html.has-project-sticky-scrub .project-background-stage-shell {
   }
 }
 
+@supports (block-size: 100dvh) {
+  html.has-project-sticky-scrub .project-background-stage-shell {
+    block-size: 100dvh;
+    margin-block-end: -100dvh;
+  }
+}
+
 html.has-project-sticky-scrub .project-background-stage {
   position: relative;
   display: block;
@@ -147,6 +154,13 @@ html.has-project-sticky-scrub .project-background-art--curves img {
     object-fit: cover;
     object-position: 50% 50%;
   }
+
+  /* Match stage height: dvh tracks Safari toolbar; keeps Figma 390×852 proportion on dynamic viewport. */
+  @supports (min-height: 100dvh) {
+    html.has-project-sticky-scrub .project-background-art--madebymad img {
+      top: calc(50% + 100dvh * 369.5 / 852);
+    }
+  }
 }
 
 @media (min-width: 1024px) {
@@ -221,6 +235,12 @@ html.has-project-sticky-scrub .projects-area .section-header {
 @supports (min-block-size: 100svh) {
   html.has-project-sticky-scrub .projects-area .section-header {
     min-block-size: 100svh;
+  }
+}
+
+@supports (min-block-size: 100dvh) {
+  html.has-project-sticky-scrub .projects-area .section-header {
+    min-block-size: 100dvh;
   }
 }
 
