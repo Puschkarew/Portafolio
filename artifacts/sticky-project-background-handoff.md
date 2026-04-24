@@ -86,4 +86,3 @@ Desktop:
 ## Notes / known constraints
 
 - Firefox project was removed from Playwright config at user request (“пока без Firefox”). If cross-browser parity becomes important again, re-add Firefox and run `npx playwright install` as needed.
-
