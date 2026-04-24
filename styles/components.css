@@ -579,7 +579,7 @@
     inline-size: min(100%, 20rem);
     max-inline-size: 90vw;
     block-size: auto;
-    aspect-ratio: 948 / 1279;
+    aspect-ratio: 1428 / 1060;
     object-fit: contain;
     object-position: 50% 50%;
   }
@@ -601,16 +601,16 @@
     /* Scale dimensions and offsets with the 1512px-wide design frame (Figma). */
     --madebymad-frame: 1512;
 
-    inline-size: min(948px, calc(100vw * 948 / var(--madebymad-frame)));
+    inline-size: min(1428px, calc(100vw * 1428 / var(--madebymad-frame)));
     max-inline-size: none;
     block-size: auto;
-    aspect-ratio: 948 / 1279;
+    aspect-ratio: 1428 / 1060;
     object-fit: cover;
-    object-position: 0.04% 0.02%;
+    object-position: 50% 50%;
     inset: auto;
-    right: calc(-100vw * 420 / var(--madebymad-frame));
-    top: calc(-100vw * 62 / var(--madebymad-frame));
-    left: auto;
+    left: 50%;
+    top: calc(100vw * 325 / var(--madebymad-frame));
+    transform: translateX(-50%);
   }
 }
 

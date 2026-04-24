@@ -34,6 +34,16 @@ main#main-content.site-main {
   z-index: var(--layer-main);
 }
 
+main#main-content.site-main::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: calc(-1 * var(--footer-reveal-shadow-block-size));
+  block-size: var(--footer-reveal-shadow-block-size);
+  background: var(--footer-reveal-shadow-background);
+  pointer-events: none;
+}
+
 .skip-link {
   position: absolute;
   left: 0;
@@ -68,6 +78,26 @@ main#main-content.site-main {
 
 .section {
   padding-block: var(--space-section-gap-md);
+}
+
+#work,
+.projects-area {
+  position: relative;
+  z-index: var(--layer-after-hero);
+}
+
+#work {
+  background: var(--color-surface-page);
+}
+
+#work::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: calc(-1 * var(--hero-reveal-shadow-block-size));
+  block-size: var(--hero-reveal-shadow-block-size);
+  background: var(--hero-reveal-shadow-background);
+  pointer-events: none;
 }
 
 /* Desktop: #work matches Figma Subheader (481:111) — single top rhythm, ~182px band, centered label, page fill */
@@ -122,6 +152,12 @@ main#main-content.site-main {
 .section--hero {
   background: var(--hero-background);
   box-shadow: var(--hero-glow-shadow);
+}
+
+.section--hero.hero {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-hero-under);
 }
 
 .section--footer {
@@ -231,4 +267,3 @@ main#main-content.site-main {
     overflow: visible;
   }
 }
-

@@ -301,7 +301,19 @@
 
   /* 3.4 Hero */
   --hero-background: var(--color-surface-hero);
-  --hero-glow-shadow: var(--shadow-hero-glow);
+  --hero-shadow-size: 24px;
+  --hero-shadow-spread: calc(-1 * var(--hero-shadow-size));
+  --hero-glow-shadow:
+    inset var(--hero-shadow-size) 0 var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow),
+    inset calc(-1 * var(--hero-shadow-size)) 0 var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow),
+    inset 0 var(--hero-shadow-size) var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow);
+  --hero-reveal-shadow-block-size: var(--hero-shadow-size);
+  --hero-reveal-shadow-background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-hero-glow) 56%, transparent) 0%,
+    color-mix(in srgb, var(--color-hero-glow) 24%, transparent) 44%,
+    color-mix(in srgb, var(--color-hero-glow) 0%, transparent) 100%
+  );
   --hero-headline-color: var(--color-text-brand-blue);
   --hero-accent-color: var(--color-text-accent-red);
   --hero-padding-block-start: 84px;
@@ -320,7 +332,19 @@
 
   /* 3.5 Footer */
   --footer-background: var(--color-surface-footer);
-  --footer-glow-shadow: var(--shadow-footer-glow);
+  --footer-shadow-size: 24px;
+  --footer-shadow-spread: calc(-1 * var(--footer-shadow-size));
+  --footer-glow-shadow:
+    inset var(--footer-shadow-size) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650),
+    inset calc(-1 * var(--footer-shadow-size)) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650),
+    inset 0 calc(-1 * var(--footer-shadow-size)) var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650);
+  --footer-reveal-shadow-block-size: var(--footer-shadow-size);
+  --footer-reveal-shadow-background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-gray-650) 56%, transparent) 0%,
+    color-mix(in srgb, var(--color-gray-650) 24%, transparent) 44%,
+    color-mix(in srgb, var(--color-gray-650) 0%, transparent) 100%
+  );
   --footer-tagline-color: var(--color-text-olive);
   --footer-wrapper-min-height-desktop: 910px;
   --footer-meta-stack-gap: var(--space-400);
@@ -331,6 +355,8 @@
    * `.site-shell` establishes the shared stacking context for content + header.
    * Sticky footer sits under `main` so the area17-style reveal (main slides, footer shows) works.
    */
+  --layer-hero-under: 0;
+  --layer-after-hero: 1;
   --layer-footer-under: 1;
   --layer-main: 2;
   --layer-sticky: 1000;
@@ -402,4 +428,3 @@
     --duration-slow: 0ms;
   }
 }
-
