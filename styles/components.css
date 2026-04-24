@@ -161,7 +161,7 @@
 .nav-link.site-header__link,
 .nav-link.site-header__contact,
 .nav-link.site-header__mobile-trigger {
-  color: var(--header-fg);
+  color: var(--color-text-primary);
   text-decoration: none;
   white-space: nowrap;
   border-bottom: 0;
@@ -227,10 +227,14 @@
 
 @supports not (mix-blend-mode: difference) {
   .tag__text,
-  .site-header__text,
+  .site-header__text {
+    mix-blend-mode: normal;
+    color: var(--color-text-primary);
+  }
+
   .site-header__visual-text {
     mix-blend-mode: normal;
-    color: var(--header-fg);
+    color: var(--color-white);
   }
 }
 

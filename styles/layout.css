@@ -7,6 +7,7 @@
 html,
 body {
   min-height: 100%;
+
   /* `hidden` breaks `position: sticky` on descendants in Chromium; `clip` suppresses horizontal bleed without that bug. */
   overflow-x: clip;
 }

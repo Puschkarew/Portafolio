@@ -1,31 +1,22 @@
 /**
  * Header: exact rail pinning, fixed glass (backdrop-filter) layer, fixed visual
  * text clones (mix-blend-mode: difference), and fixed transparent hitbox links.
- * Theme sampling follows the visible source rail.
  */
 (function () {
   var HEADER_SELECTOR = ".site-header";
   var MOVING_RAIL_SELECTOR = ".site-header__menu";
-  var THEME_SELECTOR = "[data-header-theme]:not(html)";
   var GLASS_SOURCES = [
     { name: "nav", selector: ".site-header__nav" },
     { name: "contact", selector: ".site-header__contact" },
     { name: "mobile", selector: ".site-header__mobile-trigger" }
   ];
-  var VALID = { light: true, dark: true };
-  var DEFAULT_HEADER_HEIGHT = 84;
 
   var headerEl = null;
   var movingRailEl = null;
-  var themeNodes = [];
-  var observer = null;
   var resizeRaf = 0;
-  var themeRaf = 0;
   var pinRaf = 0;
   var geometryRaf = 0;
-  var headerHeight = DEFAULT_HEADER_HEIGHT;
   var appliedTop = null;
-  var themeDirty = true;
   var topStep = 1;
   var glassItemsByName = Object.create(null);
   var textPairs = [];
@@ -47,88 +38,6 @@
   function cacheElements() {
     headerEl = document.querySelector(HEADER_SELECTOR);
     movingRailEl = document.querySelector(MOVING_RAIL_SELECTOR);
-  }
-
-  function cacheThemeNodes() {
-    themeNodes = Array.prototype.slice.call(document.querySelectorAll(THEME_SELECTOR));
-  }
-
-  function measureHeader() {
-    if (!headerEl) {
-      headerHeight = DEFAULT_HEADER_HEIGHT;
-      return;
-    }
-    headerHeight = Math.max(
-      headerEl.offsetHeight || Math.ceil(headerEl.getBoundingClientRect().height) || DEFAULT_HEADER_HEIGHT,
-      1
-    );
-  }
-
-  function samplePoint() {
-    if (movingRailEl) {
-      var railRect = movingRailEl.getBoundingClientRect();
-      if (railRect.width > 0 && railRect.height > 0) {
-        return {
-          x: Math.min(Math.max(railRect.left + railRect.width / 2, 1), window.innerWidth - 2),
-          y: Math.min(Math.max(railRect.bottom + 2, 1), window.innerHeight - 2)
-        };
-      }
-    }
-    return {
-      x: Math.min(Math.max(window.innerWidth * 0.5, 1), window.innerWidth - 2),
-      y: Math.min(headerHeight + 2, window.innerHeight - 2)
-    };
-  }
-
-  function pickTheme() {
-    var point = samplePoint();
-    var x = point.x;
-    var y = point.y;
-    var i;
-    var el;
-    var r;
-    var t;
-
-    for (i = 0; i < themeNodes.length; i += 1) {
-      el = themeNodes[i];
-      r = el.getBoundingClientRect();
-      if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
-        t = el.getAttribute("data-header-theme");
-        if (VALID[t]) return t;
-      }
-    }
-
-    var best = null;
-    var bestBottom = -Infinity;
-    for (i = 0; i < themeNodes.length; i += 1) {
-      el = themeNodes[i];
-      r = el.getBoundingClientRect();
-      if (r.bottom <= y && r.bottom > bestBottom) {
-        bestBottom = r.bottom;
-        t = el.getAttribute("data-header-theme");
-        if (VALID[t]) best = t;
-      }
-    }
-    return best || "dark";
-  }
-
-  function applyTheme(theme) {
-    var next = VALID[theme] ? theme : "dark";
-    if (document.documentElement.getAttribute("data-header-theme") !== next) {
-      document.documentElement.setAttribute("data-header-theme", next);
-    }
-  }
-
-  function runThemeFrame() {
-    themeRaf = 0;
-    if (!themeDirty) return;
-    themeDirty = false;
-    applyTheme(pickTheme());
-  }
-
-  function scheduleThemeFrame() {
-    if (themeRaf) return;
-    themeRaf = requestAnimationFrame(runThemeFrame);
   }
 
   function writeTop(top) {
@@ -297,34 +206,8 @@
     glassResizeObserver.observe(headerEl);
   }
 
-  function attachObserver() {
-    if (observer) {
-      observer.disconnect();
-    }
-    if (!themeNodes.length) {
-      observer = null;
-      return;
-    }
-    var margin = "-" + headerHeight + "px 0px 0px 0px";
-    observer = new IntersectionObserver(function () {
-      themeDirty = true;
-      scheduleThemeFrame();
-    }, {
-      root: null,
-      rootMargin: margin,
-      threshold: 0
-    });
-    for (var j = 0; j < themeNodes.length; j += 1) {
-      observer.observe(themeNodes[j]);
-    }
-    themeDirty = true;
-    scheduleThemeFrame();
-  }
-
   function pinHeader() {
     writeTop(currentScrollTop());
-    themeDirty = true;
-    scheduleThemeFrame();
   }
 
   function onScroll() {
@@ -344,11 +227,8 @@
   }
 
   function refreshLayout() {
-    cacheThemeNodes();
     updateTopStep();
-    measureHeader();
     writeTop(currentScrollTop());
-    attachObserver();
     scheduleGeometryFrame();
   }
 
@@ -357,10 +237,7 @@
     buildGlassItemRefs();
     buildOverlayNodes();
     updateTopStep();
-    measureHeader();
     writeTop(currentScrollTop());
-    cacheThemeNodes();
-    attachObserver();
     attachGeometryResizeObserver();
     scheduleGeometryFrame();
 

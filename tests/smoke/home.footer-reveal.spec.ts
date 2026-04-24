@@ -50,6 +50,25 @@ test.describe("footer sticky reveal (main stacks above footer)", () => {
         expect(box.y + box.height).toBeGreaterThan(0);
         expect(box.y).toBeLessThan(viewport.height);
       }
+
+      if (viewport.name === "1512") {
+        const detached = await page.evaluate(() => {
+          const sh = document.querySelector(".project-background-stage-shell");
+          const curves = document.querySelector("[data-project=\"curves\"]");
+          return {
+            isDetached: document.documentElement.classList.contains("is-project-stage-detached"),
+            shellAlpha: sh ? Number.parseFloat(getComputedStyle(sh).opacity) : null,
+            curvesBg: curves ? getComputedStyle(curves).backgroundColor : null
+          };
+        });
+        expect(detached.isDetached).toBe(true);
+        expect(detached.shellAlpha).toBe(0);
+        if (typeof detached.curvesBg === "string" && /^rgba\(/i.test(detached.curvesBg)) {
+          const m = detached.curvesBg.match(/rgba\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*,\s*([\d.]+)\s*\)/i);
+          const a = m ? Number.parseFloat(m[1]) : 1;
+          expect(a).toBeGreaterThan(0);
+        }
+      }
     });
   }
 });

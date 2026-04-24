@@ -1,39 +1,53 @@
-/* Scroll-driven project background/art (desktop + JS). */
+/* Scroll-driven project background/art (desktop + JS). Handoff 2026-04-24. */
+
+.project-background-stage-shell,
 .project-background-stage {
   display: none;
 }
 
-html.has-project-sticky-scrub main#main-content.site-main {
+html.has-project-sticky-scrub .projects-area {
+  position: relative;
   isolation: isolate;
 }
 
-html.has-project-sticky-scrub .project-background-stage {
-  position: fixed;
-  inset: 0;
+html.has-project-sticky-scrub .project-background-stage-shell {
+  position: sticky;
+  top: 0;
   z-index: 0;
   display: block;
+  block-size: 100vh;
+  margin-block-end: -100vh;
   pointer-events: none;
+  overflow: hidden;
+  opacity: 1;
+}
+
+html.has-project-sticky-scrub .project-background-stage {
+  position: relative;
+  display: block;
+  block-size: 100%;
   overflow: hidden;
   isolation: isolate;
 }
 
-/* Solid base so footer is never seen through the project stack. */
-html.has-project-sticky-scrub .project-background-layer--base {
+html.has-project-sticky-scrub .project-background-layer--base,
+html.has-project-sticky-scrub [data-bg-layer],
+html.has-project-sticky-scrub .project-background-art {
   position: absolute;
   inset: 0;
-  z-index: 0;
-  background: var(--color-surface-page);
-  opacity: 1;
+  pointer-events: none;
   transition: none;
 }
 
+html.has-project-sticky-scrub .project-background-layer--base {
+  z-index: 0;
+  background: var(--color-surface-page);
+  opacity: 1;
+}
+
 html.has-project-sticky-scrub [data-bg-layer] {
-  position: absolute;
-  inset: 0;
   z-index: 1;
   opacity: 0;
-  transition: none;
-  pointer-events: none;
 }
 
 html.has-project-sticky-scrub [data-bg-layer="prelude"] {
@@ -57,13 +71,9 @@ html.has-project-sticky-scrub [data-bg-layer="curves"] {
 }
 
 html.has-project-sticky-scrub .project-background-art {
-  position: absolute;
-  inset: 0;
   z-index: 2;
-  display: block;
   opacity: 0;
-  transition: none;
-  pointer-events: none;
+  --project-art-blur: 32px;
 }
 
 html.has-project-sticky-scrub .project-background-art__inner {
@@ -71,6 +81,11 @@ html.has-project-sticky-scrub .project-background-art__inner {
   inset: 0;
   display: grid;
   place-items: center;
+}
+
+html.has-project-sticky-scrub .project-background-art img,
+html.has-project-sticky-scrub .project-background-art--odds .humans-shader-slot {
+  filter: blur(var(--project-art-blur));
 }
 
 /* Match in-section art framing (Figma 1512 frame). */
@@ -82,6 +97,7 @@ html.has-project-sticky-scrub .project-background-art--featured img {
 
 html.has-project-sticky-scrub .project-background-art--madebymad img {
   --madebymad-frame: 1512;
+
   position: absolute;
   inline-size: min(948px, calc(100vw * 948 / var(--madebymad-frame)));
   max-inline-size: none;
@@ -95,8 +111,22 @@ html.has-project-sticky-scrub .project-background-art--madebymad img {
   left: auto;
 }
 
+html.has-project-sticky-scrub .project-background-art--odds .humans-shader-slot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+html.has-project-sticky-scrub .project-background-art--odds canvas {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none;
+}
+
 html.has-project-sticky-scrub .project-background-art--curves img {
   --in-curves-frame: 1512;
+
   position: absolute;
   inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-frame)));
   max-inline-size: none;
@@ -113,7 +143,6 @@ html.has-project-sticky-scrub [data-color-ref] {
   background: var(--color-surface-page, var(--color-white));
 }
 
-/* Prelude reference = page / index band before the first project. */
 html.has-project-sticky-scrub .section--prelude-color-ref {
   background: var(--color-surface-page);
   --section-accent: var(--color-text-primary);
@@ -131,26 +160,40 @@ html.has-project-sticky-scrub .project-color-refs {
   padding: 0;
   border: 0;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
   pointer-events: none;
 }
 
-/* Section sits above the fixed background stack. */
-html.has-project-sticky-scrub [data-project] {
+html.has-project-sticky-scrub .projects-area [data-project] {
   position: relative;
   z-index: 1;
   background: transparent;
-  transition: none;
 }
 
-/* Bitmap art comes from the stage; keep DOM for a11y / fallback. */
-html.has-project-sticky-scrub [data-project] .section-header__art {
+html.has-project-sticky-scrub .projects-area [data-project] .section-header__art {
   opacity: 0;
-  transition: none;
   pointer-events: none;
+  transition: none;
 }
 
 html.has-project-sticky-scrub [data-project="odds"] .section--odds__shader {
-  opacity: var(--project-art-opacity, 1);
+  opacity: 0;
+  pointer-events: none;
   transition: none;
+}
+
+html.has-project-sticky-scrub.is-project-stage-detached .project-background-stage-shell {
+  opacity: 0;
+}
+
+html.has-project-sticky-scrub.is-project-stage-detached .projects-area [data-project="curves"] {
+  background: var(--color-surface-in-curves);
+}
+
+html.has-project-sticky-scrub.is-project-stage-detached .projects-area [data-project="curves"] .section-header__art {
+  opacity: 1;
+}
+
+html.has-project-sticky-scrub.is-project-stage-detached .projects-area [data-project="curves"] .section-header__art img {
+  filter: none;
 }

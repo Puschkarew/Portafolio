@@ -9,6 +9,7 @@
     "lint:html": "html-validate \"index.html\" \"tests/fixtures/**/*.html\"",
     "lint:quality": "npm run lint:css && npm run lint:html",
     "smoke:visual": "playwright test tests/smoke/home.visual.spec.ts",
+    "smoke:projects": "playwright test tests/smoke/home.project-transitions.spec.ts tests/smoke/home.footer-refresh.scroll.spec.ts",
     "smoke:a11y": "playwright test tests/smoke/home.a11y.spec.ts",
     "smoke:token-semantic": "playwright test tests/smoke/home.token-semantic.spec.ts",
     "smoke:structure": "node scripts/quality/check-html-structure.mjs && node scripts/quality/check-css-consistency.mjs",
