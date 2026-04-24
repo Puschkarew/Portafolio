@@ -437,7 +437,9 @@
   inline-size: var(--hero-profile-size-desktop);
   aspect-ratio: 1 / 1;
   block-size: auto;
+
   --hero-profile-optical-offset-inline: 80px;
+
   margin-inline-start: calc(
     4 * (((100% - 11 * var(--space-grid-gap)) / 12) + var(--space-grid-gap)) - var(--hero-profile-optical-offset-inline)
   );
@@ -760,34 +762,34 @@
   }
 
   .cards-grid--mad .card--madebymad {
-    grid-column: 2 / span 9;
-    grid-row: 3;
+    grid-column: 4 / span 9;
+    grid-row: 4;
   }
 
   .cards-grid--mad .card--secretkitchen {
     grid-column: 1 / span 6;
-    grid-row: 4;
+    grid-row: 3;
   }
 
   /* Odds & Ends */
   .cards-grid--odds .card--particle-text {
     grid-column: 1 / span 9;
-    grid-row: 1;
+    grid-row: 4;
   }
 
   .cards-grid--odds .card--shader {
     grid-column: 3 / span 8;
-    grid-row: 2;
+    grid-row: 3;
   }
 
   .cards-grid--odds .card--mezhdu-prochim {
-    grid-column: 1 / span 9;
-    grid-row: 3;
+    grid-column: 2 / span 9;
+    grid-row: 1;
   }
 
   .cards-grid--odds .card--nostalgia {
     grid-column: 8 / span 5;
-    grid-row: 4;
+    grid-row: 2;
   }
 
   /* In Curves */
@@ -825,22 +827,7 @@
 }
 
 .card--nostalgia .card__media {
-  background: var(--color-accent-pink);
-}
-
-.card--nostalgia .card__media::before {
-  content: "";
-  position: absolute;
-  inset: 9.09% 6.64% -14.48% -12.03%;
-  background: url("../assets/figma/card-nostalgia-vector.png") center / contain no-repeat;
-  transform: rotate(-45deg);
-}
-
-.card--nostalgia .card__media::after {
-  content: "";
-  position: absolute;
-  inset: 17.09% 17.25% 17.24% 17.08%;
-  background: url("../assets/figma/card-nostalgia-circle.png") center / contain no-repeat;
+  background: url("../assets/figma/Nostalgia Box Image.svg") center / contain no-repeat;
 }
 
 .card--shader .card__media {
