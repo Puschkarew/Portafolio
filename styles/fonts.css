@@ -1,0 +1,36 @@
+/*
+ * Local OTF webfonts in /fonts (temporary trial files).
+ * Browsers accept OpenType with format("opentype"). For production you may switch to woff2.
+ */
+
+@font-face {
+  font-family: "American Grotesk";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/AmericanGrotesk-NormalRegular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "American Grotesk";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("../fonts/AmericanGrotesk-NormalMedium.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Society Trial";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Society-Regular-trial.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Society Trial";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/Society-Italic-trial.otf") format("opentype");
+}
