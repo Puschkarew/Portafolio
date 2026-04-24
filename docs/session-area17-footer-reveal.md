@@ -2,6 +2,8 @@
 
 **Статус (актуальная эталонная реализация):** это поведение футера — **источник правды** для репозитория; не менять без явной задачи. Регрессии запрещены: см. раздел **Site footer — do not regress** в [AGENTS.md](../AGENTS.md).
 
+**Актуальное уточнение:** футер всегда должен помещаться в один viewport. Для коротких экранов композиция адаптируется внутри `100vh` с modern viewport overrides (`100svh`, затем `100dvh`): иллюстрация масштабируется и обрезается, а сообщение и meta остаются видимыми на финальном scroll-state.
+
 **Дата:** 22 апреля 2026  
 **Контекст:** реализация плана «Area17-style footer reveal» (без правок самого plan-файла).
 
@@ -21,7 +23,9 @@
    - Селектор `main#main-content.site-main`: `position: relative`, `z-index: var(--layer-main)`, фон `var(--color-surface-page)` (чтобы в промежутках между секциями не «просвечивал» футер).
 
 3. **Футер** (тот же файл, `.section.section--footer.site-footer`):
-   - `position: sticky`, `bottom: 0`, `z-index: var(--layer-footer-under)`.
+   - `position: sticky`, `bottom: 0`, `z-index: var(--layer-footer-under)`;
+   - `block-size: 100vh`, `100svh` и `100dvh` при поддержке;
+   - внутренний `.footer__wrapper` занимает `100%` высоты футера, без `min-block-size`, который мог делать футер выше экрана.
 
 4. **Доступность / якоря**:
    - `scroll-margin-block-start: var(--space-600)` на футере `#contact` и на `#footer-meta` (чтобы клики по навигации к `#contact` / «CV» не прятались под шапку).
@@ -41,7 +45,7 @@
 | `npm run lint:quality` (Stylelint + html-validate) | Успех |
 | `check-html-structure.mjs`, `check-css-consistency.mjs` | Успех |
 | Playwright: `home.visual`, `home.a11y`, `home.token-semantic` (Chromium + Firefox) | Успех |
-| **Новый** [`tests/smoke/home.footer-reveal.spec.ts`](../tests/smoke/home.footer-reveal.spec.ts) — слои, `position`/`z-index`, скролл в конец, видимость `.footer__message` на 390 / 1512 / 1920 | Успех |
+| [`tests/smoke/home.footer-reveal.spec.ts`](../tests/smoke/home.footer-reveal.spec.ts) — слои, `sticky; bottom: 0`, footer height = viewport height, видимость message/meta/model на 390×600 / 390×700 / 390×844 / 1512 / 1920 | Успех |
 
 **Примечание по `home.live-parity`:** прогон против локального HTTP на порту, отличном от занятого, показал падение по метрике `heroOverlapArea` (ожидается `0`, фактически ненулевое пересечение геро-блока на узком вьюпорте). Поведение не связывалось напрямую с правками футера; для регресса по эффекту футера добавлен отдельный smoke `home.footer-reveal.spec.ts`.
 
@@ -50,8 +54,9 @@
 ## Изменённые и добавленные файлы
 
 - [`styles/tokens.css`](../styles/tokens.css) — переменные `--layer-main`, `--layer-footer-under`.
-- [`styles/layout.css`](../styles/layout.css) — слой `main`, sticky-футер, `scroll-margin` для якорей.
-- [`tests/smoke/home.footer-reveal.spec.ts`](../tests/smoke/home.footer-reveal.spec.ts) — новый тест.
+- [`styles/layout.css`](../styles/layout.css) — слой `main`, sticky-футер, viewport-bound height, `scroll-margin` для якорей.
+- [`styles/components.css`](../styles/components.css) — `.footer__wrapper` и responsive footer composition внутри одного viewport.
+- [`tests/smoke/home.footer-reveal.spec.ts`](../tests/smoke/home.footer-reveal.spec.ts) — регрессии viewport-fit footer reveal.
 
 ## Опциональные следующие шаги (не из текущей реализации)
 
