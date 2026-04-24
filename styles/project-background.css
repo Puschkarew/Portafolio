@@ -101,15 +101,6 @@ html.has-project-sticky-scrub .project-background-art--featured img {
   block-size: auto;
 }
 
-html.has-project-sticky-scrub .project-background-art--madebymad img {
-  inline-size: min(100%, 20rem);
-  max-inline-size: 90vw;
-  block-size: auto;
-  aspect-ratio: 1428 / 1060;
-  object-fit: contain;
-  object-position: 50% 50%;
-}
-
 html.has-project-sticky-scrub .project-background-art--odds .humans-shader-slot {
   position: absolute;
   inset: 0;
@@ -124,12 +115,38 @@ html.has-project-sticky-scrub .project-background-art--odds canvas {
 }
 
 html.has-project-sticky-scrub .project-background-art--curves img {
-  inline-size: min(100%, 22rem);
-  max-inline-size: 92vw;
+  position: absolute;
+
+  /* Match .section--curves .section-header__art img (Figma 1301:5915, frame 390) */
+  --in-curves-mobile-frame: 390;
+
+  inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-mobile-frame)));
+  max-inline-size: none;
   block-size: auto;
   aspect-ratio: 2185 / 1448;
-  object-fit: contain;
+  object-fit: cover;
   object-position: 50% 50%;
+  inset: auto;
+  left: calc(100% + 100vw * 147.5 / var(--in-curves-mobile-frame));
+  top: calc(50% - 100vw * 189 / var(--in-curves-mobile-frame));
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1023px) {
+  /* Figma 1301:5883 — mobile frame 390×852; Bike 484×359, object-cover; center at 50% + 369.5px (852-tall frame). */
+  html.has-project-sticky-scrub .project-background-art--madebymad img {
+    position: absolute;
+    inset: auto;
+    left: 50%;
+    top: calc(50% + 100svh * 369.5 / 852);
+    transform: translate(-50%, -50%);
+    inline-size: min(484px, calc(100vw * 484 / 390));
+    max-inline-size: none;
+    block-size: auto;
+    aspect-ratio: 484 / 359;
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
 }
 
 @media (min-width: 1024px) {

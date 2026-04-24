@@ -614,20 +614,46 @@
   }
 }
 
-/* In Curves — header art (Figma 1282:2477, design width 1512) */
+/* In Curves — header art: mobile Figma 1301:5915 (frame 390×852); desktop Figma 1282:2477 / 1512 */
 @media (max-width: 1023px) {
+  .section--curves .section-header {
+    position: relative;
+    overflow: clip;
+  }
+
   .section--curves .section-header__art {
-    place-items: center;
+    display: block;
+    z-index: 0;
+    place-items: unset;
   }
 
   .section--curves .section-header__art img {
-    position: static;
-    inline-size: min(100%, 22rem);
-    max-inline-size: 92vw;
+    position: absolute;
+
+    /* Same mobile frame as Figma node 1301:5922 (Image): center at (100% + 147.5px, 50% − 189px), 2185×1448 */
+    --in-curves-mobile-frame: 390;
+
+    inline-size: min(2185px, calc(100vw * 2185 / var(--in-curves-mobile-frame)));
+    max-inline-size: none;
     block-size: auto;
     aspect-ratio: 2185 / 1448;
-    object-fit: contain;
+    object-fit: cover;
     object-position: 50% 50%;
+    inset: auto;
+    left: calc(100% + 100vw * 147.5 / var(--in-curves-mobile-frame));
+    top: calc(50% - 100vw * 189 / var(--in-curves-mobile-frame));
+    transform: translate(-50%, -50%);
+  }
+
+  /* Figma 1301:5915: gaps 24 / 48 inside copy; no extra block padding (centered in header by parent grid) */
+  .section--curves .section-header__content {
+    z-index: 1;
+    padding-block: 0;
+    gap: var(--space-1200);
+  }
+
+  .section--curves .section-header__intro {
+    gap: var(--space-600);
   }
 }
 
@@ -700,6 +726,13 @@
   justify-items: center;
   text-align: center;
   padding-block: var(--space-1200);
+}
+
+@media (max-width: 1023px) {
+  /* Figma 1301:5883 — intro + meta spacing comes from grid gap only, not extra padding around the stack. */
+  .section--madebymad .section-header__content {
+    padding-block: 0;
+  }
 }
 
 .cards-grid {
@@ -1109,7 +1142,7 @@
   .footer__model {
     left: 0;
     right: 0;
-    top: 96px;
+    top: 116px;
     bottom: 141px;
     width: auto;
     height: auto;
