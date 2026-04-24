@@ -162,6 +162,11 @@ main#main-content.site-main::after {
   z-index: var(--layer-hero-under);
 }
 
+/* Tall hero: sticky with a negative top so the bottom pins to the viewport before #work overlaps. */
+html[data-hero-tall] .section--hero.hero {
+  top: var(--hero-sticky-top, 0px);
+}
+
 .section--footer {
   background: var(--footer-background);
   box-shadow: var(--footer-glow-shadow);
