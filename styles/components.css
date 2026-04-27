@@ -1019,6 +1019,13 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   gap: var(--space-200);
 }
 
+/* Figma 1775:5194: 96px between main columns on mobile; desktop uses grid gap from tokens */
+@media (max-width: 767px) {
+  .about-table__grid {
+    gap: var(--space-2400);
+  }
+}
+
 .about-table {
   --color-hero-glow: var(--color-hero-glow-about);
   --hero-reveal-shadow-background: linear-gradient(
@@ -1029,7 +1036,9 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   );
 }
 
-#work.about-table {
+/* About page: not the home #work subheader; 64px vertical padding */
+#about-table.section.about-table {
+  padding-block: var(--space-1600);
   text-align: start;
   --about-table-rule: color-mix(in srgb, var(--color-black) 40%, transparent);
 }
@@ -1069,21 +1078,34 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 }
 
 @media (max-width: 1023px) {
-  #work.about-table .about-table__col--experience .about-table__list {
+  #about-table.about-table .about-table__col--experience .about-table__list {
     padding-inline-end: var(--space-400);
   }
 }
 
-/* Figma: Title/SM 28/32 on small viewports; global mobile alias is 24/28 */
+/* Figma: Title/SM 28/32 on mobile (all section titles; overrides global 24/28) */
 @media (max-width: 767px) {
-  #work.about-table .about-table__col--experience .about-table__title {
+  #about-table.about-table .about-table__title {
     font-size: var(--font-size-28);
     line-height: var(--line-height-32);
+  }
+
+  /* Experience: dates stay Body/LG mobile 18/26; stack columns use 20/30 (see below) */
+  #about-table.about-table .about-table__col--experience .about-table__date {
+    font-size: var(--font-size-18);
+    line-height: var(--line-height-26);
+  }
+
+  /* Figma: Languages, Hardware, Soft skills, Links, Courses, Hard skills lists — 20/30, not global 18/26 */
+  #about-table.about-table .about-table__col--stack .type-body-lg,
+  #about-table.about-table .about-table__col--stack .type-body-lg-underline {
+    font-size: var(--font-size-20);
+    line-height: var(--line-height-30);
   }
 }
 
 /* Figma: body 18/26 with links + emphasis at 20/30 in the same line */
-#work.about-table .about-table__col--experience .about-table__desc em {
+#about-table.about-table .about-table__col--experience .about-table__desc em {
   font-family: var(--font-family-serif);
   font-style: italic;
   font-weight: var(--font-weight-regular);
@@ -1092,19 +1114,30 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   letter-spacing: var(--type-body-lg-tracking);
 }
 
-#work.about-table .about-table__col--experience .about-table__desc .type-body-lg-underline {
+#about-table.about-table .about-table__col--experience .about-table__desc .type-body-lg-underline {
   font-size: var(--font-size-20);
   line-height: var(--line-height-30);
 }
 
 .about-table__divider {
+  flex-shrink: 0;
+  align-self: stretch;
   inline-size: 100%;
   block-size: 1px;
+  min-block-size: 1px;
   background: var(--about-table-rule);
 }
 
 .about-table__divider--experience {
   display: none;
+}
+
+/* Figma 1775:5199: same hairline as other about-table rules (1px) */
+.about-table__divider--section-lead {
+  flex-shrink: 0;
+  block-size: 1px;
+  min-block-size: 1px;
+  background: var(--about-table-rule);
 }
 
 .about-table__col--stack {
@@ -1130,6 +1163,13 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   font-style: italic;
 }
 
+/* Hard skills only: hairline between Best friends / AI / Base (reliable across engines vs 1px ::before) */
+.about-table__subsection + .about-table__subsection {
+  margin-block-start: var(--space-800);
+  padding-block-start: var(--space-400);
+  border-block-start: 1px solid var(--about-table-rule);
+}
+
 .about-table__items {
   margin: 0;
   padding: 0;
@@ -1151,6 +1191,13 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   margin-block-start: var(--type-body-lg-size);
 }
 
+/* Figma 1775:5228: paragraph gap 20px at mobile body 20/30 */
+@media (max-width: 767px) {
+  #about-table.about-table .about-table__prose.type-body-lg p + p {
+    margin-block-start: var(--font-size-20);
+  }
+}
+
 .about-table a:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 2px;
@@ -1160,11 +1207,35 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   color: inherit;
 }
 
-@media (min-width: 1024px) {
-  #work.about-table.section {
-    padding-block: var(--space-2400);
+/* Figma 1775:5199: Hard skills — title → 32px → line → 16px → first block; 32 + hairlines between subsections; pr-48; mobile sub-lines */
+@media (max-width: 1023px) {
+  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] {
+    gap: 0;
+    padding-inline-end: var(--space-1200);
   }
 
+  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__title {
+    margin-block-end: var(--space-800);
+  }
+
+  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__divider {
+    margin-block: 0;
+    margin-block-end: var(--space-400);
+  }
+
+  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__divider + .about-table__subsection {
+    margin-block-start: 0;
+  }
+
+  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] .about-table__subsection {
+    position: relative;
+  }
+
+}
+
+/* Hard skills mobile title/body: covered by .about-table__title and .about-table__col--stack .type-body-lg */
+
+@media (min-width: 1024px) {
   .about-table__grid {
     gap: var(--space-grid-gap);
   }
@@ -1235,21 +1306,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
   .about-table__col--hard .about-table__subsection > * {
     inline-size: calc(100% - var(--space-1200));
-  }
-
-  .about-table__subsection + .about-table__subsection {
-    margin-block-start: var(--space-800);
-    padding-block-start: var(--space-400);
-  }
-
-  .about-table__subsection + .about-table__subsection::before {
-    content: "";
-    position: absolute;
-    inset-inline-start: 0;
-    inset-block-start: 0;
-    inline-size: calc(100% - var(--space-1200));
-    block-size: 1px;
-    background: var(--about-table-rule);
   }
 
   .about-table__items + .about-table__hardware-media {

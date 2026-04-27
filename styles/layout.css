@@ -81,13 +81,22 @@ main#main-content.site-main::after {
 }
 
 #work,
-.projects-area {
+.projects-area,
+#about-table {
   position: relative;
   z-index: var(--layer-after-hero);
 }
 
-#work {
+#work,
+#about-table {
   background: var(--color-surface-page);
+}
+
+/* Sticky .about-hero (z:0) + #about-table: explicit z-index + isolation so scroll compositing
+   does not paint the hero headline over the table (especially WebKit). */
+#about-table {
+  z-index: 2;
+  isolation: isolate;
 }
 
 /* Subheader: top rhythm only; Figma 1294/481 — no block-end gap; label centered (not only 1024+) */
@@ -96,7 +105,8 @@ main#main-content.site-main::after {
   text-align: center;
 }
 
-#work::before {
+#work::before,
+#about-table::before {
   content: "";
   position: absolute;
   inset-inline: 0;
@@ -241,7 +251,8 @@ html[data-hero-tall] .section--hero.hero {
   }
 
   /* Figma 1294: page padding 24px on Subheader while global mobile page padding stays 16px */
-  #work .container {
+  #work .container,
+  #about-table .container {
     padding-inline: var(--space-600);
   }
 }
