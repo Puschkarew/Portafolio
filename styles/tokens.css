@@ -365,6 +365,9 @@
   --layer-header-glass: 2147483000;
   --layer-header-text: 2147483001;
   --layer-header-hit: 2147483002;
+  --layer-mobile-menu: 2147483600;
+  --layer-mobile-menu-text: 2147483601;
+  --mobile-menu-overlay-blur: 48px;
   --site-header-margin-offset: -84px;
   --section-header-min-height: 100vh;
 }

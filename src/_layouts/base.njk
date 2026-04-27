@@ -42,6 +42,31 @@
       <div class="site-header-glass__item" data-header-glass-item="mobile"></div>
     </div>
 
+    <div
+      class="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Site menu"
+      hidden
+    >
+      <div class="mobile-menu__inner">
+        <div class="mobile-menu__header">
+          <button class="mobile-menu__close type-caption" type="button">
+            <span class="mobile-menu__close-text">Close</span>
+          </button>
+        </div>
+
+        <nav class="mobile-menu__nav" aria-label="Mobile">
+          <ul class="mobile-menu__list">
+            <li><a class="mobile-menu__link type-display-xl" href="#">About</a></li>
+            <li><a class="mobile-menu__link type-display-xl" href="#">Index</a></li>
+            <li><a class="mobile-menu__link type-display-xl" href="#">CV</a></li>
+            <li><a class="mobile-menu__link type-display-xl" href="#">Get in touch</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+
     <header class="site-header">
       <div class="site-header__pin">
         <div class="site-header__grid">
@@ -72,6 +97,7 @@
 
     <script src="scripts/hero-sticky-behavior.js" defer></script>
     <script src="scripts/header-theme.js?v=no-header-themes" defer></script>
+    <script src="scripts/mobile-menu.js" defer></script>
     <script src="assets/humans-shader/humans-shader-embed.js" defer></script>
     <script src="scripts/odds-humans-shader-init.js" defer></script>
     <script src="scripts/project-sticky-background.js?v=no-header-themes" defer></script>
