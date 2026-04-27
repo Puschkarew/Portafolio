@@ -1,0 +1,140 @@
+---
+description: Project working agreement and frozen behavior constraints (from AGENTS.md)
+alwaysApply: true
+---
+
+# Project instructions (AGENTS.md)
+
+## What this project is
+
+This is a hand-coded website built from Figma designs.
+Default stack: Eleventy-generated plain HTML, CSS, and minimal JavaScript.
+
+## Agent docs map
+
+- Start with [docs/agent-docs-index.md](docs/agent-docs-index.md) when choosing which project document to read.
+- Build workflow: [docs/eleventy-build-workflow.md](docs/eleventy-build-workflow.md).
+- Page authoring: [docs/page-authoring-guide.md](docs/page-authoring-guide.md).
+- Validation matrix: [docs/validation-playbook.md](docs/validation-playbook.md).
+
+## Build workflow
+
+- Source templates live in `src/`.
+- Generated output lives in `dist/` and is ignored by git.
+- Run `npm run build` before validating generated HTML.
+- Run `npm run dev` for the local Eleventy dev server and open the printed `http://localhost:.../` URL for browser checks.
+- Do not open `dist/index.html` directly through Finder or a `file://` URL. Root-relative assets such as `/styles/...` and `/scripts/...` require an HTTP server; direct file opening can look like the site has no CSS, especially in Safari.
+- To inspect the built `dist/` output, serve it over HTTP, for example `cd dist && python3 -m http.server 8080`, then open `http://127.0.0.1:8080/`.
+- Do not edit `dist/` by hand.
+
+## How to work
+
+- Implement only the requested block, section, or file.
+- Start with a short plan.
+- Prefer refactor over rewrite when possible.
+- If rewrite is necessary, rewrite only one local block at a time.
+- Do not change unrelated content, styles, or structure.
+
+## Figma-first workflow
+
+- Always use Figma MCP for the exact selected frame or node before coding, not the whole page, unless explicitly asked.
+- First call `get_design_context` for the exact node.
+- Then call `get_screenshot` for the same node and use it as the visual reference.
+- If the context is too large, call `get_metadata`, inspect the node tree, and re-fetch only the necessary child nodes.
+- Do not implement from memory or from a screenshot alone.
+- Translate Figma output into this project's actual HTML/CSS structure and naming conventions.
+- Reuse existing CSS variables, design tokens, utility classes, components, and layout patterns.
+- Use Figma variables/tokens when available.
+- Do not introduce new icon libraries if Figma MCP provides SVG or image assets.
+- If Figma MCP returns localhost asset URLs, use those URLs temporarily for implementation, then save required assets into the project assets folder.
+- Do not create placeholder images or icons when real assets are available.
+- Avoid inline styles unless there is no better project-native option.
+- Preserve visual fidelity: spacing, typography, color, radius, shadows, layout, and responsive behavior.
+- After implementation, run the project locally and compare the result against the Figma screenshot.
+- Report any design details that cannot be represented cleanly in CSS before inventing workarounds.
+
+## Figma implementation prompt template
+
+```text
+Use Figma MCP to inspect this exact Figma selection:
+
+<PASTE FIGMA LINK TO SELECTION>
+
+Task:
+Implement this section in the existing portfolio codebase.
+
+Required flow:
+1. Fetch design context with Figma MCP.
+2. Fetch screenshot with Figma MCP.
+3. Check existing project structure, CSS variables, tokens, breakpoints, and naming conventions.
+4. Implement using the existing architecture. Do not create a separate isolated demo.
+5. Save any required image/SVG assets into the project assets folder.
+6. Match the Figma screenshot visually: typography, spacing, sizes, shadows, radius, alignment.
+7. Add responsive behavior based on existing breakpoints.
+8. Run the local project and compare the browser result against the Figma screenshot.
+9. Before finishing, summarize what files changed and what still differs from Figma, if anything.
+
+Do not:
+- install new UI/icon libraries;
+- use placeholder images if Figma provides assets;
+- hardcode tokens if equivalent CSS variables already exist;
+- rewrite unrelated parts of the page.
+```
+
+## HTML/CSS standards
+
+- Semantic HTML first.
+- Mobile-first CSS.
+- Grid for page layout, Flexbox for component alignment.
+- No floats for layout.
+- No absolute positioning as the main structure.
+- Use gap over spacing hacks.
+- Use CSS custom properties for reusable values.
+- Prefer BEM-like class naming unless the repo already uses another consistent system.
+- No inline styles unless truly necessary.
+- No unnecessary wrappers.
+- No new CSS framework unless explicitly requested.
+
+## Accessibility
+
+- Preserve logical DOM and focus order.
+- Keep focus visible.
+- Do not remove outlines without a replacement.
+- Avoid horizontal scroll in normal content.
+- Respect reduced motion when animation is non-essential.
+
+## Performance
+
+- Keep CSS lean.
+- Avoid unnecessary dependencies.
+- Prefer responsive images.
+- Be careful with fonts, shadows, filters, and oversized media.
+
+## Browser priority and verification
+
+- Browser priority for this project: Chromium first, Firefox second, Safari third.
+- For visual effects (`backdrop-filter`, `mix-blend-mode`, sticky/fixed overlays), verify at least Chromium + Firefox before completion.
+- For Safari, run a manual pass on key viewports and capture screenshots when visual effects are touched.
+- If behavior differs across engines, optimize for Chromium first, then align Firefox and Safari without breaking Chromium baseline.
+
+## Site header — do not regress
+
+The header is **working as designed**. Treat it as **frozen behavior** unless the task explicitly asks to change the header.
+
+- **Spec of record:** [artifacts/header-glass-blend-implementation-handoff.md](artifacts/header-glass-blend-implementation-handoff.md) — architecture (four layers: fixed glass, source `header`, fixed visual text clones, fixed hit links), DOM shape, tokens, CSS/JS responsibilities, and validation checklist.
+- **Do not:** change header DOM, stacking, blend, glass, fixed visual text clones, hit links, or `scripts/header-theme.js` assumptions without reading the spec first.
+- **Validation:** if you touch header markup or styles, follow [docs/validation-playbook.md](docs/validation-playbook.md).
+
+## Site footer — do not regress
+
+The footer uses the **area17-style reveal** and is **frozen behavior** unless the task explicitly asks to change the footer pattern.
+
+- **Spec of record:** [docs/session-area17-footer-reveal.md](docs/session-area17-footer-reveal.md) — layer tokens, `main` + `.section.section--footer.site-footer` rules, anchors.
+- **Do not:** change `main`/footer stacking, make `main` transparent, or add footer z-index JavaScript without reading the spec first.
+- **Validation:** re-run footer checks from [docs/validation-playbook.md](docs/validation-playbook.md) after footer or main layout/z-index changes.
+
+## Before finishing
+
+- List changed files.
+- Summarize what was fixed.
+- Mention remaining mismatches with Figma, if any.
