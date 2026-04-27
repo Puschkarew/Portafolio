@@ -26,6 +26,12 @@ This project is a hand-coded site that now uses Eleventy only as a static build 
 
 Use `RUNTIME_HOME_PATH=/absolute/path/to/file.html` only when intentionally testing a non-default generated page or artifact.
 
+## Browser Preview
+
+- Use `npm run dev` for normal browser checks, then open the printed `http://localhost:.../` URL.
+- Do not double-click or directly open `dist/index.html` as `file://...`. The generated HTML uses root-relative asset paths (`/styles/...`, `/scripts/...`, `/assets/...`), which require HTTP serving. Direct file opening can make Safari render the page without CSS.
+- To preview the built output, serve `dist/` over HTTP: `cd dist && python3 -m http.server 8080`, then open `http://127.0.0.1:8080/`.
+
 ## Rules For Agents
 
 - Change templates in `src/`, not generated output.

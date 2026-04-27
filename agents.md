@@ -16,8 +16,10 @@ Default stack: Eleventy-generated plain HTML, CSS, and minimal JavaScript.
 
 - Source templates live in `src/`.
 - Generated output lives in `dist/` and is ignored by git.
-- Run `npm run build` before validating generated HTML or opening `dist/index.html` directly.
-- Run `npm run dev` for the local Eleventy dev server.
+- Run `npm run build` before validating generated HTML.
+- Run `npm run dev` for the local Eleventy dev server and open the printed `http://localhost:.../` URL for browser checks.
+- Do not open `dist/index.html` directly through Finder or a `file://` URL. Root-relative assets such as `/styles/...` and `/scripts/...` require an HTTP server; direct file opening can look like the site has no CSS, especially in Safari.
+- To inspect the built `dist/` output, serve it over HTTP, for example `cd dist && python3 -m http.server 8080`, then open `http://127.0.0.1:8080/`.
 - Do not edit `dist/` by hand.
 
 ## How to work

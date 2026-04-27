@@ -57,6 +57,6 @@ When that happens, create `src/_layouts/case.njk` and keep `base.njk` as the out
 
 ## Asset Paths
 
-Use root-relative paths only if the deploy target requires them. The current site uses relative paths that work from generated pages such as `dist/index.html`; nested routes may require path decisions before release.
+The shared layout currently uses root-relative CSS, script, and shared asset paths such as `/styles/...`, `/scripts/...`, and `/assets/...`. Keep page-local asset paths consistent with the surrounding markup, and verify nested routes through an HTTP server.
 
-For now, if a new page is nested, verify images, styles, and scripts through `npm run dev`, not only by opening a file directly.
+Do not verify generated pages by opening HTML files directly through Finder or `file://...`; root-relative paths can resolve outside the project and make the page appear unstyled. Use `npm run dev` for normal checks, or serve the built `dist/` folder over HTTP before opening it in a browser.

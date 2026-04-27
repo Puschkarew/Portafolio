@@ -52,3 +52,9 @@ npm run smoke:structure
 ```
 
 It is acceptable for docs to mention `dist/index.html` or historical handoff files. New instructions should not tell agents to edit generated output or the old root HTML entrypoint.
+
+## Browser Launch Checks
+
+- Browser checks must use an HTTP URL, usually from `npm run dev`.
+- When validating the generated `dist/` folder manually, serve it first with `cd dist && python3 -m http.server 8080` and open `http://127.0.0.1:8080/`.
+- Do not validate Safari by opening `dist/index.html` directly through Finder or `file://...`; root-relative CSS and script paths will resolve outside the project and the page can appear unstyled.
