@@ -4,6 +4,7 @@ import path from "node:path";
 import { runtimeHomeUrl } from "./runtime-home";
 
 const outputDir = path.resolve("artifacts/smoke");
+const runtimeAboutUrl = process.env.RUNTIME_ABOUT_URL ?? "http://127.0.0.1:4173/about/";
 
 const VIEWPORTS = [
   { width: 390, height: 844, name: "390" },
@@ -30,7 +31,7 @@ const desktopExpectations: TokenExpectation[] = [
     weight: "400",
     sizePx: 16,
     lineHeightPx: 22,
-    letterSpacingPx: 0.3
+    letterSpacingPx: 0.5
   },
   {
     selector: ".hero__description",
@@ -48,7 +49,7 @@ const desktopExpectations: TokenExpectation[] = [
     weight: "500",
     sizePx: 72,
     lineHeightPx: 80,
-    letterSpacingPx: -0.72
+    letterSpacingPx: -0.01
   },
   {
     selector: ".nav-link",
@@ -57,7 +58,7 @@ const desktopExpectations: TokenExpectation[] = [
     weight: "400",
     sizePx: 16,
     lineHeightPx: 22,
-    letterSpacingPx: 0.3
+    letterSpacingPx: 0.5
   },
   {
     selector: ".section-header__meta",
@@ -66,13 +67,13 @@ const desktopExpectations: TokenExpectation[] = [
     weight: "400",
     sizePx: 16,
     lineHeightPx: 22,
-    letterSpacingPx: 0.3
+    letterSpacingPx: 0.5
   }
 ];
 
 const mobileOverrides = new Map<string, Pick<TokenExpectation, "sizePx" | "lineHeightPx" | "letterSpacingPx">>([
   [".hero__description", { sizePx: 18, lineHeightPx: 26, letterSpacingPx: 0.5 }],
-  [".section-title", { sizePx: 48, lineHeightPx: 56, letterSpacingPx: -0.48 }]
+  [".section-title", { sizePx: 48, lineHeightPx: 56, letterSpacingPx: -0.01 }]
 ]);
 
 function toPx(value: string): number {
@@ -153,4 +154,43 @@ test("token-semantic smoke validates critical type roles", async ({ page }) => {
   }
 
   fs.writeFileSync(path.join(outputDir, "home-token-semantic.json"), JSON.stringify(report, null, 2));
+});
+
+test("about page uses Body/LG underline for table links", async ({ page }) => {
+  for (const viewport of VIEWPORTS) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto(runtimeAboutUrl);
+    await expect(page.locator("main#main-content")).toBeVisible();
+
+    const locator = page.locator(".about-table__link.type-body-lg-underline").first();
+    await expect(locator).toBeVisible();
+
+    const styles = await locator.evaluate((el) => {
+      const computed = getComputedStyle(el);
+      return {
+        fontFamily: computed.fontFamily,
+        fontWeight: computed.fontWeight,
+        fontStyle: computed.fontStyle,
+        fontSize: computed.fontSize,
+        lineHeight: computed.lineHeight,
+        letterSpacing: computed.letterSpacing,
+        textDecorationLine: computed.textDecorationLine
+      };
+    });
+
+    const expectedSize = viewport.width <= 767 ? 18 : 20;
+    const expectedLineHeight = viewport.width <= 767 ? 26 : 30;
+
+    expect(styles.fontFamily).toContain("Society Trial");
+    expect(styles.fontWeight).toBe("400");
+    expect(styles.fontStyle).toBe("normal");
+    expect(Math.abs(toPx(styles.fontSize) - expectedSize)).toBeLessThanOrEqual(toleranceFor("size"));
+    expect(Math.abs(toPx(styles.lineHeight) - expectedLineHeight)).toBeLessThanOrEqual(
+      toleranceFor("line-height")
+    );
+    expect(Math.abs(toPx(styles.letterSpacing) - 0.5)).toBeLessThanOrEqual(
+      toleranceFor("letter-spacing")
+    );
+    expect(styles.textDecorationLine).toContain("underline");
+  }
 });

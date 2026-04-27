@@ -44,6 +44,7 @@
   margin: 0;
 }
 
+.type-body-lg-italic,
 .type-body-md-italic {
   font-family: var(--type-body-md-italic-family);
   font-weight: var(--type-body-md-italic-weight);
@@ -51,6 +52,28 @@
   line-height: var(--type-body-md-italic-line-height);
   letter-spacing: var(--type-body-md-italic-tracking);
   font-style: var(--type-body-md-italic-style);
+  margin: 0;
+}
+
+.type-body-lg-underline {
+  font-family: var(--type-body-lg-family);
+  font-weight: var(--type-body-lg-weight);
+  font-size: var(--type-body-lg-size);
+  line-height: var(--type-body-lg-line-height);
+  letter-spacing: var(--type-body-lg-tracking);
+  font-style: var(--type-body-lg-style);
+  text-decoration-line: underline;
+  margin: 0;
+}
+
+.type-body-lg-italic-underline {
+  font-family: var(--type-body-md-italic-family);
+  font-weight: var(--type-body-md-italic-weight);
+  font-size: var(--type-body-md-italic-size);
+  line-height: var(--type-body-md-italic-line-height);
+  letter-spacing: var(--type-body-md-italic-tracking);
+  font-style: var(--type-body-md-italic-style);
+  text-decoration-line: underline;
   margin: 0;
 }
 
@@ -629,7 +652,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 .hero__headline {
   grid-column: 1 / span 10;
   color: var(--hero-headline-color);
-  letter-spacing: -0.01px;
   overflow-wrap: anywhere;
 }
 
@@ -690,7 +712,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 .index-hero__headline {
   grid-column: 1 / span 10;
   margin: 0;
-  letter-spacing: -0.01px;
   color: var(--color-black);
 }
 
@@ -900,7 +921,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
   .about-hero__headline {
     grid-column: 1 / span 10;
-    letter-spacing: -0.01px;
   }
 }
 
@@ -1572,7 +1592,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
     grid-column: 1 / -1;
     font-size: var(--type-display-xl-size);
     line-height: var(--type-display-xl-line-height);
-    letter-spacing: -0.01px;
   }
 
   .hero__profile {
