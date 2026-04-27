@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="{{ lang | default(site.lang) }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title | default(site.title) }}</title>
+    <link rel="stylesheet" href="styles/fonts.css" />
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/project-background.css" />
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <div class="site-shell">
+{{ content | safe }}
+    <footer id="contact" class="site-footer section section--footer">
+      <div class="container container--wide footer__wrapper">
+        <div class="footer__message-grid">
+          <p class="type-display-xl footer__message">Open to suggestions. <strong><a class="footer__cta" href="#contact-details">Drop me a line</a></strong></p>
+        </div>
+
+        <div class="footer__meta-grid">
+          <div id="footer-meta" class="type-caption footer__meta">
+            <p>
+              American Grotesk by <strong>Klim Type Foundry</strong><br />
+              Society by <strong>AllCaps</strong>
+            </p>
+            <p id="contact-details">Designed and coded by hand, with AI assistance</p>
+          </div>
+        </div>
+
+        <div class="footer__model" aria-hidden="true">
+          <img src="assets/figma/footer-model.png" alt="" width="1752" height="1800" loading="lazy" decoding="async" />
+        </div>
+      </div>
+    </footer>
+
+    <div class="site-header-glass" aria-hidden="true">
+      <div class="site-header-glass__item" data-header-glass-item="nav"></div>
+      <div class="site-header-glass__item" data-header-glass-item="contact"></div>
+      <div class="site-header-glass__item" data-header-glass-item="mobile"></div>
+    </div>
+
+    <header class="site-header">
+      <div class="site-header__pin">
+        <div class="site-header__grid">
+          <div class="site-header__menu">
+            <nav class="site-header__nav" aria-label="Primary">
+              <ul class="site-header__list">
+                <li>
+                  <a class="nav-link site-header__link" href="#top"><span class="site-header__text">Vladimir Pushkarev</span></a>
+                </li>
+                <li>
+                  <a class="nav-link site-header__link" href="#about"><span class="site-header__text">About</span></a>
+                </li>
+                <li>
+                  <a class="nav-link site-header__link" href="#work"><span class="site-header__text">Index</span></a>
+                </li>
+                <li>
+                  <a class="nav-link site-header__link" href="#footer-meta"><span class="site-header__text">CV</span></a>
+                </li>
+              </ul>
+            </nav>
+            <a class="nav-link site-header__contact" href="#contact"><span class="site-header__text">Get in touch</span></a>
+            <a class="nav-link site-header__mobile-trigger" href="#work"><span class="site-header__text">Menu</span></a>
+          </div>
+        </div>
+      </div>
+    </header>
+    </div>
+
+    <script src="scripts/hero-sticky-behavior.js" defer></script>
+    <script src="scripts/header-theme.js?v=no-header-themes" defer></script>
+    <script src="assets/humans-shader/humans-shader-embed.js" defer></script>
+    <script src="scripts/odds-humans-shader-init.js" defer></script>
+    <script src="scripts/project-sticky-background.js?v=no-header-themes" defer></script>
+  </body>
+</html>

@@ -1,8 +1,8 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { runtimeHomeUrl } from "./runtime-home";
 
-const runtimeHomePath = path.resolve("index.html");
 const outputDir = path.resolve("artifacts/smoke");
 
 const VIEWPORTS = [
@@ -91,7 +91,7 @@ test("token-semantic smoke validates critical type roles", async ({ page }) => {
 
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
-    await page.goto(`file://${runtimeHomePath}`);
+    await page.goto(runtimeHomeUrl);
     await expect(page.locator("main#main-content")).toBeVisible();
 
     const viewportRows: Array<Record<string, string | number>> = [];

@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
-import path from "node:path";
-
-const runtimeHomePath = path.resolve("index.html");
+import { runtimeHomeUrl } from "./runtime-home";
 
 type ScrubState = {
   mode: string;
@@ -15,7 +13,7 @@ test.describe("refresh at footer: scroll up restores stage without stale inlines
   test.use({ viewport: { width: 1512, height: 900 } });
 
   test("reload at max scroll, scroll up, stage opacities match scrub and shell visible", async ({ page }) => {
-    await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+    await page.goto(runtimeHomeUrl, { waitUntil: "load" });
     await page.waitForFunction(
       () => typeof (window as unknown as { __portfolioProjectScrub?: { getState: () => ScrubState } }).__portfolioProjectScrub !== "undefined",
       null,

@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
-import path from "node:path";
-
-const runtimeHomePath = path.resolve("index.html");
+import { runtimeHomeUrl } from "./runtime-home";
 
 type ScrubState = {
   mode: string;
@@ -14,7 +12,7 @@ test.describe("home project scroll transitions (desktop stage)", () => {
   test.use({ viewport: { width: 1512, height: 900 } });
 
   test("debug hook, 50vh transition, pair + blur on scrub", async ({ page }) => {
-    await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+    await page.goto(runtimeHomeUrl, { waitUntil: "load" });
     await page.waitForFunction(
       () => typeof (window as unknown as { __portfolioProjectScrub?: { getState: () => ScrubState } }).__portfolioProjectScrub !== "undefined",
       null,
@@ -120,7 +118,7 @@ test.describe("home project scroll transitions (desktop stage)", () => {
   });
 
   test("no html data-header-theme at madebymad pre-sticky, odds pre-sticky, odds mid transition", async ({ page }) => {
-    await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+    await page.goto(runtimeHomeUrl, { waitUntil: "load" });
     await page.waitForFunction(
       () => typeof (window as unknown as { __portfolioProjectScrub?: { getState: () => ScrubState } }).__portfolioProjectScrub !== "undefined",
       null,
@@ -165,7 +163,7 @@ test.describe("home project scroll transitions (mobile stage)", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test("mobile uses shared stage with 50vh scrub, art blur, and text interpolation", async ({ page }) => {
-    await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+    await page.goto(runtimeHomeUrl, { waitUntil: "load" });
     await page.waitForFunction(
       () => typeof (window as unknown as { __portfolioProjectScrub?: { getState: () => ScrubState } }).__portfolioProjectScrub !== "undefined",
       null,

@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
-import path from "node:path";
-
-const runtimeHomePath = path.resolve("index.html");
+import { runtimeHomeUrl } from "./runtime-home";
 
 test.describe("footer sticky reveal (main stacks above footer)", () => {
   for (const viewport of [
@@ -13,7 +11,7 @@ test.describe("footer sticky reveal (main stacks above footer)", () => {
   ] as const) {
     test(`viewport-fit reveal at ${viewport.name}`, async ({ page }) => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
-      await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+      await page.goto(runtimeHomeUrl, { waitUntil: "load" });
       await page.evaluate(() => (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()));
 
       const layers = await page.evaluate(() => {

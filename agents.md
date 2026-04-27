@@ -3,7 +3,22 @@
 ## What this project is
 
 This is a hand-coded website built from Figma designs.
-Default stack: plain HTML, CSS, and minimal JavaScript.
+Default stack: Eleventy-generated plain HTML, CSS, and minimal JavaScript.
+
+## Agent docs map
+
+- Start with [docs/agent-docs-index.md](docs/agent-docs-index.md) when choosing which project document to read.
+- Build workflow: [docs/eleventy-build-workflow.md](docs/eleventy-build-workflow.md).
+- Page authoring: [docs/page-authoring-guide.md](docs/page-authoring-guide.md).
+- Validation matrix: [docs/validation-playbook.md](docs/validation-playbook.md).
+
+## Build workflow
+
+- Source templates live in `src/`.
+- Generated output lives in `dist/` and is ignored by git.
+- Run `npm run build` before validating generated HTML or opening `dist/index.html` directly.
+- Run `npm run dev` for the local Eleventy dev server.
+- Do not edit `dist/` by hand.
 
 ## How to work
 
@@ -59,19 +74,19 @@ Default stack: plain HTML, CSS, and minimal JavaScript.
 
 ## Site header — do not regress
 
-The header is **working as designed** (glass blur, `mix-blend-mode: difference` on labels, correct stacking above canvas/sticky content, stable text on scroll, pointer hitboxes). Treat it as **frozen behavior** unless the task explicitly asks to change the header.
+The header is **working as designed**. Treat it as **frozen behavior** unless the task explicitly asks to change the header.
 
 - **Spec of record:** [artifacts/header-glass-blend-implementation-handoff.md](artifacts/header-glass-blend-implementation-handoff.md) — architecture (four layers: fixed glass, source `header`, fixed visual text clones, fixed hit links), DOM shape, tokens, CSS/JS responsibilities, and validation checklist.
-- **Do not:** put a high `z-index` (or `transform` / `isolation` / `opacity < 1`) on `.site-header`; make the header `position: fixed` or `sticky`; move `backdrop-filter` back into moving rail `::before`; replace fixed **span** visual text with blend on fixed **link** text; run per-scroll geometry sync for overlays when only `scrollY` pin is needed.
-- **Runtime:** [scripts/header-theme.js](scripts/header-theme.js) — exact rail `top = scrollY`, geometry sync on layout events (not every scroll). It does **not** set `data-header-theme` (single glass style only). If you touch header markup or styles, re-run `npm run smoke:structure` and `npm run smoke:visual`.
+- **Do not:** change header DOM, stacking, blend, glass, fixed visual text clones, hit links, or `scripts/header-theme.js` assumptions without reading the spec first.
+- **Validation:** if you touch header markup or styles, follow [docs/validation-playbook.md](docs/validation-playbook.md).
 
 ## Site footer — do not regress
 
-The footer uses the **area17-style reveal**: `main` stays **above** the footer in the stacking order; on scroll, content **lifts** and the footer is **revealed from underneath** (not as a plain “next block” in the same visual layer). This is **frozen behavior** unless the task explicitly asks to change the footer pattern.
+The footer uses the **area17-style reveal** and is **frozen behavior** unless the task explicitly asks to change the footer pattern.
 
 - **Spec of record:** [docs/session-area17-footer-reveal.md](docs/session-area17-footer-reveal.md) — layer tokens, `main` + `.section.section--footer.site-footer` rules, anchors.
-- **Smoke test:** [tests/smoke/home.footer-reveal.spec.ts](tests/smoke/home.footer-reveal.spec.ts) — re-run after footer or main layout/z-index changes.
-- **Do not:** set `main` to `background: transparent` for “project backgrounds” without an agreed replacement; reintroduce a full-viewport fixed background **stage** between `main` and the footer; add JS that toggles footer `z-index` at scroll boundaries; make project sections `background: transparent` on desktop in a way that lets the footer show **through** `main`. Those patterns break the reveal and/or recreate old bleed bugs.
+- **Do not:** change `main`/footer stacking, make `main` transparent, or add footer z-index JavaScript without reading the spec first.
+- **Validation:** re-run footer checks from [docs/validation-playbook.md](docs/validation-playbook.md) after footer or main layout/z-index changes.
 
 ## Before finishing
 

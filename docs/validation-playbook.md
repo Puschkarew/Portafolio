@@ -1,0 +1,54 @@
+# Validation Playbook
+
+Use the smallest validation set that matches the change. Broaden checks when touching shared layout, frozen behavior, or generated output paths.
+
+## Change Matrix
+
+| Change type | Required checks |
+| --- | --- |
+| Docs only | `npm run build`, `npm run smoke:structure`, link/path grep |
+| New or edited page template | `npm run lint:html`, `npm run smoke:structure`, `npm run smoke:a11y` |
+| CSS layout change | `npm run lint:quality`, `npm run smoke:visual`, `npm run smoke:a11y` |
+| Header markup/style/script | `npm run smoke:structure`, `npm run smoke:visual`, plus Chromium and Firefox visual pass |
+| Footer layout/reveal | `npm run smoke:footer`, `npm run smoke:visual` |
+| Hero sticky behavior | `npm run smoke:hero`, `npm run smoke:visual` |
+| Project sticky backgrounds | `npm run smoke:projects`, `npm run smoke:footer`, `npm run smoke:visual` |
+| Release/deploy workflow | `npm run build`, `npm run lint:quality`, `npm run smoke`, CI review |
+
+## Generated Artifacts
+
+Some smoke commands rewrite files under `artifacts/smoke/`. Treat those as test evidence, not automatic source changes.
+
+Before finishing:
+
+- check `git status --short`;
+- keep artifact changes only when the task explicitly asks for refreshed evidence;
+- otherwise restore tracked smoke images/reports and remove untracked generated reports.
+
+## CI Triggers
+
+The GitHub workflow treats these as smoke-relevant:
+
+- `src/`
+- `eleventy.config.cjs`
+- `styles/`
+- `scripts/`
+- `tests/`
+- `playwright.config.ts`
+- `package.json`
+- `package-lock.json`
+
+If a future source directory affects generated pages, update the workflow trigger and `docs/eleventy-build-workflow.md` together.
+
+## Link And Path Checks
+
+For documentation-only updates, run:
+
+```bash
+rg "docs/|artifacts/" agents.md docs/*.md
+rg "index\\.html" agents.md docs/*.md
+npm run build
+npm run smoke:structure
+```
+
+It is acceptable for docs to mention `dist/index.html` or historical handoff files. New instructions should not tell agents to edit generated output or the old root HTML entrypoint.

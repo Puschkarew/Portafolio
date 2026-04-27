@@ -1,0 +1,35 @@
+# Eleventy Build Workflow
+
+This project is a hand-coded site that now uses Eleventy only as a static build layer. The browser output should stay plain HTML, CSS, and minimal JavaScript.
+
+## Source And Output
+
+- `src/` is the source of truth for pages and layouts.
+- `dist/` is generated output and is ignored by git.
+- Do not edit generated files by hand.
+- Do not restore the old root HTML entrypoint as a source file.
+
+## Current Structure
+
+- `eleventy.config.cjs` configures Eleventy.
+- `src/index.njk` contains the home page main content.
+- `src/_layouts/base.njk` owns the document shell, stylesheet links, footer, header layers, and script order.
+- `src/_data/site.json` contains small site-level metadata.
+- `assets/`, `fonts/`, `styles/`, and `scripts/` are copied through unchanged with passthrough copy.
+
+## Commands
+
+- `npm run build` writes the generated site to `dist/`.
+- `npm run dev` starts the Eleventy dev server.
+- `npm run lint:html` builds first, then validates generated HTML.
+- Most home smoke scripts build first, then open `dist/index.html` through `tests/smoke/runtime-home.ts`.
+
+Use `RUNTIME_HOME_PATH=/absolute/path/to/file.html` only when intentionally testing a non-default generated page or artifact.
+
+## Rules For Agents
+
+- Change templates in `src/`, not generated output.
+- Keep CSS and JavaScript in `styles/` and `scripts/` unless there is a clear reason to change the build shape.
+- Keep static assets under existing passthrough directories.
+- Preserve script order in `src/_layouts/base.njk`, especially `hero-sticky-behavior.js` before `header-theme.js`.
+- If a new source directory should be copied to output, add it to `eleventy.config.cjs` and mention it in this document.

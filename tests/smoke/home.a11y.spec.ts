@@ -1,8 +1,7 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
-
-const runtimeHomePath = path.resolve("index.html");
+import { runtimeHomeUrl } from "./runtime-home";
 
 const VIEWPORTS = [
   { width: 390, height: 844, name: "390" },
@@ -31,7 +30,7 @@ test("a11y/reflow smoke validates landmarks, skip-link and overflow across viewp
 
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
-    await page.goto(`file://${runtimeHomePath}`);
+    await page.goto(runtimeHomeUrl);
 
     await expect(page.locator("header")).toBeVisible();
     await expect(page.locator("nav[aria-label='Primary']")).toBeVisible();

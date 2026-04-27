@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const htmlPath = path.resolve("index.html");
+const htmlPath = path.resolve(process.env.RUNTIME_HOME_PATH ?? "dist/index.html");
 const html = fs.readFileSync(htmlPath, "utf8");
 
 function fail(message) {
@@ -29,7 +29,7 @@ for (let index = 1; index < headingMatches.length; index += 1) {
 }
 
 if (html.includes("http://127.0.0.1:7866/ingest/")) {
-  fail("HTML structure check failed: debug localhost endpoint still present in index.html.");
+  fail("HTML structure check failed: debug localhost endpoint still present in generated HTML.");
 }
 
 const duplicateProjectGridLabel = [...html.matchAll(/aria-label="Projects grid"/g)].length;
