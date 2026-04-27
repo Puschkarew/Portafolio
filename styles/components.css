@@ -844,7 +844,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 .index-table__line--row {
   border-block-start: 1px solid var(--index-table-divider, rgba(0, 0, 0, 0.12));
   padding-block-start: 16px;
-  border-radius: 4px;
 }
 
 .index-table__grid {
@@ -1013,17 +1012,12 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   }
 }
 
+/* Source order of blocks = mobile order; desktop: explicit grid areas (3×3 + Experience span) */
 .about-table__grid {
-  display: grid;
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  gap: var(--space-200);
-}
-
-/* Figma 1775:5194: 96px between main columns on mobile; desktop uses grid gap from tokens */
-@media (max-width: 767px) {
-  .about-table__grid {
-    gap: var(--space-2400);
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1600);
+  min-width: 0;
 }
 
 .about-table {
@@ -1043,11 +1037,11 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   --about-table-rule: color-mix(in srgb, var(--color-black) 40%, transparent);
 }
 
-.about-table__col {
-  grid-column: 1 / -1;
+.about-table__block {
   display: flex;
   flex-direction: column;
   gap: var(--space-800);
+  min-width: 0;
 }
 
 /* Experience list only (about page); 32px between rows per Figma mobile */
@@ -1078,7 +1072,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 }
 
 @media (max-width: 1023px) {
-  #about-table.about-table .about-table__col--experience .about-table__list {
+  #about-table.about-table .about-table__block--experience .about-table__list {
     padding-inline-end: var(--space-400);
   }
 }
@@ -1091,21 +1085,21 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   }
 
   /* Experience: dates stay Body/LG mobile 18/26; stack columns use 20/30 (see below) */
-  #about-table.about-table .about-table__col--experience .about-table__date {
+  #about-table.about-table .about-table__block--experience .about-table__date {
     font-size: var(--font-size-18);
     line-height: var(--line-height-26);
   }
 
   /* Figma: Languages, Hardware, Soft skills, Links, Courses, Hard skills lists — 20/30, not global 18/26 */
-  #about-table.about-table .about-table__col--stack .type-body-lg,
-  #about-table.about-table .about-table__col--stack .type-body-lg-underline {
+  #about-table.about-table .about-table__block:not(.about-table__block--experience) .type-body-lg,
+  #about-table.about-table .about-table__block:not(.about-table__block--experience) .type-body-lg-underline {
     font-size: var(--font-size-20);
     line-height: var(--line-height-30);
   }
 }
 
 /* Figma: body 18/26 with links + emphasis at 20/30 in the same line */
-#about-table.about-table .about-table__col--experience .about-table__desc em {
+#about-table.about-table .about-table__block--experience .about-table__desc em {
   font-family: var(--font-family-serif);
   font-style: italic;
   font-weight: var(--font-weight-regular);
@@ -1114,7 +1108,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   letter-spacing: var(--type-body-lg-tracking);
 }
 
-#about-table.about-table .about-table__col--experience .about-table__desc .type-body-lg-underline {
+#about-table.about-table .about-table__block--experience .about-table__desc .type-body-lg-underline {
   font-size: var(--font-size-20);
   line-height: var(--line-height-30);
 }
@@ -1140,17 +1134,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   background: var(--about-table-rule);
 }
 
-.about-table__col--stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2400);
-}
-
-.about-table__section {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-800);
-}
+/* .about-table__section removed: each .about-table__block is a section */
 
 .about-table__subsection {
   display: flex;
@@ -1209,40 +1193,75 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
 /* Figma 1775:5199: Hard skills — title → 32px → line → 16px → first block; 32 + hairlines between subsections; pr-48; mobile sub-lines */
 @media (max-width: 1023px) {
-  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] {
+  #about-table .about-table__block--hard {
     gap: 0;
     padding-inline-end: var(--space-1200);
   }
 
-  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__title {
+  #about-table .about-table__block--hard > .about-table__title {
     margin-block-end: var(--space-800);
   }
 
-  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__divider {
+  #about-table .about-table__block--hard > .about-table__divider {
     margin-block: 0;
     margin-block-end: var(--space-400);
   }
 
-  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] > .about-table__divider + .about-table__subsection {
+  #about-table .about-table__block--hard > .about-table__divider + .about-table__subsection {
     margin-block-start: 0;
   }
 
-  #about-table .about-table__col--hard .about-table__section[aria-label="Hard skills"] .about-table__subsection {
+  #about-table .about-table__block--hard .about-table__subsection {
     position: relative;
   }
-
 }
 
-/* Hard skills mobile title/body: covered by .about-table__title and .about-table__col--stack .type-body-lg */
+/* Hard skills mobile title/body: covered by .about-table__title and .about-table__block .type-body-lg (non-Experience) */
 
 @media (min-width: 1024px) {
   .about-table__grid {
-    gap: var(--space-grid-gap);
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: auto auto auto;
+    row-gap: 0;
+    column-gap: var(--space-grid-gap);
   }
 
-  .about-table__col--experience {
+  .about-table__block--experience {
     grid-column: 1 / span 6;
+    grid-row: 1 / -1;
+    align-self: stretch;
     gap: 0;
+  }
+
+  .about-table__block--hard {
+    grid-column: 7 / span 3;
+    grid-row: 1;
+  }
+
+  .about-table__block--languages {
+    grid-column: 7 / span 3;
+    grid-row: 2;
+  }
+
+  .about-table__block--hardware {
+    grid-column: 7 / span 3;
+    grid-row: 3;
+  }
+
+  .about-table__block--soft {
+    grid-column: 10 / span 3;
+    grid-row: 1;
+  }
+
+  .about-table__block--links {
+    grid-column: 10 / span 3;
+    grid-row: 2;
+  }
+
+  .about-table__block--courses {
+    grid-column: 10 / span 3;
+    grid-row: 3;
   }
 
   .about-table__divider--experience {
@@ -1250,7 +1269,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
     margin-block-start: var(--space-800);
   }
 
-  .about-table__col--experience .about-table__list {
+  .about-table__block--experience .about-table__list {
     margin-block-start: 15px;
     gap: var(--space-1200);
   }
@@ -1279,23 +1298,15 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
     background: var(--about-table-rule);
   }
 
-  .about-table__col--hard {
-    grid-column: 7 / span 3;
-  }
-
-  .about-table__col--soft {
-    grid-column: 10 / span 3;
-  }
-
-  .about-table__section {
+  .about-table__block:not(.about-table__block--experience) {
     gap: 0;
   }
 
-  .about-table__section > .about-table__divider {
+  .about-table__block:not(.about-table__block--experience) > .about-table__divider {
     margin-block-start: var(--space-800);
   }
 
-  .about-table__section > .about-table__divider + * {
+  .about-table__block:not(.about-table__block--experience) > .about-table__divider + * {
     margin-block-start: 15px;
   }
 
@@ -1304,7 +1315,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
     gap: 0;
   }
 
-  .about-table__col--hard .about-table__subsection > * {
+  .about-table__block--hard .about-table__subsection > * {
     inline-size: calc(100% - var(--space-1200));
   }
 
