@@ -178,8 +178,9 @@ test("about page uses Body/LG underline for table links", async ({ page }) => {
       };
     });
 
-    const expectedSize = viewport.width <= 767 ? 18 : 20;
-    const expectedLineHeight = viewport.width <= 767 ? 26 : 30;
+    /* Experience table links use Body/LG step-up 20/30 on all viewports (Figma mobile) */
+    const expectedSize = 20;
+    const expectedLineHeight = 30;
 
     expect(styles.fontFamily).toContain("Society Trial");
     expect(styles.fontWeight).toBe("400");

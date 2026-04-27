@@ -695,23 +695,90 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
 .about-hero__wrapper {
   position: relative;
-  padding-inline: 16px;
-  padding-block-start: 84px;
-  min-block-size: 871px;
-  display: flex;
-  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* About hero — mobile / tablet: full-width yellow, height = width (1:1); desktop overrides below. */
+@media (max-width: 1023px) {
+  .about-hero {
+    /* Yellow + glow fill the whole section; width drives height */
+    max-inline-size: none;
+    margin-inline: 0;
+    width: 100%;
+    inline-size: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+    min-block-size: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+    box-sizing: border-box;
+  }
+
+  .about-hero__wrapper {
+    box-sizing: border-box;
+    min-block-size: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding-block-start: 0;
+    padding-block-end: 0;
+
+    /* Hero copy: always 16px from section edges (overrides .container --space-page-padding on tablet). */
+    padding-inline: 16px;
+  }
+
+  .about-hero__grid {
+    position: relative;
+    inline-size: 100%;
+    margin-block-end: 48px;
+  }
+
+  /* Index hero — same mobile geometry as About (rose surface + copy unchanged) */
+  .index-hero {
+    max-inline-size: none;
+    margin-inline: 0;
+    width: 100%;
+    inline-size: 100%;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
+    min-block-size: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: clip;
+    box-sizing: border-box;
+  }
+
+  .index-hero__wrapper {
+    box-sizing: border-box;
+    min-block-size: 0;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding-block-start: 0;
+    padding-block-end: 0;
+    padding-inline: 16px;
+  }
+
+  .index-hero__grid {
+    position: relative;
+    inline-size: 100%;
+    margin-block-end: 48px;
+  }
 }
 
 .index-hero__wrapper {
   position: relative;
-  min-block-size: 504px;
-  padding-inline: 24px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .index-hero__grid {
-  position: absolute;
-  inset-inline: 24px;
-  inset-block-end: 64px;
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 12px;
@@ -846,15 +913,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 }
 
 @media (max-width: 767px) {
-  .index-hero__wrapper {
-    min-block-size: 390px;
-    padding-inline: var(--space-page-padding);
-  }
-
-  .index-hero__grid {
-    inset-inline: var(--space-page-padding);
-  }
-
   .index-table {
     padding-block-start: var(--space-1600);
     padding-block-end: var(--space-1600);
@@ -893,10 +951,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
-  inline-size: min(100%, 390px);
-  position: absolute;
-  inset-inline: 16px;
-  inset-block-start: 460px;
 }
 
 .about-hero__headline {
@@ -910,11 +964,18 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 }
 
 @media (min-width: 1024px) {
+  .about-hero {
+    max-inline-size: none;
+    width: auto;
+    aspect-ratio: auto;
+    display: block;
+    overflow: visible;
+  }
+
   .about-hero__wrapper {
     min-block-size: 504px;
     padding-inline: var(--space-page-padding);
     padding-block-start: 0;
-    justify-content: stretch;
   }
 
   .about-hero__grid {
@@ -929,6 +990,26 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
   .about-hero__headline {
     grid-column: 1 / span 10;
+  }
+
+  .index-hero {
+    max-inline-size: none;
+    width: auto;
+    aspect-ratio: auto;
+    display: block;
+    overflow: visible;
+  }
+
+  .index-hero__wrapper {
+    min-block-size: 504px;
+    padding-inline: 24px;
+  }
+
+  .index-hero__grid {
+    position: absolute;
+    inset-inline: 24px;
+    inset-block-start: auto;
+    inset-block-end: 64px;
   }
 }
 
@@ -960,13 +1041,14 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   gap: var(--space-800);
 }
 
+/* Experience list only (about page); 32px between rows per Figma mobile */
 .about-table__list {
   margin: 0;
   padding: 0;
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: var(--space-1200);
+  gap: var(--space-800);
 }
 
 .about-table__title {
@@ -974,11 +1056,45 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 }
 
 .about-table__row {
-  display: grid;
-  grid-template-columns: 232px 1fr;
-  gap: var(--space-800);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-400);
   padding-block: var(--space-400);
   border-top: 1px solid var(--about-table-rule);
+}
+
+.about-table__desc {
+  min-width: 0;
+}
+
+@media (max-width: 1023px) {
+  #work.about-table .about-table__col--experience .about-table__list {
+    padding-inline-end: var(--space-400);
+  }
+}
+
+/* Figma: Title/SM 28/32 on small viewports; global mobile alias is 24/28 */
+@media (max-width: 767px) {
+  #work.about-table .about-table__col--experience .about-table__title {
+    font-size: var(--font-size-28);
+    line-height: var(--line-height-32);
+  }
+}
+
+/* Figma: body 18/26 with links + emphasis at 20/30 in the same line */
+#work.about-table .about-table__col--experience .about-table__desc em {
+  font-family: var(--font-family-serif);
+  font-style: italic;
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-20);
+  line-height: var(--line-height-30);
+  letter-spacing: var(--type-body-lg-tracking);
+}
+
+#work.about-table .about-table__col--experience .about-table__desc .type-body-lg-underline {
+  font-size: var(--font-size-20);
+  line-height: var(--line-height-30);
 }
 
 .about-table__divider {
@@ -1069,6 +1185,10 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   }
 
   .about-table__row {
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    gap: var(--space-800);
+    align-items: start;
     position: relative;
     inline-size: calc(100% - var(--space-1200));
     padding-block: 0;
