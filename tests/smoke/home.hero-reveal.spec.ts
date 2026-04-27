@@ -1,7 +1,5 @@
 import { test, expect } from "@playwright/test";
-import path from "node:path";
-
-const runtimeHomePath = path.resolve("index.html");
+import { runtimeHomeUrl } from "./runtime-home";
 
 function alphaFromColor(color: string): number {
   const match = color.match(/rgba\(\s*[\d.]+\s*,\s*[\d.]+\s*,\s*[\d.]+\s*,\s*([\d.]+)\s*\)/i);
@@ -16,7 +14,7 @@ test.describe("hero sticky reveal (content stacks above hero)", () => {
   ] as const) {
     test(`stacking + mid scroll at ${viewport.name}`, async ({ page }) => {
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
-      await page.goto(`file://${runtimeHomePath}`, { waitUntil: "load" });
+      await page.goto(runtimeHomeUrl, { waitUntil: "load" });
       await page.evaluate(() => (document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve()));
 
       await page.waitForFunction(

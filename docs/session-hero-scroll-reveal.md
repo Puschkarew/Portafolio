@@ -34,7 +34,7 @@ Hero остаётся sticky во всех режимах. Для высокой
   - сохраняет `.section--hero.hero { position: sticky; z-index: var(--layer-hero-under); }`;
   - для `html[data-hero-tall] .section--hero.hero` меняет только `top`;
   - оставляет `#work` и `.projects-area` на `var(--layer-after-hero)`.
-- [`index.html`](../index.html)
+- [`src/_layouts/base.njk`](../src/_layouts/base.njk)
   - подключает `scripts/hero-sticky-behavior.js` с `defer` до `header-theme.js`.
 
 ## Почему не z-index фазы
