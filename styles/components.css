@@ -63,6 +63,10 @@
   letter-spacing: var(--type-body-lg-tracking);
   font-style: var(--type-body-lg-style);
   text-decoration-line: underline;
+  text-decoration-thickness: 2%;
+  text-underline-offset: 0.25em;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: var(--color-olive-400);
   margin: 0;
 }
 
@@ -74,6 +78,10 @@
   letter-spacing: var(--type-body-md-italic-tracking);
   font-style: var(--type-body-md-italic-style);
   text-decoration-line: underline;
+  text-decoration-thickness: 2%;
+  text-underline-offset: 0.25em;
+  text-decoration-skip-ink: auto;
+  text-decoration-color: var(--color-olive-400);
   margin: 0;
 }
 
@@ -1034,8 +1042,6 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
 .about-table__link {
   color: inherit;
-  text-decoration-thickness: 2%;
-  text-underline-offset: 0.12em;
 }
 
 @media (min-width: 1024px) {

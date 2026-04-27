@@ -20,6 +20,7 @@ This project is a hand-coded site that now uses Eleventy only as a static build 
 ## Commands
 
 - `npm run build` writes the generated site to `dist/`.
+- `npm run build-ghpages` writes the generated site with the `/Portafolio/` path prefix required by GitHub Pages.
 - `npm run dev` starts the Eleventy dev server.
 - `npm run lint:html` builds first, then validates generated HTML.
 - Most home smoke scripts build first, then open `dist/index.html` through `tests/smoke/runtime-home.ts`.

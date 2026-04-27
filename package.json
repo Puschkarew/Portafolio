@@ -4,7 +4,7 @@
   "description": "Portfolio handoff and quality gate scaffolding.",
   "scripts": {
     "build": "eleventy",
-    "build-ghpages": "eleventy --pathprefix=/${npm_package_name}/",
+    "build-ghpages": "eleventy --pathprefix=/Portafolio/",
     "dev": "eleventy --serve",
     "smoke": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:perf",
     "verify:slice": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:live",
