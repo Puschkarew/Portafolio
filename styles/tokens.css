@@ -50,6 +50,10 @@
   /* 1.8 Colors — section accents (all currently hardcoded on Home) */
   --color-hero-blue-50: #cbf7ff;
   --color-hero-glow: #81baff;
+  --color-hero-rose-50: #ffdfed; /* Index hero surface */
+  --color-hero-glow-rose: #fdb4df; /* Index hero glow */
+  --color-hero-yellow-50: #fff2b2; /* About hero surface */
+  --color-hero-glow-yellow: #e7bd68; /* About hero glow */
   --color-accent-red: #b70025;
   --color-accent-iris: #454add;
   --color-accent-seafoam: #93e2ee;
@@ -64,6 +68,7 @@
 
   /* 1.10 Color — semi-transparent */
   --color-tag-overlay: rgba(0, 0, 0, 0.001);
+  --color-overlay-fallback: rgba(0, 0, 0, 0.44);
 
   /* 2. Typography — families */
   --font-family-sans: "American Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -163,6 +168,8 @@
   /* 2.2 Surfaces (backgrounds) */
   --color-surface-page: var(--color-white);
   --color-surface-hero: var(--color-hero-blue-50);
+  --color-surface-hero-index: var(--color-hero-rose-50);
+  --color-surface-hero-about: var(--color-hero-yellow-50);
   --color-surface-featured: var(--color-surface-featured-raw);
   --color-surface-made-by-mad: var(--color-surface-cream-raw);
   --color-surface-odds-ends: var(--color-surface-bark-raw);
@@ -269,11 +276,16 @@
 
   /* 2.7 Shadows / effects (hero, footer, tag/header overlays; project cards have no drop shadow) */
   --shadow-hero-glow: inset 0 0 24px 0 var(--color-hero-glow);
+  --color-hero-glow-index: var(--color-hero-glow-rose);
+  --shadow-hero-glow-index: inset 0 0 24px 0 var(--color-hero-glow-index);
+  --color-hero-glow-about: var(--color-hero-glow-yellow);
+  --shadow-hero-glow-about: inset 0 0 24px 0 var(--color-hero-glow-about);
   --shadow-footer-glow: inset 0 0 24px 0 var(--color-gray-650);
 
   /* 2.8 Tag overlay (глянцевая плашка поверх карточки) */
   --tag-overlay-bg: var(--color-tag-overlay);
   --tag-overlay-blur: 32px;
+  --overlay-blur-strong: 96px;
 
   /* 2.9 Header overlay (стеклянные плашки в шапке) */
   --header-overlay-bg: var(--color-tag-overlay);
@@ -303,12 +315,16 @@
 
   /* 3.4 Hero */
   --hero-background: var(--color-surface-hero);
+  --hero-background-index: var(--color-surface-hero-index);
+  --hero-background-about: var(--color-surface-hero-about);
   --hero-shadow-size: 24px;
   --hero-shadow-spread: calc(-1 * var(--hero-shadow-size));
   --hero-glow-shadow:
     inset var(--hero-shadow-size) 0 var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow),
     inset calc(-1 * var(--hero-shadow-size)) 0 var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow),
     inset 0 var(--hero-shadow-size) var(--hero-shadow-size) var(--hero-shadow-spread) var(--color-hero-glow);
+  --hero-glow-color-index: var(--color-hero-glow-index);
+  --hero-glow-color-about: var(--color-hero-glow-about);
   --hero-reveal-shadow-block-size: var(--hero-shadow-size);
   --hero-reveal-shadow-background: linear-gradient(
     to top,
