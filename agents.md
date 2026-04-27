@@ -30,11 +30,49 @@ Default stack: Eleventy-generated plain HTML, CSS, and minimal JavaScript.
 
 ## Figma-first workflow
 
-- Use the exact Figma frame or node, not the whole page, unless explicitly asked.
-- Get design context and screenshot before implementation.
+- Always use Figma MCP for the exact selected frame or node before coding, not the whole page, unless explicitly asked.
+- First call `get_design_context` for the exact node.
+- Then call `get_screenshot` for the same node and use it as the visual reference.
+- If the context is too large, call `get_metadata`, inspect the node tree, and re-fetch only the necessary child nodes.
+- Do not implement from memory or from a screenshot alone.
+- Translate Figma output into this project's actual HTML/CSS structure and naming conventions.
+- Reuse existing CSS variables, design tokens, utility classes, components, and layout patterns.
 - Use Figma variables/tokens when available.
-- Treat Figma output as a reference, then translate it into this repo's conventions.
-- Validate the result against Figma before finishing.
+- Do not introduce new icon libraries if Figma MCP provides SVG or image assets.
+- If Figma MCP returns localhost asset URLs, use those URLs temporarily for implementation, then save required assets into the project assets folder.
+- Do not create placeholder images or icons when real assets are available.
+- Avoid inline styles unless there is no better project-native option.
+- Preserve visual fidelity: spacing, typography, color, radius, shadows, layout, and responsive behavior.
+- After implementation, run the project locally and compare the result against the Figma screenshot.
+- Report any design details that cannot be represented cleanly in CSS before inventing workarounds.
+
+## Figma implementation prompt template
+
+```text
+Use Figma MCP to inspect this exact Figma selection:
+
+<PASTE FIGMA LINK TO SELECTION>
+
+Task:
+Implement this section in the existing portfolio codebase.
+
+Required flow:
+1. Fetch design context with Figma MCP.
+2. Fetch screenshot with Figma MCP.
+3. Check existing project structure, CSS variables, tokens, breakpoints, and naming conventions.
+4. Implement using the existing architecture. Do not create a separate isolated demo.
+5. Save any required image/SVG assets into the project assets folder.
+6. Match the Figma screenshot visually: typography, spacing, sizes, shadows, radius, alignment.
+7. Add responsive behavior based on existing breakpoints.
+8. Run the local project and compare the browser result against the Figma screenshot.
+9. Before finishing, summarize what files changed and what still differs from Figma, if anything.
+
+Do not:
+- install new UI/icon libraries;
+- use placeholder images if Figma provides assets;
+- hardcode tokens if equivalent CSS variables already exist;
+- rewrite unrelated parts of the page.
+```
 
 ## HTML/CSS standards
 

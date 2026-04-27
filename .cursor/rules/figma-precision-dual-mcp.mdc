@@ -15,11 +15,13 @@ This project is Figma-first and hand-coded. Follow `AGENTS.md` and existing proj
 
 ## Required workflow for UI tasks
 
-1. Confirm exact Figma scope (frame/node), then capture design context and screenshot.
-2. Implement only requested section/block and preserve existing project conventions.
-3. Run quick interaction smoke with `cursor-ide-browser`.
-4. Run deep validation with `user-chrome-devtools`.
-5. Iterate until mismatch is removed or explicitly accepted by user.
+1. Confirm exact Figma scope (frame/node) and follow `AGENTS.md` as the canonical Figma implementation workflow.
+2. Use Figma MCP `get_design_context` for the exact node, then `get_screenshot` for the same node. If context is too large, use `get_metadata`, inspect the node tree, and re-fetch only the necessary child nodes.
+3. Do not implement from memory or from a screenshot alone.
+4. Implement only the requested section/block with existing architecture, tokens, components, assets, and naming conventions. Do not create an isolated demo, placeholder assets, or new icon/UI libraries unless explicitly requested.
+5. Run quick interaction smoke with `cursor-ide-browser`.
+6. Run deep validation with `user-chrome-devtools`.
+7. Iterate until mismatch is removed or explicitly accepted by user.
 
 ## Deep validation checklist (chrome-devtools MCP)
 
