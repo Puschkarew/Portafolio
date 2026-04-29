@@ -2480,12 +2480,14 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
 
   .case-hero__media-panel {
     padding-inline: var(--space-400);
+    padding-block-end: var(--space-400);
   }
 
   .case-hero__text-panel {
     block-size: auto;
     min-block-size: 100vh;
-    gap: var(--space-1600);
+    gap: var(--space-800);
+    padding-block-start: var(--space-800);
     padding-block-end: var(--space-1600);
     padding-inline: var(--space-400);
   }

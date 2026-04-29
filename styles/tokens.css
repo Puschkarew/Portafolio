@@ -87,6 +87,7 @@
   --font-size-28: 1.75rem; /* 28px */
   --font-size-32: 2rem; /* 32px */
   --font-size-36: 2.25rem; /* 36px */
+  --font-size-42: 2.625rem; /* 42px — mobile display-2xl */
   --font-size-44: 2.75rem; /* 44px — mobile display-xl */
   --font-size-48: 3rem; /* 48px — mobile display-2xl */
   --font-size-56: 3.5rem; /* 56px */
@@ -101,6 +102,7 @@
   --line-height-40: 2.5rem;
   --line-height-42: 2.625rem;
   --line-height-44: 2.75rem;
+  --line-height-48: 3rem;
   --line-height-56: 3.5rem;
   --line-height-68: 4.25rem;
   --line-height-80: 5rem;
@@ -237,8 +239,8 @@
   --type-caps-transform: uppercase;
 
   /* 2.4.1 Typography — mobile aliases (Figma mobile column) */
-  --type-display-2xl-size-mobile: var(--font-size-48);
-  --type-display-2xl-line-height-mobile: var(--line-height-56);
+  --type-display-2xl-size-mobile: var(--font-size-42);
+  --type-display-2xl-line-height-mobile: var(--line-height-48);
 
   --type-display-xl-size-mobile: var(--font-size-36);
   --type-display-xl-line-height-mobile: var(--line-height-40);
@@ -246,7 +248,7 @@
   --type-display-md-size-mobile: var(--font-size-24);
   --type-display-md-line-height-mobile: var(--line-height-28);
 
-  --type-heading-lg-size-mobile: var(--font-size-28);
+  --type-heading-lg-size-mobile: var(--font-size-24);
   --type-heading-lg-line-height-mobile: var(--line-height-32);
 
   --type-body-lg-size-mobile: var(--font-size-18);
