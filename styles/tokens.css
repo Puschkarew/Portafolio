@@ -347,6 +347,10 @@
   --hero-mobile-profile-gap-before: 65px;
   --hero-mobile-profile-gap-after: 7px;
 
+  /* 3.4.1 Case hero */
+  --case-hero-glow: #505050;
+  --case-title-muted: #71717b;
+
   /* 3.5 Footer */
   --footer-background: var(--color-surface-footer);
   --footer-shadow-size: 24px;
