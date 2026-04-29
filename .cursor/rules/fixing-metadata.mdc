@@ -1,0 +1,48 @@
+---
+description: Metadata, SEO, and social preview checklist for static HTML and Eleventy pages
+globs:
+  - "src/**/*.{njk,html,json,md}"
+  - "src/_data/**/*.json"
+  - "eleventy.config.cjs"
+alwaysApply: false
+---
+
+# Fixing Metadata
+
+Apply this rule when changing page titles, descriptions, canonical URLs, robots directives, Open Graph tags, Twitter cards, favicons, app icons, manifests, theme color, JSON-LD structured data, locale metadata, deployment URLs, path prefixes, or new public pages.
+
+## Workflow
+
+1. Identify the project metadata source of truth: shared layout, `src/_data/site.json`, page front matter, or an existing SEO component.
+2. Identify every affected generated page and its final public URL.
+3. Build before validation when generated HTML is involved. Do not hand-edit `dist/`.
+4. Check for duplicate or conflicting `<title>`, description, canonical, robots, Open Graph, and Twitter tags.
+5. Ensure title, description, canonical URL, `og:url`, deployment URL, trailing slash, and path-prefix behavior agree.
+6. Ensure public shareable pages have safe defaults and page-specific overrides where useful.
+7. Use absolute public URLs for social images.
+8. Add JSON-LD only when it truthfully matches visible page content.
+9. Verify social cards on a real deployed URL when possible; localhost is not enough.
+10. Keep diffs scoped to metadata unless broader SEO/content work is explicitly requested.
+
+## Eleventy Pattern
+
+- Store global defaults in `src/_data/site.json` when the project already uses site data.
+- Store page-specific metadata in front matter, for example `title`, `description`, `image`, `canonical`, `robots`, or `ogType`.
+- Render metadata in the shared base layout.
+- Use existing Eleventy URL/path-prefix conventions.
+- Inspect generated `dist/**/*.html` after `npm run build`.
+
+## Review Priorities
+
+- Critical: duplicate/conflicting metadata, unstable values, public pages accidentally noindexed, canonical/indexing contradictions.
+- High: missing title/description/canonical on public pages, `og:url` mismatch, missing social basics for shareable pages.
+- Medium: missing favicon/app icon/theme-color, weak social image dimensions, JSON-LD mismatch, missing locale metadata.
+- Low: title format polish, optional manifest improvements, non-critical social preview copy.
+
+## Boundaries
+
+- Do not add SEO/head libraries unless explicitly requested or already standard in the project.
+- Do not introduce a second metadata system.
+- Do not invent JSON-LD facts, ratings, offers, organization details, or contact data.
+- Do not refactor unrelated templates, styles, scripts, or content.
+- Preserve Figma-first and validation-playbook workflows when metadata work is part of a larger page task.

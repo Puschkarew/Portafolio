@@ -1,0 +1,41 @@
+---
+description: Accessibility review checklist for interactive HTML, CSS, and JavaScript changes
+globs:
+  - "src/**/*.{njk,html,js,ts,tsx,jsx}"
+  - "styles/**/*.css"
+  - "scripts/**/*.js"
+alwaysApply: false
+---
+
+# Fixing Accessibility
+
+Apply this rule when changing buttons, links, inputs, menus, dialogs, overlays, tabs, dropdowns, icon-only controls, focus states, keyboard behavior, forms, validation, contrast, motion, media, or hidden content.
+
+## Workflow
+
+1. Identify every changed interactive or perceivable element.
+2. Prefer native HTML before ARIA: `button` for actions, `a[href]` for navigation, real form controls for input.
+3. Ensure every interactive control and form field has a useful accessible name.
+4. Confirm Tab reachability, visible focus, Enter/Space activation for controls, and no `tabindex` greater than `0`.
+5. For dialogs and overlays, set initial focus, keep focus inside while open, close with Escape when appropriate, and restore focus to the trigger.
+6. Preserve heading order, list/table semantics, landmarks, and meaningful link text.
+7. Associate helper/error text with fields, set `aria-invalid` only when invalid, and use live/status messaging for important async feedback.
+8. Check contrast, state clarity, hover-only interactions, color-only states, and `prefers-reduced-motion`.
+9. Run relevant project validation, usually `npm run smoke:a11y`, `npm run lint:html`, or the checks named in `docs/validation-playbook.md`.
+
+## Fix Boundaries
+
+- Make the smallest targeted fix that solves the accessibility issue.
+- Do not rewrite unrelated UI, frozen header/footer behavior, project structure, or design tokens.
+- Do not add new UI/accessibility libraries unless explicitly requested or already standard in the project.
+- Do not add ARIA that duplicates native semantics.
+- Preserve Figma-first implementation and visual parity checks; use this as the accessibility pass.
+
+## Review Priorities
+
+- Critical: missing accessible names, unreachable controls, broken focus/dialog behavior, keyboard traps.
+- High: wrong semantics, unlabeled fields, unassociated errors, invalid ARIA.
+- Medium: insufficient contrast, hover-only state, color-only status, missing announcements.
+- Low: missing media alternatives, non-essential motion without reduced-motion handling.
+
+When reporting a finding, include the exact file/line or snippet, why it matters, the smallest code-level fix, and the validation command or manual check.
