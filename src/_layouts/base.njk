@@ -37,6 +37,9 @@
     </footer>
 
     <div class="site-header-glass" aria-hidden="true">
+{% if headerVariant == "case" %}
+      <div class="site-header-glass__item" data-header-glass-item="project"></div>
+{% endif %}
       <div class="site-header-glass__item" data-header-glass-item="nav"></div>
       <div class="site-header-glass__item" data-header-glass-item="contact"></div>
       <div class="site-header-glass__item" data-header-glass-item="mobile"></div>
@@ -70,6 +73,9 @@
     <header class="site-header">
       <div class="site-header__pin">
         <div class="site-header__grid">
+{% if headerVariant == "case" %}
+          <a class="nav-link site-header__project" href="#top"><span class="site-header__text">{{ title }}</span></a>
+{% endif %}
           <div class="site-header__menu">
             <nav class="site-header__nav" aria-label="Primary">
               <ul class="site-header__list">

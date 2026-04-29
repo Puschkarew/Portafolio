@@ -2319,6 +2319,14 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
     grid-column: 1 / -1;
   }
 
+  .case-prose {
+    grid-row: 1;
+  }
+
+  .case-note {
+    grid-row: 2;
+  }
+
   .case-media-grid {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
@@ -2479,29 +2487,23 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   }
 
   .case-hero__media-panel {
+    block-size: auto;
+    min-block-size: 0;
     padding-inline: var(--space-400);
     padding-block-end: var(--space-400);
   }
 
+  .case-hero__media {
+    aspect-ratio: 358 / 506.615;
+  }
+
   .case-hero__text-panel {
     block-size: auto;
-    min-block-size: 100vh;
+    min-block-size: 0;
     gap: var(--space-800);
     padding-block-start: var(--space-800);
     padding-block-end: var(--space-1600);
     padding-inline: var(--space-400);
-  }
-
-  @supports (min-block-size: 100svh) {
-    .case-hero__text-panel {
-      min-block-size: 100svh;
-    }
-  }
-
-  @supports (min-block-size: 100dvh) {
-    .case-hero__text-panel {
-      min-block-size: 100dvh;
-    }
   }
 
   .case-hero__grid {

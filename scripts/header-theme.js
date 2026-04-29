@@ -6,6 +6,7 @@
   var HEADER_SELECTOR = ".site-header";
   var MOVING_RAIL_SELECTOR = ".site-header__menu";
   var GLASS_SOURCES = [
+    { name: "project", selector: ".site-header__project" },
     { name: "nav", selector: ".site-header__nav" },
     { name: "contact", selector: ".site-header__contact" },
     { name: "mobile", selector: ".site-header__mobile-trigger" }
@@ -13,6 +14,7 @@
 
   var headerEl = null;
   var movingRailEl = null;
+  var projectRailEl = null;
   var resizeRaf = 0;
   var pinRaf = 0;
   var geometryRaf = 0;
@@ -38,6 +40,7 @@
   function cacheElements() {
     headerEl = document.querySelector(HEADER_SELECTOR);
     movingRailEl = document.querySelector(MOVING_RAIL_SELECTOR);
+    projectRailEl = headerEl ? headerEl.querySelector(".site-header__project") : null;
   }
 
   function writeTop(top) {
@@ -45,6 +48,7 @@
     var nextTop = quantize(top);
     var zeroSafeTop = Math.abs(nextTop) < topStep / 2 ? 0 : nextTop;
     movingRailEl.style.top = zeroSafeTop + "px";
+    if (projectRailEl) projectRailEl.style.top = zeroSafeTop + "px";
     appliedTop = zeroSafeTop;
   }
 
@@ -174,7 +178,7 @@
     }
 
     var sourceLinks = headerEl.querySelectorAll(
-      "a.site-header__link, a.site-header__contact, a.site-header__mobile-trigger"
+      "a.site-header__project, a.site-header__link, a.site-header__contact, a.site-header__mobile-trigger"
     );
     linkPairs = [];
     var h;
