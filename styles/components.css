@@ -1759,7 +1759,7 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   flex-direction: column;
   justify-content: space-between;
   gap: var(--space-2400);
-  padding-block-start: var(--space-800);
+  padding-block-start: var(--space-1600);
   padding-block-end: var(--space-2400);
   padding-inline: var(--space-page-padding);
 }
