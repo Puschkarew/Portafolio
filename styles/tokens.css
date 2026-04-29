@@ -6,11 +6,21 @@
  *   2. Semantic  — intent-based (color-text-primary, space-page-padding, type-display-xl-*).
  *   3. Component — local tokens for specific components (card-*, tag-*, hero-*, footer-*).
  *
+ * Figma mapping:
+ *   - Colors → --color-* semantic tokens.
+ *   - Sizes → --space-*, --radius-*, --stroke-*, --icon-*, --grid-* tokens.
+ *   - Typography + text styles → --font-*, --line-height-*, --tracking-*, --type-* tokens.
+ *
+ * Production-only tokens live in the Component section when they describe browser
+ * behavior, layout geometry, layering, or implementation workarounds not modeled
+ * as Figma variables.
+ *
  * Breakpoints override typography and spacing at `max-width: 767px` (mobile) and
  * `max-width: 1023px` (tablet) per docs/figma-audit/layout-rules.md.
  *
  * Source: Figma "Starting Point" (fileKey: OrSenMzG1cZgmJzjvi7ikP)
- * Updated: 2026-04-21
+ * Figma inventory: Colors Primitive 289, Colors 23, Sizes 24, Typography 23.
+ * Updated: 2026-04-29
  * Licensing shortlist: docs/typography-fonts-to-purchase.md
  */
 
@@ -24,7 +34,6 @@
   --color-white: #ffffff;
 
   /* 1.2 Colors — olive */
-  --color-olive-300: #d8d8d0;
   --color-olive-400: #abab9c;
 
   /* 1.3 Colors — teal */
@@ -40,12 +49,10 @@
   /* 1.6 Colors — blue */
   --color-blue-900: #1c398e;
 
-  /* 1.7 Colors — grayscale helpers */
-  --color-zinc-50: #fafafa;
-  --color-gray-400: #99a1af;
-  --color-gray-500: #767676; /* currently hardcoded as #767676 */
-  --color-gray-600: #696773; /* currently hardcoded as #696773 */
-  --color-gray-650: #7a7a74; /* currently hardcoded as #7a7a74 */
+  /* 1.7 Colors — Figma semantic raw values */
+  --color-tag-muted-raw: #767676; /* Figma Colors: tag/muted, text/muted */
+  --color-card-dim-raw: #696773; /* Figma Colors: card/dim */
+  --color-footer-glow-raw: #7a7a74; /* Figma Colors: footer/glow */
 
   /* 1.8 Colors — section accents (all currently hardcoded on Home) */
   --color-hero-blue-50: #cbf7ff;
@@ -66,7 +73,8 @@
   --color-surface-bark-raw: #652316;
   --color-surface-taupe-raw: #968978;
 
-  /* 1.10 Color — semi-transparent */
+  /* 1.10 Color — semi-transparent production values */
+  /* Figma tag/overlay is #00000000; 0.1% alpha preserves backdrop rendering in header/tag glass. */
   --color-tag-overlay: rgba(0, 0, 0, 0.001);
   --color-overlay-fallback: rgba(0, 0, 0, 0.44);
 
@@ -82,14 +90,12 @@
   --font-size-16: 1rem; /* 16px */
   --font-size-18: 1.125rem; /* 18px — mobile body */
   --font-size-20: 1.25rem; /* 20px — desktop body */
-  --font-size-22: 1.375rem; /* 22px — legacy fallback */
   --font-size-24: 1.5rem; /* 24px — mobile display-md */
   --font-size-28: 1.75rem; /* 28px */
   --font-size-32: 2rem; /* 32px */
   --font-size-36: 2.25rem; /* 36px */
-  --font-size-42: 2.625rem; /* 42px — mobile display-2xl */
-  --font-size-44: 2.75rem; /* 44px — mobile display-xl */
-  --font-size-48: 3rem; /* 48px — mobile display-2xl */
+  --font-size-42: 2.625rem; /* 42px — Figma text-size/2-xl mobile variable */
+  --font-size-48: 3rem; /* 48px — current mobile section-title acceptance size */
   --font-size-56: 3.5rem; /* 56px */
   --font-size-72: 4.5rem; /* 72px */
 
@@ -101,7 +107,6 @@
   --line-height-32: 2rem;
   --line-height-40: 2.5rem;
   --line-height-42: 2.625rem;
-  --line-height-44: 2.75rem;
   --line-height-48: 3rem;
   --line-height-56: 3.5rem;
   --line-height-68: 4.25rem;
@@ -110,33 +115,37 @@
   /* 2.4 Typography — tracking */
   --tracking-tight: -0.01px;
   --tracking-normal: 0;
-  --tracking-wide: 0.1em;
   --tracking-wider: 0.5px;
   --tracking-caps: 0.25em; /* "caps/16" in Figma = 4px on 16px ≈ 0.25em */
 
   /* 3. Spacing — 4-based scale */
-  --space-0: 0;
-  --space-50: 2px;
-  --space-100: 4px;
   --space-150: 6px;
   --space-200: 8px;
   --space-300: 12px;
   --space-400: 16px;
-  --space-500: 20px;
   --space-600: 24px;
   --space-800: 32px;
   --space-1200: 48px;
   --space-1600: 64px;
   --space-2400: 96px;
-  --space-3200: 128px;
   --space-4000: 160px;
 
   /* 4. Radii */
   --radius-xs: 2px;
   --radius-sm: 4px; /* current Figma radius/100 */
-  --radius-md: 8px;
   --radius-lg: 12px;
-  --radius-full: 9999px;
+  --radius-200: 8px; /* Figma radius/200; keep semantic aliases component-side if needed */
+  --radius-400: 16px; /* Figma radius/400 */
+  --radius-full: 9999px; /* Figma radius/full */
+
+  /* 4.1 Stroke widths */
+  --stroke-border: 1px;
+  --stroke-focus-ring: 2px;
+
+  /* 4.2 Icon sizes */
+  --icon-size-sm: 24px;
+  --icon-size-md: 32px;
+  --icon-size-lg: 40px;
 
   /* 5. Breakpoints (informational; use in @media queries) */
   --bp-sm: 480px;
@@ -145,13 +154,6 @@
   --bp-xl: 1280px;
   --bp-2xl: 1512px;
 
-  /* 6. Motion (starter defaults; adjust later) */
-  --duration-fast: 120ms;
-  --duration-base: 200ms;
-  --duration-slow: 320ms;
-  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
-  --easing-entrance: cubic-bezier(0.16, 1, 0.3, 1);
-
   /* ============================================================
    * 2. SEMANTIC
    * ============================================================ */
@@ -159,7 +161,7 @@
   /* 2.1 Text colors */
   --color-text-primary: var(--color-black);
   --color-text-inverse: var(--color-white);
-  --color-text-muted: var(--color-gray-500);
+  --color-text-muted: var(--color-tag-muted-raw);
   --color-text-olive: var(--color-olive-400);
   --color-text-brand-blue: var(--color-blue-900);
   --color-text-accent-red: var(--color-accent-red);
@@ -181,9 +183,10 @@
 
   /* 2.3 Card fills (used on Project Card) */
   --color-card-default: var(--color-black);
-  --color-card-dim: var(--color-gray-600);
+  --color-card-dim: var(--color-card-dim-raw);
   --color-card-pink: var(--color-accent-pink);
   --color-card-lemon: var(--color-accent-lemon);
+  --color-footer-glow: var(--color-footer-glow-raw);
 
   /* 2.4 Typography — composite */
   --type-display-2xl-family: var(--font-family-sans);
@@ -239,8 +242,8 @@
   --type-caps-transform: uppercase;
 
   /* 2.4.1 Typography — mobile aliases (Figma mobile column) */
-  --type-display-2xl-size-mobile: var(--font-size-42);
-  --type-display-2xl-line-height-mobile: var(--line-height-48);
+  --type-display-2xl-size-mobile: var(--font-size-48);
+  --type-display-2xl-line-height-mobile: var(--line-height-56);
 
   --type-display-xl-size-mobile: var(--font-size-36);
   --type-display-xl-line-height-mobile: var(--line-height-40);
@@ -277,22 +280,11 @@
   --grid-columns: 12;
   --grid-max-width: var(--bp-2xl);
 
-  /* 2.7 Shadows / effects (hero, footer, tag/header overlays; project cards have no drop shadow) */
-  --shadow-hero-glow: inset 0 0 24px 0 var(--color-hero-glow);
+  /* 2.7 Shadows / effects (project cards have no drop shadow) */
   --color-hero-glow-index: var(--color-hero-glow-rose);
   --shadow-hero-glow-index: inset 0 0 24px 0 var(--color-hero-glow-index);
   --color-hero-glow-about: var(--color-hero-glow-yellow);
   --shadow-hero-glow-about: inset 0 0 24px 0 var(--color-hero-glow-about);
-  --shadow-footer-glow: inset 0 0 24px 0 var(--color-gray-650);
-
-  /* 2.8 Tag overlay (глянцевая плашка поверх карточки) */
-  --tag-overlay-bg: var(--color-tag-overlay);
-  --tag-overlay-blur: 32px;
-  --overlay-blur-strong: 96px;
-
-  /* 2.9 Header overlay (стеклянные плашки в шапке) */
-  --header-overlay-bg: var(--color-tag-overlay);
-  --header-overlay-blur: 48px;
 
   /* ============================================================
    * 3. COMPONENT
@@ -300,14 +292,14 @@
 
   /* 3.1 Project Card */
   --card-radius: var(--radius-sm);
-  --card-padding: var(--space-card-padding);
 
   /* 3.2 Project Tag */
   --tag-radius: var(--radius-sm);
   --tag-padding-block-start: var(--space-150);
   --tag-padding-block-end: var(--space-200);
   --tag-padding-inline: var(--space-300);
-  --tag-gap: var(--space-200);
+  --tag-overlay-bg: var(--color-tag-overlay);
+  --tag-overlay-blur: 32px;
 
   /* 3.3 Section header */
   --section-header-title-color-default: var(--color-text-primary);
@@ -350,23 +342,23 @@
   --hero-mobile-profile-gap-after: 7px;
 
   /* 3.4.1 Case hero */
-  --case-hero-glow: #505050;
-  --case-title-muted: #71717b;
+  --case-hero-glow: #505050; /* Figma Colors: hero/Black-glow */
+  --case-title-muted: #71717b; /* Case-page production value */
 
   /* 3.5 Footer */
   --footer-background: var(--color-surface-footer);
   --footer-shadow-size: 24px;
   --footer-shadow-spread: calc(-1 * var(--footer-shadow-size));
   --footer-glow-shadow:
-    inset var(--footer-shadow-size) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650),
-    inset calc(-1 * var(--footer-shadow-size)) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650),
-    inset 0 calc(-1 * var(--footer-shadow-size)) var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-gray-650);
+    inset var(--footer-shadow-size) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-footer-glow),
+    inset calc(-1 * var(--footer-shadow-size)) 0 var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-footer-glow),
+    inset 0 calc(-1 * var(--footer-shadow-size)) var(--footer-shadow-size) var(--footer-shadow-spread) var(--color-footer-glow);
   --footer-reveal-shadow-block-size: var(--footer-shadow-size);
   --footer-reveal-shadow-background: linear-gradient(
     to bottom,
-    color-mix(in srgb, var(--color-gray-650) 56%, transparent) 0%,
-    color-mix(in srgb, var(--color-gray-650) 24%, transparent) 44%,
-    color-mix(in srgb, var(--color-gray-650) 0%, transparent) 100%
+    color-mix(in srgb, var(--color-footer-glow) 56%, transparent) 0%,
+    color-mix(in srgb, var(--color-footer-glow) 24%, transparent) 44%,
+    color-mix(in srgb, var(--color-footer-glow) 0%, transparent) 100%
   );
   --footer-tagline-color: var(--color-text-olive);
   --footer-wrapper-min-height-desktop: 910px;
@@ -390,6 +382,8 @@
   --layer-header-hit: 2147483002;
   --layer-mobile-menu: 2147483600;
   --layer-mobile-menu-text: 2147483601;
+  --header-overlay-bg: var(--color-tag-overlay);
+  --header-overlay-blur: 48px;
   --mobile-menu-overlay-blur: 48px;
   --site-header-margin-offset: -84px;
   --section-header-min-height: 100vh;
@@ -440,17 +434,5 @@
 
     --tag-overlay-blur: 20px;
     --header-overlay-blur: 24px;
-  }
-}
-
-/* ============================================================
- * 5. REDUCED MOTION
- * ============================================================ */
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --duration-fast: 0ms;
-    --duration-base: 0ms;
-    --duration-slow: 0ms;
   }
 }
