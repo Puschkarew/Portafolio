@@ -497,6 +497,36 @@ html.has-mobile-menu-visual-text.is-mobile-menu-open .mobile-menu__link {
   overflow: hidden;
 }
 
+html.has-scroll-reveal [data-reveal="scale"],
+html.has-scroll-reveal .scroll-reveal-target {
+  --reveal-delay: 0ms;
+
+  opacity: 0;
+  transform: scale(0.94);
+  transform-origin: top left;
+  transition:
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay),
+    opacity 180ms linear var(--reveal-delay);
+  will-change: transform;
+}
+
+html.has-scroll-reveal [data-reveal="scale"].is-revealed,
+html.has-scroll-reveal .scroll-reveal-target.is-revealed {
+  opacity: 1;
+  transform: scale(1);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.has-scroll-reveal [data-reveal="scale"],
+  html.has-scroll-reveal .scroll-reveal-target {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+
 .card__link {
   display: block;
   color: inherit;
