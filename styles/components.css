@@ -1993,7 +1993,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-media-grid__panel--unit img {
   aspect-ratio: 275 / 594;
-  border-radius: 32px;
+  border-radius: var(--radius-400);
 }
 
 .case-media-grid__panel--formulating {
@@ -2007,8 +2007,10 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   aspect-ratio: 697 / 650;
   inline-size: min(100%, 744px);
   block-size: auto;
-  border-start-start-radius: 24px;
-  border-start-end-radius: 24px;
+  border-start-start-radius: var(--radius-400);
+  border-start-end-radius: var(--radius-400);
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .case-media-grid__panel--retros {
@@ -2021,6 +2023,10 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 .case-media-grid__panel--retros img {
   inline-size: min(100%, 894px);
   block-size: auto;
+  border-start-start-radius: var(--radius-400);
+  border-start-end-radius: var(--radius-400);
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .case-reference-stack {
@@ -2028,6 +2034,22 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   flex-direction: column;
   gap: var(--space-800);
   inline-size: 100%;
+}
+
+.case-reference-illustration {
+  margin: 0;
+  inline-size: 100%;
+  aspect-ratio: 1464 / 1038;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-orange-500);
+}
+
+.case-reference-illustration img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
 }
 
 .case-reference-grid {
@@ -2058,16 +2080,22 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   object-fit: cover;
 }
 
+.case-reference-item img {
+  border-radius: inherit;
+}
+
 .case-reference-item--glyphs {
   grid-column: 1 / span 5;
   aspect-ratio: 1158 / 1364;
-  border-radius: 24px;
+  border-radius: var(--radius-400);
 }
 
 .case-reference-item--specimen {
   grid-column: 6 / span 7;
-  border-start-start-radius: 24px;
-  border-start-end-radius: 24px;
+  border-start-start-radius: var(--radius-400);
+  border-start-end-radius: var(--radius-400);
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .case-reference-item--specimen img {
@@ -2099,12 +2127,23 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-reference-item--article {
   grid-column: 1 / span 6;
-  aspect-ratio: 1404 / 2459;
+  align-self: start;
+  aspect-ratio: 1440 / 2741;
+  border-radius: var(--radius-400);
+}
+
+.case-reference-item--article img {
+  block-size: auto;
+  object-fit: contain;
 }
 
 .case-reference-item--score {
   grid-column: 7 / span 6;
   aspect-ratio: 1404 / 3123;
+  border-start-start-radius: var(--radius-400);
+  border-start-end-radius: var(--radius-400);
+  border-end-end-radius: 0;
+  border-end-start-radius: 0;
 }
 
 .case-editorial-gallery {
@@ -2224,7 +2263,8 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 }
 
 .case-lead-prose {
-  grid-column: 5 / span 8;
+  grid-column: 5 / span 7;
+  max-inline-size: 1087px;
   font-feature-settings: "onum" 1, "pnum" 1;
 }
 
@@ -2582,15 +2622,6 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
     padding-block-end: 0;
   }
 
-  .case-media-grid__panel--unit img {
-    border-radius: var(--radius-lg);
-  }
-
-  .case-media-grid__panel--formulating img {
-    border-start-start-radius: var(--radius-lg);
-    border-start-end-radius: var(--radius-lg);
-  }
-
   .case-media-grid__panel--retros {
     padding-block: 24px 0;
     padding-inline: var(--space-400);
@@ -2651,15 +2682,6 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
   .case-details__section {
     gap: var(--space-600);
-  }
-
-  .case-reference-item--glyphs {
-    border-radius: var(--radius-lg);
-  }
-
-  .case-reference-item--specimen {
-    border-start-start-radius: var(--radius-lg);
-    border-start-end-radius: var(--radius-lg);
   }
 
   .card {

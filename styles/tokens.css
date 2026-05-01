@@ -74,6 +74,7 @@
   --color-surface-taupe-raw: #968978;
 
   /* 1.10 Color — semi-transparent production values */
+
   /* Figma tag/overlay is #00000000; 0.1% alpha preserves backdrop rendering in header/tag glass. */
   --color-tag-overlay: rgba(0, 0, 0, 0.001);
   --color-overlay-fallback: rgba(0, 0, 0, 0.44);
