@@ -9,6 +9,9 @@
     ".case-content .case-reference-poster__frame",
     ".case-content .case-editorial-gallery__item",
     ".case-content .case-editorial-gallery__detail",
+    ".case-content .mybox-media",
+    ".case-content .mybox-token",
+    ".case-content .mybox-collage__item",
     ".case-content .case-details__art"
   ].join(", ")
   const autoRevealClass = "scroll-reveal-target"

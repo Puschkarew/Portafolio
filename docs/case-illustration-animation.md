@@ -21,6 +21,9 @@ Keep this list aligned with `caseMediaSelector` in `scroll-reveal.js`. Today it 
 | `.case-content .case-reference-poster__frame` | Poster frame wrapper |
 | `.case-content .case-editorial-gallery__item` | Editorial gallery tiles |
 | `.case-content .case-editorial-gallery__detail` | Detail figures |
+| `.case-content .mybox-media` | MyBox exported media modules |
+| `.case-content .mybox-token` | MyBox palette cells |
+| `.case-content .mybox-collage__item` | MyBox collage images with independent reveal |
 | `.case-content .case-details__art` | Decorative art in credits/details |
 
 When adding a **new** repeating illustration pattern:
