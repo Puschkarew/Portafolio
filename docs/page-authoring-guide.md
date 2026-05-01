@@ -39,6 +39,8 @@ The generated page will use `src/_layouts/base.njk`, including the shared CSS li
 
 For the first one or two case pages, start with direct Nunjucks markup and existing CSS conventions. Create a dedicated case layout only when repeated case structure becomes clear.
 
+When you add illustrations or large media inside `.case-content`, treat **[`docs/case-illustration-animation.md`](case-illustration-animation.md)** as the spec for scroll-driven reveal: reuse established classes (for example `.case-reference-illustration`, `.case-reference-item`) or extend [`scripts/scroll-reveal.js`](../scripts/scroll-reveal.js) if you introduce a new wrapper pattern — do not assume `<img>` blocks animate without matching that system.
+
 Add a case layout when at least two case pages share the same major structure, for example:
 
 - case hero metadata;

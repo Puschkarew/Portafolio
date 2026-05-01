@@ -1999,13 +1999,17 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 .case-media-grid__panel--formulating {
   grid-column: 5 / span 8;
   align-self: start;
-  align-items: flex-end;
-  padding: var(--space-600) var(--space-600) 0;
+  align-items: flex-start;
+  justify-content: center;
+  padding-block-start: 24px;
+  padding-inline: max(24px, var(--space-page-padding));
+  padding-block-end: 0;
 }
 
 .case-media-grid__panel--formulating img {
-  aspect-ratio: 697 / 650;
-  inline-size: min(100%, 744px);
+  object-fit: contain;
+  inline-size: auto;
+  max-inline-size: 100%;
   block-size: auto;
   border-start-start-radius: var(--radius-400);
   border-start-end-radius: var(--radius-400);
@@ -2613,12 +2617,13 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
     row-gap: var(--space-600);
   }
 
-  .case-media-grid__panel--unit,
-  .case-media-grid__panel--formulating {
+  .case-media-grid__panel--unit {
     padding: var(--space-400);
   }
 
   .case-media-grid__panel--formulating {
+    padding-block-start: 24px;
+    padding-inline: max(24px, var(--space-page-padding));
     padding-block-end: 0;
   }
 

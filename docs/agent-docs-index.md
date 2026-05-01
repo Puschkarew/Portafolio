@@ -6,6 +6,7 @@ Start here when choosing which project document to read.
 
 - Eleventy workflow: [`docs/eleventy-build-workflow.md`](eleventy-build-workflow.md)
 - Adding `about` or case pages: [`docs/page-authoring-guide.md`](page-authoring-guide.md)
+- Case illustration scroll reveal (keep in sync with `scripts/scroll-reveal.js`): [`docs/case-illustration-animation.md`](case-illustration-animation.md)
 - Validation matrix: [`docs/validation-playbook.md`](validation-playbook.md)
 
 ## Frozen Runtime Areas
@@ -18,7 +19,7 @@ Start here when choosing which project document to read.
 ## What To Read First
 
 - Editing a page: read the Eleventy workflow, then the page authoring guide.
-- Adding a case page: read the page authoring guide, then validation playbook.
+- Adding a case page: read the page authoring guide, [`docs/case-illustration-animation.md`](case-illustration-animation.md) when adding figures/media under `.case-content`, then validation playbook.
 - Touching CSS layout: read validation playbook and the relevant frozen area document.
 - Touching header: read the header handoff before editing.
 - Touching footer: read the footer reveal document before editing.
