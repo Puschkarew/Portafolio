@@ -1902,6 +1902,36 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   color: var(--mybox-orange-800);
 }
 
+.case-hero--mezhdu-prochim {
+  --mezhdu-indigo-100: #e0e7ff;
+  --mezhdu-indigo-400: #7c86ff;
+  --mezhdu-indigo-600: #4f39f6;
+  --mezhdu-indigo-950: #1e1a4d;
+  --mezhdu-yellow: #ffd900;
+  --mezhdu-green: #19a48c;
+  --mezhdu-peach: #f4a689;
+  --mezhdu-surface-light: #f4f5f7;
+  --case-hero-glow: var(--mezhdu-indigo-400);
+  --case-title-muted: var(--mezhdu-indigo-950);
+
+  background: var(--mezhdu-indigo-100);
+  color: var(--mezhdu-indigo-600);
+  box-shadow: inset 0 0 24px 0 var(--case-hero-glow);
+}
+
+.case-hero--mezhdu-prochim .case-hero__media {
+  background: var(--mezhdu-indigo-950);
+}
+
+.case-hero--mezhdu-prochim .case-hero__title,
+.case-hero--mezhdu-prochim .case-hero__summary {
+  color: var(--mezhdu-indigo-600);
+}
+
+.case-hero--mezhdu-prochim .case-hero__title-muted {
+  color: var(--mezhdu-indigo-950);
+}
+
 .case-content-shell {
   --case-content-glow: #505050;
   --case-content-reveal-shadow-background: linear-gradient(
@@ -1929,6 +1959,10 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-hero--mybox + .case-content-shell {
   --case-content-glow: #ffb86a;
+}
+
+.case-hero--mezhdu-prochim + .case-content-shell {
+  --case-content-glow: #7c86ff;
 }
 
 .case-content {
@@ -2413,6 +2447,100 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   outline-offset: 2px;
 }
 
+.mezhdu-media-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-grid-gap);
+  row-gap: var(--space-800);
+  inline-size: 100%;
+  overflow: clip;
+}
+
+.mezhdu-media,
+.mezhdu-social-item,
+.mezhdu-collage__media {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.mezhdu-media img,
+.mezhdu-social-item img,
+.mezhdu-collage__media img,
+.mezhdu-details__art img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.mezhdu-media--laptop {
+  grid-column: 1 / -1;
+  aspect-ratio: 1464 / 976;
+}
+
+.mezhdu-media--course {
+  grid-column: 1 / -1;
+  inline-size: calc(100% - var(--space-600));
+  aspect-ratio: 1440 / 820;
+  justify-self: start;
+}
+
+.mezhdu-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-grid-gap);
+  inline-size: 100%;
+  align-items: start;
+}
+
+.mezhdu-social-item {
+  aspect-ratio: 1;
+  background: var(--color-surface-featured);
+}
+
+.mezhdu-social-item--tall {
+  aspect-ratio: 480 / 853;
+}
+
+.mezhdu-collage {
+  inline-size: 100%;
+}
+
+.mezhdu-collage__media {
+  display: flex;
+  justify-content: center;
+  inline-size: 100%;
+  aspect-ratio: 1464 / 4258;
+  background: #f4f5f7;
+}
+
+.mezhdu-collage__media img {
+  inline-size: auto;
+  max-inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+}
+
+.mezhdu-details {
+  min-block-size: 464px;
+}
+
+.mezhdu-details__art {
+  position: absolute;
+  inset-block-start: -27px;
+  inset-inline-start: -55px;
+  z-index: 0;
+  inline-size: min(33.7vw, 509px);
+  transform: rotate(-39.91deg);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.mezhdu-details__art img {
+  block-size: auto;
+}
+
 .mybox-media-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -2813,6 +2941,22 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
     grid-column: 1 / -1;
   }
 
+  .mezhdu-media-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .mezhdu-media--laptop,
+  .mezhdu-media--course {
+    grid-column: 1 / -1;
+    inline-size: 100%;
+  }
+
+  .mezhdu-details__art {
+    inset-block-start: 48px;
+    inset-inline-start: 0;
+    inline-size: min(42vw, 360px);
+  }
+
   .mybox-media-grid {
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
@@ -3009,6 +3153,24 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
   .case-media-grid__panel--retros img {
     inline-size: min(100%, 72vw);
+  }
+
+  .mezhdu-media-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: var(--space-600);
+  }
+
+  .mezhdu-social-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-600);
+  }
+
+  .mezhdu-collage__media {
+    aspect-ratio: 353 / 1024;
+  }
+
+  .mezhdu-details__art {
+    inline-size: min(78vw, 320px);
   }
 
   .case-reference-grid {

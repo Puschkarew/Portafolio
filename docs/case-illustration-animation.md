@@ -24,6 +24,10 @@ Keep this list aligned with `caseMediaSelector` in `scroll-reveal.js`. Today it 
 | `.case-content .mybox-media` | MyBox exported media modules |
 | `.case-content .mybox-token` | MyBox palette cells |
 | `.case-content .mybox-collage__item` | MyBox collage images with independent reveal |
+| `.case-content .mezhdu-media` | Mezhdu Prochim large exported media modules |
+| `.case-content .mezhdu-social-item` | Mezhdu Prochim social/course tiles |
+| `.case-content .mezhdu-collage__media` | Mezhdu Prochim tall collaborators collage |
+| `.case-content .mezhdu-details__art` | Mezhdu Prochim decorative credits art |
 | `.case-content .case-details__art` | Decorative art in credits/details |
 
 When adding a **new** repeating illustration pattern:

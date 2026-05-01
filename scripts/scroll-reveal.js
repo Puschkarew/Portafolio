@@ -12,6 +12,10 @@
     ".case-content .mybox-media",
     ".case-content .mybox-token",
     ".case-content .mybox-collage__item",
+    ".case-content .mezhdu-media",
+    ".case-content .mezhdu-social-item",
+    ".case-content .mezhdu-collage__media",
+    ".case-content .mezhdu-details__art",
     ".case-content .case-details__art"
   ].join(", ")
   const autoRevealClass = "scroll-reveal-target"
