@@ -1998,8 +1998,8 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-media-grid__panel--formulating {
   grid-column: 5 / span 8;
-  aspect-ratio: 972 / 718;
-  align-items: flex-start;
+  align-self: start;
+  align-items: flex-end;
   padding: var(--space-600) var(--space-600) 0;
 }
 
@@ -2013,9 +2013,8 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-media-grid__panel--retros {
   grid-column: 1 / -1;
-  aspect-ratio: 1464 / 1326;
   align-items: flex-start;
-  padding-block-start: var(--space-600);
+  padding-block: 24px 0;
   padding-inline: var(--space-1200);
 }
 
@@ -2067,26 +2066,30 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .case-reference-item--specimen {
   grid-column: 6 / span 7;
-  aspect-ratio: 990.203 / 1166;
   border-start-start-radius: 24px;
   border-start-end-radius: 24px;
 }
 
+.case-reference-item--specimen img {
+  block-size: auto;
+  object-fit: contain;
+}
+
 .case-reference-poster__frame {
-  aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding: var(--space-4000);
   border-radius: var(--radius-sm);
   background: var(--color-black);
 }
 
 .case-reference-poster__frame img {
-  inline-size: min(100%, 616px);
+  aspect-ratio: 537 / 742;
+  inline-size: 100%;
   block-size: auto;
-  aspect-ratio: 616 / 616;
-  object-fit: contain;
+  border-radius: var(--radius-sm);
 }
 
 .case-reference-poster__caption {
@@ -2128,7 +2131,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 .case-editorial-gallery__item {
   position: absolute;
   inline-size: 41.325%;
-  aspect-ratio: 605 / 857;
+  aspect-ratio: 595 / 842;
   overflow: hidden;
 }
 
@@ -2240,17 +2243,17 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   column-gap: var(--space-grid-gap);
   row-gap: var(--space-800);
   min-block-size: 610px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: var(--radius-sm);
 }
 
 .case-details__art {
   position: absolute;
-  inset-block-start: 36px;
-  inset-inline-start: 3.1%;
+  inset-block-start: -80px;
+  inset-inline-start: -22px;
   z-index: 0;
-  inline-size: min(30vw, 440px);
-  transform: rotate(180deg) scaleY(-1);
+  inline-size: min(35.1vw, 514px);
+  transform: rotate(180deg);
   transform-origin: center;
   pointer-events: none;
 }
@@ -2269,10 +2272,6 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   flex-direction: column;
   gap: var(--space-800);
   min-inline-size: 0;
-}
-
-.case-details__section--client {
-  grid-column: 1 / span 4;
 }
 
 .case-details__section--details {
@@ -2413,14 +2412,9 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
     inline-size: min(42vw, 360px);
   }
 
-  .case-details__section--client,
   .case-details__section--details,
   .case-details__section--team {
     grid-column: 1 / -1;
-  }
-
-  .case-details__section--client {
-    min-block-size: min(58vw, 440px);
   }
 
   .case-details__item {
@@ -2598,7 +2592,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   }
 
   .case-media-grid__panel--retros {
-    padding-block-start: var(--space-400);
+    padding-block: 24px 0;
     padding-inline: var(--space-400);
   }
 
@@ -2609,6 +2603,10 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   .case-reference-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     padding: var(--space-400) var(--space-400) 0;
+  }
+
+  .case-reference-poster__frame {
+    padding: var(--space-400);
   }
 
   .case-editorial-gallery {
@@ -2653,10 +2651,6 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
   .case-details__section {
     gap: var(--space-600);
-  }
-
-  .case-details__section--client {
-    min-block-size: min(90vw, 380px);
   }
 
   .case-reference-item--glyphs {

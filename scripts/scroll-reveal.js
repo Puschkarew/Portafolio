@@ -4,8 +4,8 @@
     ".case-hero .case-hero__media",
     ".case-content .case-media-grid__feature",
     ".case-content .case-media-grid__panel",
-    ".case-content .case-reference-grid",
-    ".case-content .case-reference-poster",
+    ".case-content .case-reference-item",
+    ".case-content .case-reference-poster__frame",
     ".case-content .case-editorial-gallery__item",
     ".case-content .case-editorial-gallery__detail",
     ".case-content .case-details__art"
