@@ -2466,7 +2466,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .mezhdu-media img,
 .mezhdu-social-item img,
-.mezhdu-collage__media img,
+.mezhdu-collage__media:not(.mezhdu-collage-composition) > img,
 .mezhdu-details__art img {
   display: block;
   inline-size: 100%;
@@ -2507,6 +2507,23 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inline-size: 100%;
 }
 
+.mezhdu-letters-embed {
+  inline-size: 100%;
+  max-inline-size: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #1e1a4d;
+}
+
+.mezhdu-letters-embed__frame {
+  display: block;
+  inline-size: 100%;
+  min-block-size: 360px;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #1e1a4d;
+}
+
 .mezhdu-collage__media {
   display: flex;
   justify-content: center;
@@ -2515,11 +2532,252 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   background: #f4f5f7;
 }
 
-.mezhdu-collage__media img {
+.mezhdu-collage__media:not(.mezhdu-collage-composition) > img {
   inline-size: auto;
   max-inline-size: 100%;
   block-size: 100%;
   object-fit: contain;
+}
+
+.mezhdu-collage-composition {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+}
+
+.mezhdu-collage-composition__item {
+  position: absolute;
+  display: block;
+  max-inline-size: none;
+  transform-origin: center;
+}
+
+.mezhdu-collage-composition__item--sasha-01 {
+  inset-block-start: 12.7049%;
+  inset-inline-start: -0.0482%;
+  inline-size: 38.4855%;
+  block-size: 13.7394%;
+  transform: rotate(-0.25deg);
+}
+
+.mezhdu-collage-composition__item--natasha-01 {
+  inset-block-start: 25.292%;
+  inset-inline-start: 60.6093%;
+  inline-size: 22.541%;
+  block-size: 13.2457%;
+  transform: rotate(-14.25deg);
+}
+
+.mezhdu-collage-composition__item--drawing-new-image {
+  inset-block-start: 19.9389%;
+  inset-inline-start: 31.4208%;
+  inline-size: 30.1913%;
+  block-size: 13.8103%;
+}
+
+.mezhdu-collage-composition__item--sasha-mask-01 {
+  inset-block-start: 28.3598%;
+  inset-inline-start: 3.0929%;
+  inline-size: 33.7406%;
+  block-size: 16.3896%;
+}
+
+.mezhdu-collage-composition__item--alina-01 {
+  inset-block-start: 36.0498%;
+  inset-inline-start: 65.7104%;
+  inline-size: 34.2896%;
+  block-size: 14.9118%;
+}
+
+.mezhdu-collage-composition__item--sasha-02 {
+  inset-block-start: 36.6756%;
+  inset-inline-start: 16.5777%;
+  inline-size: 54.1301%;
+  block-size: 18.9992%;
+  transform: rotate(6.9deg);
+}
+
+.mezhdu-collage-composition__item--roma-02 {
+  inset-block-start: 69.3283%;
+  inset-inline-start: 4.5082%;
+  inline-size: 38.1148%;
+  block-size: 17.2147%;
+  mix-blend-mode: hard-light;
+}
+
+.mezhdu-collage-composition__item--wide-photo-mask {
+  inset-block-start: 81.7755%;
+  inset-inline-start: 8.3333%;
+  inline-size: 57.2404%;
+  block-size: 15.7445%;
+}
+
+.mezhdu-collage-composition__item--drawing-cleanshot-2024-1902 {
+  inset-block-start: 93.9495%;
+  inset-inline-start: 2.7308%;
+  inline-size: 7.2285%;
+  block-size: 2.2711%;
+  transform: rotate(-173.7deg);
+}
+
+.mezhdu-collage-composition__item--shape-black-left {
+  inset-block-start: 44.7863%;
+  inset-inline-start: -6.4208%;
+  inline-size: 33.0601%;
+  block-size: 12.3532%;
+}
+
+.mezhdu-collage-composition__item--roma-01 {
+  inset-block-start: 53.0296%;
+  inset-inline-start: 47.7459%;
+  inline-size: 37.5%;
+  block-size: 19.0695%;
+}
+
+.mezhdu-collage-composition__item--shape-black-right {
+  inset-block-start: 48.8962%;
+  inset-inline-start: 72.7459%;
+  inline-size: 30.5328%;
+  block-size: 9.9577%;
+}
+
+.mezhdu-collage-composition__item--sasha-03 {
+  inset-block-start: 58.3372%;
+  inset-inline-start: 3.1421%;
+  inline-size: 50.8801%;
+  block-size: 12.4472%;
+}
+
+.mezhdu-collage-composition__item--masha-propisi {
+  inset-block-start: 69.3283%;
+  inset-inline-start: 51.2295%;
+  inline-size: 55.24%;
+  block-size: 14.7722%;
+}
+
+.mezhdu-collage-composition__item--drawing-cleanshot-2024-1906 {
+  inset-block-start: 15.2181%;
+  inset-inline-start: 43.6478%;
+  inline-size: 15.7544%;
+  block-size: 6.2838%;
+  transform: rotate(81.56deg);
+}
+
+.mezhdu-collage-composition__item--top-photo-mask {
+  inset-block-start: -6.3974%;
+  inset-inline-start: 16.6428%;
+  inline-size: 51.8285%;
+  block-size: 23.7843%;
+}
+
+.mezhdu-collage-composition__item--curator-01 {
+  inset-block-start: 7.0925%;
+  inset-inline-start: 56.7623%;
+  inline-size: 45.3552%;
+  block-size: 16.2283%;
+}
+
+.mezhdu-collage-composition__item--person-y-top {
+  inset-block-start: 18.1761%;
+  inset-inline-start: 75.3016%;
+  inline-size: 26.8115%;
+  block-size: 12.3041%;
+  transform: rotate(20.83deg);
+}
+
+.mezhdu-collage-composition__item--drawing-image-20 {
+  inset-block-start: 1.406%;
+  inset-inline-start: 76.1615%;
+  inline-size: 19.8769%;
+  block-size: 5.0879%;
+  transform: rotate(11.02deg);
+}
+
+.mezhdu-collage-composition__item--drawing-image-14 {
+  inset-block-start: 10.566%;
+  inset-inline-start: -1.5765%;
+  inline-size: 11.333%;
+  block-size: 3.178%;
+  transform: rotate(-10.42deg);
+}
+
+.mezhdu-collage-composition__item--drawing-image-01 {
+  inset-block-start: 35.7363%;
+  inset-inline-start: 91.5149%;
+  inline-size: 6.0203%;
+  block-size: 1.9574%;
+  transform: rotate(15.91deg);
+}
+
+.mezhdu-collage-composition__item--drawing-image-59 {
+  inset-block-start: 36.78%;
+  inset-inline-start: 35.52%;
+  inline-size: 8.13%;
+  block-size: 2.51%;
+}
+
+.mezhdu-collage-composition__item--drawing-image-58 {
+  inset-block-start: 55.787%;
+  inset-inline-start: 34.011%;
+  inline-size: 9.758%;
+  block-size: 2.7159%;
+  transform: rotate(-19.27deg);
+}
+
+.mezhdu-collage-composition__item--drawing-image-57 {
+  inset-block-start: 27.501%;
+  inset-inline-start: -1.2686%;
+  inline-size: 10.6771%;
+  block-size: 3.508%;
+  transform: rotate(-22.12deg);
+}
+
+.mezhdu-collage-composition__item--poster-traced {
+  inset-block-start: 62.0413%;
+  inset-inline-start: 82.5483%;
+  inline-size: 9.2533%;
+  block-size: 2.9873%;
+  transform: rotate(-33.8deg);
+}
+
+.mezhdu-collage-composition__item--person-y-bottom {
+  inset-block-start: 86.0979%;
+  inset-inline-start: 73.2295%;
+  inline-size: 27.9346%;
+  block-size: 12.8194%;
+}
+
+.mezhdu-collage-composition__item--drawing-cleanshot-2021-1847 {
+  inset-block-start: 74.3412%;
+  inset-inline-start: 38.9066%;
+  inline-size: 13.5867%;
+  block-size: 2.0976%;
+  transform: rotate(-113.88deg);
+}
+
+.mezhdu-collage-composition__item--drawing-cleanshot-2022-1822 {
+  inset-block-start: 85.6519%;
+  inset-inline-start: 66.8755%;
+  inline-size: 6.619%;
+  block-size: 1.0662%;
+  transform: rotate(-24.38deg);
+}
+
+.mezhdu-collage-composition__item--shape-red-01 {
+  inset-block-start: 69.5302%;
+  inset-inline-start: 4.0643%;
+  inline-size: 12.4645%;
+  block-size: 4.4092%;
+  transform: rotate(97.33deg);
+}
+
+.mezhdu-collage-composition__item--drawing-cleanshot-2021-1702 {
+  inset-block-start: -2.2195%;
+  inset-inline-start: 6.7099%;
+  inline-size: 16.9603%;
+  block-size: 7.6291%;
+  transform: rotate(-98.11deg);
 }
 
 .mezhdu-details {
