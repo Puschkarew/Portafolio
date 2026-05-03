@@ -17,7 +17,10 @@
     ".case-content .mezhdu-collage__media:not(.mezhdu-collage-composition)",
     ".case-content .mezhdu-collage-composition .mezhdu-collage-composition__item",
     ".case-content .mezhdu-details__art",
-    ".case-content .case-details__art"
+    ".case-content .case-details__art",
+    ".case-content .mos-media",
+    ".case-content .top2019-media",
+    ".case-content .utochka-media"
   ].join(", ")
   const autoRevealClass = "scroll-reveal-target"
   const revealedClass = "is-revealed"

@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en" data-debug="false">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Top 2019 Hero Playground</title>
+    <style>
+      :root {
+        --tj-black: #020202;
+        --tj-orange: #ff5d00;
+        --tj-orange-dim: #4b1a06;
+        --stage-width: 1024px;
+        --stage-height: 672px;
+        --stage-scale: 1;
+        --strip-x: 362px;
+        --strip-width: 300px;
+        --strip-start-y: 148px;
+        --strip-end-y: -3439px;
+        --hero-total-duration: 2535ms;
+        --hero-roll-delay: 1150ms;
+        --hero-roll-duration: 1385ms;
+        --hero-appear-duration: 940ms;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-width: 320px;
+        min-height: 100%;
+        margin: 0;
+        background: var(--tj-black);
+      }
+
+      body {
+        overflow: hidden;
+        color: var(--tj-orange);
+        font-family: Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .top2019-hero {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        height: 100svh;
+        overflow: hidden;
+        background: var(--tj-black);
+        isolation: isolate;
+      }
+
+      .top2019-stage {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: var(--stage-width);
+        height: var(--stage-height);
+        overflow: visible;
+        transform: translate(-50%, -50%) scale(var(--stage-scale));
+        transform-origin: center;
+      }
+
+      .top2019-strip {
+        position: absolute;
+        left: var(--strip-x);
+        top: 0;
+        z-index: 1;
+        width: var(--strip-width);
+        height: auto;
+        max-width: none;
+        opacity: 0;
+        filter: blur(22px);
+        transform: translate3d(0, var(--strip-start-y), 0);
+        animation:
+          top2019-strip-appear var(--hero-appear-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards,
+          top2019-strip-roll var(--hero-roll-duration) cubic-bezier(0.88, 0, 0.12, 1) var(--hero-roll-delay) forwards;
+        will-change: transform;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .top2019-logo {
+        position: fixed;
+        left: max(28px, calc((100vw - (var(--stage-width) * var(--stage-scale))) / 2 + 28px * var(--stage-scale)));
+        top: max(29px, calc((100vh - (var(--stage-height) * var(--stage-scale))) / 2 + 29px * var(--stage-scale)));
+        top: max(29px, calc((100svh - (var(--stage-height) * var(--stage-scale))) / 2 + 29px * var(--stage-scale)));
+        z-index: 2;
+        width: calc(36px * var(--stage-scale));
+        min-width: 36px;
+        max-width: 108px;
+        aspect-ratio: 1;
+        color: var(--tj-orange);
+        opacity: 0;
+        filter: blur(10px);
+        animation: top2019-logo-light var(--hero-total-duration) forwards;
+        will-change: opacity;
+      }
+
+      .top2019-logo img {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .top2019-debug-panel {
+        position: fixed;
+        left: 24px;
+        right: 24px;
+        bottom: 24px;
+        z-index: 5;
+        display: none;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        font: 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+
+      html[data-debug="true"] .top2019-debug-panel {
+        display: flex;
+      }
+
+      .top2019-debug-panel button {
+        border: 1px solid color-mix(in srgb, var(--tj-orange) 70%, #fff);
+        border-radius: 999px;
+        padding: 8px 14px;
+        background: rgba(255, 93, 0, 0.12);
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .top2019-debug-panel input {
+        flex: 1 1 auto;
+        accent-color: var(--tj-orange);
+      }
+
+      .top2019-hero.is-paused .top2019-strip,
+      .top2019-hero.is-paused .top2019-logo {
+        animation-play-state: paused;
+      }
+
+      @keyframes top2019-strip-appear {
+        0% {
+          opacity: 0;
+          filter: blur(22px);
+        }
+
+        42% {
+          opacity: 0.28;
+          filter: blur(18px);
+        }
+
+        100% {
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+
+      @keyframes top2019-strip-roll {
+        0% {
+          transform: translate3d(0, var(--strip-start-y), 0);
+        }
+
+        100% {
+          transform: translate3d(0, var(--strip-end-y), 0);
+        }
+      }
+
+      @keyframes top2019-logo-light {
+        0% {
+          opacity: 0;
+          filter: blur(10px);
+        }
+
+        24% {
+          opacity: 0.34;
+          filter: blur(0);
+        }
+
+        58% {
+          opacity: 0.34;
+          filter: blur(0);
+        }
+
+        72% {
+          opacity: 0.58;
+        }
+
+        100% {
+          opacity: 1;
+          filter: blur(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .top2019-strip,
+        .top2019-logo {
+          animation: none;
+        }
+
+        .top2019-strip {
+          transform: translate3d(0, var(--strip-end-y), 0);
+          opacity: 1;
+          filter: none;
+        }
+
+        .top2019-logo {
+          opacity: 1;
+          filter: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="top2019-hero" aria-label="Top 2019 cover animation">
+      <div class="top2019-stage" aria-hidden="true">
+        <img class="top2019-strip" src="assets/figma/Top2019/hero-strip.jpg" alt="" width="1217" height="16020" decoding="async" fetchpriority="high" />
+      </div>
+
+      <div class="top2019-logo" aria-hidden="true">
+        <img src="assets/figma/Top2019/Logo w.svg" alt="" width="36" height="36" decoding="async" />
+      </div>
+
+      <div class="top2019-debug-panel" role="group" aria-label="Animation controls">
+        <button type="button" data-action="replay">Replay</button>
+        <button type="button" data-action="pause">Pause</button>
+        <input type="range" min="0" max="100" value="100" aria-label="Strip position" />
+      </div>
+    </main>
+
+    <script>
+      (() => {
+        const root = document.documentElement;
+        const hero = document.querySelector(".top2019-hero");
+        const strip = document.querySelector(".top2019-strip");
+        const replay = document.querySelector('[data-action="replay"]');
+        const pause = document.querySelector('[data-action="pause"]');
+        const scrubber = document.querySelector(".top2019-debug-panel input");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const stage = { width: 1024, height: 672 };
+        const startY = 148;
+        const endY = -3439;
+
+        function setStageScale() {
+          const scale = Math.max(window.innerWidth / stage.width, window.innerHeight / stage.height);
+          root.style.setProperty("--stage-scale", scale.toFixed(5));
+        }
+
+        function replayAnimation() {
+          hero.classList.remove("is-paused");
+          pause.textContent = "Pause";
+          strip.style.removeProperty("transform");
+          strip.style.removeProperty("animation");
+          void strip.offsetWidth;
+          document.querySelectorAll(".top2019-strip, .top2019-logo").forEach((el) => {
+            el.style.animation = "none";
+            void el.offsetWidth;
+            el.style.removeProperty("animation");
+          });
+        }
+
+        function setScrubbedPosition(value) {
+          const progress = Number(value) / 100;
+          const y = startY + (endY - startY) * progress;
+          strip.style.animation = "none";
+          strip.style.transform = `translate3d(0, ${Math.round(y)}px, 0)`;
+        }
+
+        setStageScale();
+        window.addEventListener("resize", setStageScale, { passive: true });
+        window.visualViewport?.addEventListener("resize", setStageScale, { passive: true });
+
+        if (window.location.search.includes("debug")) {
+          root.dataset.debug = "true";
+        }
+
+        replay?.addEventListener("click", replayAnimation);
+        pause?.addEventListener("click", () => {
+          hero.classList.toggle("is-paused");
+          pause.textContent = hero.classList.contains("is-paused") ? "Play" : "Pause";
+        });
+        scrubber?.addEventListener("input", (event) => setScrubbedPosition(event.target.value));
+
+        if (reduceMotion.matches) {
+          scrubber.value = "100";
+        }
+      })();
+    </script>
+  </body>
+</html>

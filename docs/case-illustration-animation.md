@@ -30,6 +30,9 @@ Keep this list aligned with `caseMediaSelector` in `scroll-reveal.js`. Today it 
 | `.case-content .mezhdu-collage-composition .mezhdu-collage-composition__item` | Mezhdu Prochim tall collage: each absolute `img` layer reveals on its own as it enters the viewport |
 | `.case-content .mezhdu-details__art` | Mezhdu Prochim decorative credits art |
 | `.case-content .case-details__art` | Decorative art in credits/details |
+| `.case-content .mos-media` | MOS specimen / slide figures |
+| `.case-content .top2019-media` | Top 2019 slide figures |
+| `.case-content .utochka-media` | Utochka specimen figures |
 
 When adding a **new** repeating illustration pattern:
 
