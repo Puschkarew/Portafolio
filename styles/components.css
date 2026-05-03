@@ -2067,7 +2067,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   --strip-x: 362px;
   --strip-width: 300px;
   --strip-start-y: 148px;
-  --strip-end-y: -3439px;
+  --strip-end-y: -3415px;
   --hero-total-duration: 2535ms;
   --hero-roll-delay: 1150ms;
   --hero-roll-duration: 1385ms;
@@ -2134,26 +2134,32 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   opacity: 0;
   filter: blur(22px);
   transform: translate3d(0, var(--strip-start-y), 0);
-  animation:
-    top2019-strip-appear var(--hero-appear-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards,
-    top2019-strip-roll var(--hero-roll-duration) cubic-bezier(0.88, 0, 0.12, 1) var(--hero-roll-delay) forwards;
   will-change: transform;
   user-select: none;
   pointer-events: none;
 }
 
+.case-hero--top-2019 .top2019-hero.is-ready .top2019-strip {
+  animation:
+    top2019-strip-appear var(--hero-appear-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards,
+    top2019-strip-roll var(--hero-roll-duration) cubic-bezier(0.88, 0, 0.12, 1) var(--hero-roll-delay) forwards;
+}
+
 .case-hero--top-2019 .top2019-logo {
   position: absolute;
-  inset-inline-start: 28px;
-  inset-block-start: 29px;
+  inset-inline-start: max(28px, calc((100% - (var(--stage-width) * var(--stage-scale))) / 2 + 28px * var(--stage-scale)));
+  inset-block-start: max(29px, calc((100% - (var(--stage-height) * var(--stage-scale))) / 2 + 29px * var(--stage-scale)));
   z-index: 2;
-  inline-size: 36px;
+  inline-size: clamp(36px, calc(36px * var(--stage-scale)), 108px);
   aspect-ratio: 1;
   color: var(--tj-orange);
   opacity: 0;
   filter: blur(10px);
-  animation: top2019-logo-light var(--hero-total-duration) forwards;
   will-change: opacity, filter;
+}
+
+.case-hero--top-2019 .top2019-hero.is-ready .top2019-logo {
+  animation: top2019-logo-light var(--hero-total-duration) forwards;
 }
 
 .case-hero--top-2019 .top2019-logo img {

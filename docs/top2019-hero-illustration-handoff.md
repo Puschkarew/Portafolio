@@ -1,6 +1,6 @@
 # Top 2019 Hero Illustration Handoff
 
-This documents the standalone Top 2019 cover animation prototype in `top2019-hero-playground.html` so it can be moved into a future case hero illustration without re-discovering the motion.
+This documents the Top 2019 cover animation prototype in `top2019-hero-playground.html` and its case-page implementation in `src/top-2019.njk`, `styles/components.css`, and `scripts/top-2019-hero.js`.
 
 ## Source Assets
 
@@ -28,7 +28,7 @@ Use `transform: translate(-50%, -50%) scale(var(--stage-scale))` on the virtual 
 The strip is one image moving in one continuous vertical transform. Do not split the movement into multiple keyframe stops.
 
 - start transform: `translateY(148px)`;
-- end transform: `translateY(-3439px)`;
+- end transform: `translateY(-3415px)` (Readymag reference was `-3439px`; end value moved `24px` toward `0` so the final `7` sits slightly lower for optical vertical centering);
 - total reference length: `2535ms`;
 - strip appearance: `940ms`, `opacity 0 -> 1` and `blur(22px) -> 0`;
 - movement delay: `1150ms`;
@@ -45,11 +45,13 @@ Measured checkpoints from the current prototype:
 - `1750ms`: about `translateY(-606px)`;
 - `2000ms`: about `translateY(-2970px)`;
 - `2250ms`: about `translateY(-3355px)`;
-- `2535ms`: `translateY(-3439px)`.
+- `2535ms`: `translateY(-3415px)`.
 
 ## Integration Notes
 
-- In the future case page, place this inside the existing case hero media slot rather than changing frozen header or footer code.
+- The case page places this inside the existing case hero media slot; do not change frozen header or footer code for this animation.
+- In the case implementation, `.top2019-logo` is a sibling of `.top2019-stage`, not a child. This keeps the logo anchored to the black hero viewport instead of being cropped by the oversized stage.
+- `scripts/top-2019-hero.js` adds `.is-ready` only after the strip image and `window.load` are ready, so the CSS animation does not finish before the hero is visible.
 - Use relative asset URLs when testing the standalone playground, but root-relative URLs are fine inside Eleventy templates.
 - For `prefers-reduced-motion: reduce`, skip both animations and show the final `7` frame with the logo fully visible.
 - Keep the debug replay/pause/scrubber controls out of the default hero view; they are only for tuning.
