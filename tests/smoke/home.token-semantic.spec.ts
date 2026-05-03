@@ -4,7 +4,7 @@ import path from "node:path";
 import { runtimeHomeUrl } from "./runtime-home";
 
 const outputDir = path.resolve("artifacts/smoke");
-const runtimeAboutUrl = process.env.RUNTIME_ABOUT_URL ?? "http://127.0.0.1:4173/about/";
+const runtimeAboutUrl = process.env.RUNTIME_ABOUT_URL ?? "http://127.0.0.1:4182/about/";
 
 const VIEWPORTS = [
   { width: 390, height: 844, name: "390" },
@@ -73,7 +73,7 @@ const desktopExpectations: TokenExpectation[] = [
 
 const mobileOverrides = new Map<string, Pick<TokenExpectation, "sizePx" | "lineHeightPx" | "letterSpacingPx">>([
   [".hero__description", { sizePx: 18, lineHeightPx: 26, letterSpacingPx: 0.5 }],
-  [".section-title", { sizePx: 48, lineHeightPx: 56, letterSpacingPx: -0.01 }]
+  [".section-title", { sizePx: 42, lineHeightPx: 48, letterSpacingPx: -0.01 }]
 ]);
 
 function toPx(value: string): number {
@@ -178,9 +178,9 @@ test("about page uses Body/LG underline for table links", async ({ page }) => {
       };
     });
 
-    /* Experience table links use Body/LG step-up 20/30 on all viewports (Figma mobile) */
-    const expectedSize = 20;
-    const expectedLineHeight = 30;
+    const isMobile = viewport.width <= 767;
+    const expectedSize = isMobile ? 18 : 20;
+    const expectedLineHeight = isMobile ? 26 : 30;
 
     expect(styles.fontFamily).toContain("Society Trial");
     expect(styles.fontWeight).toBe("400");

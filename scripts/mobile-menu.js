@@ -29,8 +29,9 @@
     var hitLayerEl = headerEl.querySelector(".site-header__hit-layer")
     if (!hitLayerEl) return null
 
+    /* Keep in sync with sourceLinks order in scripts/header-theme.js buildOverlayNodes */
     var sourceLinks = headerEl.querySelectorAll(
-      "a.site-header__link, a.site-header__contact, a.site-header__mobile-trigger"
+      "a.site-header__project, a.site-header__link, a.site-header__contact, a.site-header__mobile-trigger"
     )
     var hitLinks = hitLayerEl.querySelectorAll("a.site-header__hit-link")
     if (!sourceLinks.length || !hitLinks.length) return null

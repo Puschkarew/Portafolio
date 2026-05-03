@@ -998,6 +998,10 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   grid-column: 1;
 }
 
+.index-table__year--mobile-fill {
+  display: none;
+}
+
 .index-table__cell--num {
   grid-column: 2;
 }
@@ -1042,67 +1046,65 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
     inline-size: 100%;
   }
 
+  /* Figma mobile Index line: full-width hairline above each row */
   .index-table__divider-bar {
     grid-column: unset;
     display: block;
-    margin-inline-start: calc((100% / 12) * var(--index-divider-start, 0));
-    inline-size: calc(100% - (100% / 12) * var(--index-divider-start, 0));
+    margin-inline-start: 0;
+    inline-size: 100%;
     max-inline-size: 100%;
   }
 
+  /* Figma 1795:8882 — Name left (flex), Year right; Body/LG one row */
   .index-table__grid {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     align-items: baseline;
     gap: var(--space-400);
-    row-gap: 0;
+    min-block-size: 0;
   }
 
+  .index-table__year--mobile-fill {
+    display: inline;
+  }
+
+  .index-table__grid--head .index-table__cell--num,
+  .index-table__grid--head .index-table__cell--agency,
+  .index-table__grid--head .index-table__cell--type,
   .index-table__grid--head .index-table__cell--viewcase {
     display: none;
   }
 
+  .index-table__cell--num,
   .index-table__cell--agency,
-  .index-table__cell--type {
-    display: none;
+  .index-table__cell--type,
+  .index-table__cell--viewcase {
+    display: none !important;
+  }
+
+  .index-table__cell--name {
+    order: 1;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    text-align: start;
+    padding-inline: 0;
   }
 
   .index-table__cell--year {
-    order: 1;
-    flex: 0 0 auto;
-    text-align: start;
-    white-space: nowrap;
-  }
-
-  .index-table__cell--year:empty {
-    display: none;
-  }
-
-  .index-table__cell--num {
     order: 2;
     flex: 0 0 auto;
-    text-align: start;
-    white-space: nowrap;
-  }
-
-  .index-table__cell--viewcase {
-    order: 3;
-    flex: 0 0 auto;
-    margin-inline-start: auto;
     text-align: end;
     white-space: nowrap;
   }
 
-  .index-table__cell--name {
-    order: 4;
-    flex: 1 1 100%;
-    min-inline-size: 0;
-    padding-inline: 0;
+  .index-table__line--linked:hover .index-table__viewcase-label {
+    text-decoration: none;
   }
 
-  .index-table__item--no-viewcase .index-table__cell--viewcase {
-    display: none;
+  .index-table__line--linked:hover .index-table__cell--name {
+    text-decoration: underline;
   }
 }
 
@@ -1237,42 +1239,6 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 }
 
-/* Figma: Title/SM 28/32 on mobile (all section titles; overrides global 24/28) */
-@media (max-width: 767px) {
-  #about-table.about-table .about-table__title {
-    font-size: var(--font-size-28);
-    line-height: var(--line-height-32);
-  }
-
-  /* Experience: dates stay Body/LG mobile 18/26; stack columns use 20/30 (see below) */
-  #about-table.about-table .about-table__block--experience .about-table__date {
-    font-size: var(--font-size-18);
-    line-height: var(--line-height-26);
-  }
-
-  /* Figma: Languages, Hardware, Soft skills, Links, Courses, Hard skills lists — 20/30, not global 18/26 */
-  #about-table.about-table .about-table__block:not(.about-table__block--experience) .type-body-lg,
-  #about-table.about-table .about-table__block:not(.about-table__block--experience) .type-body-lg-underline {
-    font-size: var(--font-size-20);
-    line-height: var(--line-height-30);
-  }
-}
-
-/* Figma: body 18/26 with links + emphasis at 20/30 in the same line */
-#about-table.about-table .about-table__block--experience .about-table__desc em {
-  font-family: var(--font-family-serif);
-  font-style: italic;
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-30);
-  letter-spacing: var(--type-body-lg-tracking);
-}
-
-#about-table.about-table .about-table__block--experience .about-table__desc .type-body-lg-underline {
-  font-size: var(--font-size-20);
-  line-height: var(--line-height-30);
-}
-
 .about-table__divider {
   flex-shrink: 0;
   align-self: stretch;
@@ -1376,7 +1342,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 }
 
-/* Hard skills mobile title/body: covered by .about-table__title and .about-table__block .type-body-lg (non-Experience) */
+/* Hard skills title/body: use shared .type-* tokens (no page-local type overrides). */
 
 @media (min-width: 1024px) {
   .about-table__grid {
@@ -3517,7 +3483,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   .case-hero__text-panel {
     block-size: auto;
     min-block-size: 0;
-    gap: var(--space-800);
+    gap: var(--space-1200);
     padding-block-start: var(--space-800);
     padding-block-end: var(--space-1600);
     padding-inline: var(--space-400);
@@ -3646,11 +3612,6 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   .mybox-palette {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-600) var(--space-400);
-  }
-
-  .case-lead-prose {
-    font-size: var(--type-heading-lg-size-mobile);
-    line-height: var(--type-heading-lg-line-height-mobile);
   }
 
   .case-details {

@@ -38,7 +38,7 @@ permalink: /index/
               {%- set dividerMod = "index-table__divider-bar--from-year" if showYear else "index-table__divider-bar--from-num" -%}
             <li class="index-table__item{% if not showYear %} index-table__item--same-year{% endif %}{% if not hasLink %} index-table__item--no-viewcase{% endif %}" data-index-divider-start="{% if showYear %}0{% else %}1{% endif %}">
               {%- if hasLink -%}
-              <a class="index-table__line index-table__line--row index-table__line--linked type-body-lg" href="{{ row.caseUrl | url }}" aria-label="View case: {{ row.name }}">
+              <a class="index-table__line index-table__line--row index-table__line--linked type-body-lg" href="{{ row.caseUrl | url }}" aria-label="{{ row.name }}, {{ row.year }}">
               {%- else -%}
               <div class="index-table__line index-table__line--row type-body-lg">
               {%- endif -%}
@@ -46,7 +46,7 @@ permalink: /index/
                   <span class="index-table__divider-bar {{ dividerMod }}"></span>
                 </div>
                 <div class="index-table__grid">
-                  <span class="index-table__cell index-table__cell--year">{%- if showYear -%}{{ row.year }}{%- endif -%}</span>
+                  <span class="index-table__cell index-table__cell--year">{%- if showYear -%}{{ row.year }}{%- endif -%}{%- if not showYear -%}<span class="index-table__year--mobile-fill">{{ row.year }}</span>{%- endif -%}</span>
                   <span class="index-table__cell index-table__cell--num">{{ row.num }}</span>
                   <span class="index-table__cell index-table__cell--name">{{ row.name }}</span>
                   <span class="index-table__cell index-table__cell--agency">{{ row.agency }}</span>

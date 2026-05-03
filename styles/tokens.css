@@ -20,7 +20,7 @@
  *
  * Source: Figma "Starting Point" (fileKey: OrSenMzG1cZgmJzjvi7ikP)
  * Figma inventory: Colors Primitive 289, Colors 23, Sizes 24, Typography 23.
- * Updated: 2026-04-29
+ * Updated: 2026-05-03
  * Licensing shortlist: docs/typography-fonts-to-purchase.md
  */
 
@@ -91,12 +91,12 @@
   --font-size-16: 1rem; /* 16px */
   --font-size-18: 1.125rem; /* 18px — mobile body */
   --font-size-20: 1.25rem; /* 20px — desktop body */
-  --font-size-24: 1.5rem; /* 24px — mobile display-md */
+  --font-size-24: 1.5rem; /* 24px — mobile heading-lg */
   --font-size-28: 1.75rem; /* 28px */
   --font-size-32: 2rem; /* 32px */
   --font-size-36: 2.25rem; /* 36px */
   --font-size-42: 2.625rem; /* 42px — Figma text-size/2-xl mobile variable */
-  --font-size-48: 3rem; /* 48px — current mobile section-title acceptance size */
+  --font-size-48: 3rem; /* 48px — primitive scale */
   --font-size-56: 3.5rem; /* 56px */
   --font-size-72: 4.5rem; /* 72px */
 
@@ -243,14 +243,15 @@
   --type-caps-transform: uppercase;
 
   /* 2.4.1 Typography — mobile aliases (Figma mobile column) */
-  --type-display-2xl-size-mobile: var(--font-size-48);
-  --type-display-2xl-line-height-mobile: var(--line-height-56);
+  --type-display-2xl-size-mobile: var(--font-size-42);
+  --type-display-2xl-line-height-mobile: var(--line-height-48);
 
   --type-display-xl-size-mobile: var(--font-size-36);
   --type-display-xl-line-height-mobile: var(--line-height-40);
 
-  --type-display-md-size-mobile: var(--font-size-24);
-  --type-display-md-line-height-mobile: var(--line-height-28);
+  /* text-size/md: 28 on mobile (same step as desktop; Figma Starting Point) */
+  --type-display-md-size-mobile: var(--font-size-28);
+  --type-display-md-line-height-mobile: var(--line-height-32);
 
   --type-heading-lg-size-mobile: var(--font-size-24);
   --type-heading-lg-line-height-mobile: var(--line-height-32);

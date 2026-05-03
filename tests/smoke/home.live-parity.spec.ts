@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 
-const runtimeUrl = process.env.LIVE_RUNTIME_URL ?? "http://127.0.0.1:4173/";
+const runtimeUrl = process.env.LIVE_RUNTIME_URL ?? "http://127.0.0.1:4182/";
 const slice = process.env.LIVE_PARITY_SLICE ?? "global";
 const outputDir = path.resolve("artifacts/smoke");
 
