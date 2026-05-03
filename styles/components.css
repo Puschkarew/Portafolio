@@ -517,6 +517,15 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   will-change: auto;
 }
 
+html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__item.scroll-reveal-target {
+  transform-origin: center;
+  transform: var(--mezhdu-item-transform) scale(0.94);
+}
+
+html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__item.scroll-reveal-target.is-revealed {
+  transform: var(--mezhdu-item-transform) scale(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html.has-scroll-reveal [data-reveal="scale"],
   html.has-scroll-reveal .scroll-reveal-target {
@@ -524,6 +533,11 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
     transform: none;
     transition: none;
     will-change: auto;
+  }
+
+  html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__item.scroll-reveal-target,
+  html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__item.scroll-reveal-target.is-revealed {
+    transform: var(--mezhdu-item-transform);
   }
 }
 
@@ -2539,9 +2553,13 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 }
 
 .mezhdu-collage-composition__item {
+  /* rotate(0deg) composes with scroll-reveal scale(); `none` cannot be chained with scale() */
+  --mezhdu-item-transform: rotate(0deg);
+
   position: absolute;
   display: block;
   max-inline-size: none;
+  transform: var(--mezhdu-item-transform);
   transform-origin: center;
 }
 
@@ -2550,7 +2568,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: -0.0482%;
   inline-size: 38.4855%;
   block-size: 13.7394%;
-  transform: rotate(-0.25deg);
+  --mezhdu-item-transform: rotate(-0.25deg);
 }
 
 .mezhdu-collage-composition__item--natasha-01 {
@@ -2558,7 +2576,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 60.6093%;
   inline-size: 22.541%;
   block-size: 13.2457%;
-  transform: rotate(-14.25deg);
+  --mezhdu-item-transform: rotate(-14.25deg);
 }
 
 .mezhdu-collage-composition__item--drawing-new-image {
@@ -2587,7 +2605,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 16.5777%;
   inline-size: 54.1301%;
   block-size: 18.9992%;
-  transform: rotate(6.9deg);
+  --mezhdu-item-transform: rotate(6.9deg);
 }
 
 .mezhdu-collage-composition__item--roma-02 {
@@ -2610,7 +2628,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 2.7308%;
   inline-size: 7.2285%;
   block-size: 2.2711%;
-  transform: rotate(-173.7deg);
+  --mezhdu-item-transform: rotate(-173.7deg);
 }
 
 .mezhdu-collage-composition__item--shape-black-left {
@@ -2653,7 +2671,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 43.6478%;
   inline-size: 15.7544%;
   block-size: 6.2838%;
-  transform: rotate(81.56deg);
+  --mezhdu-item-transform: rotate(81.56deg);
 }
 
 .mezhdu-collage-composition__item--top-photo-mask {
@@ -2675,7 +2693,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 75.3016%;
   inline-size: 26.8115%;
   block-size: 12.3041%;
-  transform: rotate(20.83deg);
+  --mezhdu-item-transform: rotate(20.83deg);
 }
 
 .mezhdu-collage-composition__item--drawing-image-20 {
@@ -2683,7 +2701,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 76.1615%;
   inline-size: 19.8769%;
   block-size: 5.0879%;
-  transform: rotate(11.02deg);
+  --mezhdu-item-transform: rotate(11.02deg);
 }
 
 .mezhdu-collage-composition__item--drawing-image-14 {
@@ -2691,7 +2709,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: -1.5765%;
   inline-size: 11.333%;
   block-size: 3.178%;
-  transform: rotate(-10.42deg);
+  --mezhdu-item-transform: rotate(-10.42deg);
 }
 
 .mezhdu-collage-composition__item--drawing-image-01 {
@@ -2699,7 +2717,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 91.5149%;
   inline-size: 6.0203%;
   block-size: 1.9574%;
-  transform: rotate(15.91deg);
+  --mezhdu-item-transform: rotate(15.91deg);
 }
 
 .mezhdu-collage-composition__item--drawing-image-59 {
@@ -2714,7 +2732,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 34.011%;
   inline-size: 9.758%;
   block-size: 2.7159%;
-  transform: rotate(-19.27deg);
+  --mezhdu-item-transform: rotate(-19.27deg);
 }
 
 .mezhdu-collage-composition__item--drawing-image-57 {
@@ -2722,7 +2740,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: -1.2686%;
   inline-size: 10.6771%;
   block-size: 3.508%;
-  transform: rotate(-22.12deg);
+  --mezhdu-item-transform: rotate(-22.12deg);
 }
 
 .mezhdu-collage-composition__item--poster-traced {
@@ -2730,7 +2748,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 82.5483%;
   inline-size: 9.2533%;
   block-size: 2.9873%;
-  transform: rotate(-33.8deg);
+  --mezhdu-item-transform: rotate(-33.8deg);
 }
 
 .mezhdu-collage-composition__item--person-y-bottom {
@@ -2745,7 +2763,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 38.9066%;
   inline-size: 13.5867%;
   block-size: 2.0976%;
-  transform: rotate(-113.88deg);
+  --mezhdu-item-transform: rotate(-113.88deg);
 }
 
 .mezhdu-collage-composition__item--drawing-cleanshot-2022-1822 {
@@ -2753,7 +2771,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 66.8755%;
   inline-size: 6.619%;
   block-size: 1.0662%;
-  transform: rotate(-24.38deg);
+  --mezhdu-item-transform: rotate(-24.38deg);
 }
 
 .mezhdu-collage-composition__item--shape-red-01 {
@@ -2761,7 +2779,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 4.0643%;
   inline-size: 12.4645%;
   block-size: 4.4092%;
-  transform: rotate(97.33deg);
+  --mezhdu-item-transform: rotate(97.33deg);
 }
 
 .mezhdu-collage-composition__item--drawing-cleanshot-2021-1702 {
@@ -2769,7 +2787,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   inset-inline-start: 6.7099%;
   inline-size: 16.9603%;
   block-size: 7.6291%;
-  transform: rotate(-98.11deg);
+  --mezhdu-item-transform: rotate(-98.11deg);
 }
 
 .mezhdu-details {

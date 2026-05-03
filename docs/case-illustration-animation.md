@@ -26,7 +26,8 @@ Keep this list aligned with `caseMediaSelector` in `scroll-reveal.js`. Today it 
 | `.case-content .mybox-collage__item` | MyBox collage images with independent reveal |
 | `.case-content .mezhdu-media` | Mezhdu Prochim large exported media modules |
 | `.case-content .mezhdu-social-item` | Mezhdu Prochim social/course tiles |
-| `.case-content .mezhdu-collage__media` | Mezhdu Prochim tall collaborators collage |
+| `.case-content .mezhdu-collage__media:not(.mezhdu-collage-composition)` | Mezhdu Prochim collage figure when it is a single media wrapper (no layered composition) |
+| `.case-content .mezhdu-collage-composition .mezhdu-collage-composition__item` | Mezhdu Prochim tall collage: each absolute `img` layer reveals on its own as it enters the viewport |
 | `.case-content .mezhdu-details__art` | Mezhdu Prochim decorative credits art |
 | `.case-content .case-details__art` | Decorative art in credits/details |
 
@@ -44,6 +45,10 @@ Use `data-reveal="scale"` on a node only when it must animate **outside** `.case
 
 - Do not rely on CSS-only fades on `<img>` for case illustrations unless the scroll-reveal system is intentionally bypassed (document why).
 - Do not add competing transitions on properties that conflict with `.scroll-reveal-target` (opacity / transform) without checking reduced-motion behaviour.
+
+## Mezhdu layered collage (`transform` note)
+
+Composition items use per-layer rotation via `--mezhdu-item-transform` in [`styles/components.css`](../styles/components.css) so scroll-reveal can apply `scale()` in the same `transform` list without overwriting layout rotations. `prefers-reduced-motion` restores `transform: var(--mezhdu-item-transform)` only for those items so they stay correctly placed.
 
 ## Verification
 

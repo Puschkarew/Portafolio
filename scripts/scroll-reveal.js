@@ -14,7 +14,8 @@
     ".case-content .mybox-collage__item",
     ".case-content .mezhdu-media",
     ".case-content .mezhdu-social-item",
-    ".case-content .mezhdu-collage__media",
+    ".case-content .mezhdu-collage__media:not(.mezhdu-collage-composition)",
+    ".case-content .mezhdu-collage-composition .mezhdu-collage-composition__item",
     ".case-content .mezhdu-details__art",
     ".case-content .case-details__art"
   ].join(", ")
