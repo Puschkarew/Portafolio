@@ -20,6 +20,11 @@ test("Index table mobile shows Year / # / Name and hides desktop-only columns", 
 
   await expect(page.locator(".index-table__grid--head .index-table__cell--viewcase")).toBeHidden()
 
+  const myboxRow = page.locator(".index-table__item").filter({ hasText: "Mybox" }).first()
+  const myboxLink = myboxRow.getByRole("link", { name: "View case: Mybox" })
+  await expect(myboxLink).toBeVisible()
+  await expect(myboxLink).toHaveClass(/index-table__line--linked/)
+
   const listStyle = await page.locator(".index-table__list").evaluate((el) => getComputedStyle(el).listStyleType)
   expect(listStyle).toBe("none")
 })

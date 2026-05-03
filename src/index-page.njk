@@ -35,17 +35,13 @@ permalink: /index/
             {%- for row in indexTable -%}
               {%- set showYear = loop.first or (indexTable[loop.index0 - 1].year != row.year) -%}
               {%- set hasLink = row.caseUrl -%}
-              {%- if showYear and hasLink -%}
-                {%- set dividerMod = "index-table__divider-bar--start-year-end-full" -%}
-              {%- elif showYear and not hasLink -%}
-                {%- set dividerMod = "index-table__divider-bar--start-year-end-type" -%}
-              {%- elif not showYear and hasLink -%}
-                {%- set dividerMod = "index-table__divider-bar--start-num-end-full" -%}
+              {%- set dividerMod = "index-table__divider-bar--from-year" if showYear else "index-table__divider-bar--from-num" -%}
+            <li class="index-table__item{% if not showYear %} index-table__item--same-year{% endif %}{% if not hasLink %} index-table__item--no-viewcase{% endif %}" data-index-divider-start="{% if showYear %}0{% else %}1{% endif %}">
+              {%- if hasLink -%}
+              <a class="index-table__line index-table__line--row index-table__line--linked type-body-lg" href="{{ row.caseUrl | url }}" aria-label="View case: {{ row.name }}">
               {%- else -%}
-                {%- set dividerMod = "index-table__divider-bar--start-num-end-type" -%}
-              {%- endif -%}
-            <li class="index-table__item{% if not showYear %} index-table__item--same-year{% endif %}{% if not hasLink %} index-table__item--no-viewcase{% endif %}" data-index-divider-start="{% if showYear %}0{% else %}1{% endif %}" data-index-divider-end="{% if row.caseUrl %}0{% else %}1{% endif %}">
               <div class="index-table__line index-table__line--row type-body-lg">
+              {%- endif -%}
                 <div class="index-table__divider-row" aria-hidden="true">
                   <span class="index-table__divider-bar {{ dividerMod }}"></span>
                 </div>
@@ -57,11 +53,15 @@ permalink: /index/
                   <span class="index-table__cell index-table__cell--type">{{ row.type }}</span>
                   <span class="index-table__cell index-table__cell--viewcase">
                     {%- if hasLink -%}
-                    <a class="index-table__viewcase-link" href="{{ row.caseUrl | url }}" aria-label="View case: {{ row.name }}">View case</a>
+                    <span class="index-table__viewcase-label" aria-hidden="true">View case</span>
                     {%- endif -%}
                   </span>
                 </div>
+              {%- if hasLink -%}
+              </a>
+              {%- else -%}
               </div>
+              {%- endif -%}
             </li>
             {%- endfor -%}
           </ul>

@@ -924,14 +924,6 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   --index-divider-start: 1;
 }
 
-.index-table__item[data-index-divider-end="0"] {
-  --index-divider-end: 0;
-}
-
-.index-table__item[data-index-divider-end="1"] {
-  --index-divider-end: 1;
-}
-
 .index-table__line {
   display: block;
   color: inherit;
@@ -942,6 +934,21 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.index-table__line--linked {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.index-table__line--linked:hover .index-table__viewcase-label {
+  text-decoration: underline;
+}
+
+.index-table__line--linked:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
 }
 
 .index-table__divider-row {
@@ -962,20 +969,12 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   box-sizing: border-box;
 }
 
-.index-table__divider-bar--start-year-end-full {
+.index-table__divider-bar--from-year {
   grid-column: 1 / span 12;
 }
 
-.index-table__divider-bar--start-num-end-full {
+.index-table__divider-bar--from-num {
   grid-column: 2 / span 11;
-}
-
-.index-table__divider-bar--start-year-end-type {
-  grid-column: 1 / span 11;
-}
-
-.index-table__divider-bar--start-num-end-type {
-  grid-column: 2 / span 10;
 }
 
 .index-table__grid {
@@ -1024,19 +1023,8 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   white-space: nowrap;
 }
 
-.index-table__viewcase-link {
-  color: inherit;
-  text-decoration: none;
+.index-table__viewcase-label {
   text-underline-offset: 0.1em;
-}
-
-.index-table__viewcase-link:hover {
-  text-decoration: underline;
-}
-
-.index-table__viewcase-link:focus-visible {
-  outline: 2px solid var(--color-focus);
-  outline-offset: 2px;
 }
 
 .index-table__line--head {
@@ -1058,9 +1046,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
     grid-column: unset;
     display: block;
     margin-inline-start: calc((100% / 12) * var(--index-divider-start, 0));
-    inline-size: calc(
-      100% - (100% / 12) * (var(--index-divider-start, 0) + var(--index-divider-end, 0))
-    );
+    inline-size: calc(100% - (100% / 12) * var(--index-divider-start, 0));
     max-inline-size: 100%;
   }
 
