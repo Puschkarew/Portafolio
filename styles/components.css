@@ -1801,11 +1801,20 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
   overflow: hidden;
 }
 
-.case-hero__media img {
+.case-hero__media img,
+.case-hero__physics-frame {
   display: block;
   inline-size: 100%;
   block-size: 100%;
+}
+
+.case-hero__media img {
   object-fit: cover;
+}
+
+.case-hero__physics-frame {
+  border: 0;
+  background: var(--mezhdu-indigo-950, var(--color-black));
 }
 
 .case-hero__text-panel {
@@ -2505,23 +2514,6 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 .mezhdu-collage {
   inline-size: 100%;
-}
-
-.mezhdu-letters-embed {
-  inline-size: 100%;
-  max-inline-size: 100%;
-  overflow: hidden;
-  border-radius: var(--radius-sm);
-  background: #1e1a4d;
-}
-
-.mezhdu-letters-embed__frame {
-  display: block;
-  inline-size: 100%;
-  min-block-size: 360px;
-  aspect-ratio: 16 / 9;
-  border: 0;
-  background: #1e1a4d;
 }
 
 .mezhdu-collage__media {
