@@ -2597,18 +2597,18 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   aspect-ratio: 1440 / 820;
 }
 
-/* Row 3 left: Figma aspect 375/648 */
+/* Row 3 left: Figma Grid 2076:13061 — 2+4+4+2 columns; aspect 375/648 */
 .mezhdu-media--rukinozhnicy {
-  grid-column: 1 / span 6;
+  grid-column: 3 / span 4;
   justify-self: stretch;
   inline-size: 100%;
   min-inline-size: 0;
   aspect-ratio: 375 / 648;
 }
 
-/* Row 3 right: stretch to match left column height */
+/* Row 3 right: same row, stretch to match left */
 .mezhdu-media--ai-ai-ai {
-  grid-column: 7 / span 6;
+  grid-column: 7 / span 4;
   align-self: stretch;
   min-block-size: 0;
   min-inline-size: 0;
@@ -3572,7 +3572,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
   .mezhdu-media--ai-ai-ai {
     align-self: auto;
-    aspect-ratio: 593 / 1024;
+    aspect-ratio: 726 / 1255;
   }
 
   .mezhdu-social-grid {
