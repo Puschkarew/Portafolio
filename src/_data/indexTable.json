@@ -1,0 +1,186 @@
+[
+  {
+    "num": 23,
+    "year": 2026,
+    "name": "Untitled Typeface",
+    "agency": "Pet project",
+    "type": "Typeface",
+    "caseUrl": null
+  },
+  {
+    "num": 22,
+    "year": 2026,
+    "name": "Made by Mad Site",
+    "agency": "Made by Mad",
+    "type": "Web",
+    "caseUrl": null
+  },
+  {
+    "num": 21,
+    "year": 2026,
+    "name": "Humans",
+    "agency": "Made by Mad",
+    "type": "App, Branding, AI",
+    "caseUrl": null
+  },
+  {
+    "num": 20,
+    "year": 2026,
+    "name": "Particle Text",
+    "agency": "Méridien",
+    "type": "Vibe coding",
+    "caseUrl": null
+  },
+  {
+    "num": 19,
+    "year": 2026,
+    "name": "3DGS Shader",
+    "agency": "Méridien",
+    "type": "Vibe coding",
+    "caseUrl": null
+  },
+  {
+    "num": 18,
+    "year": 2025,
+    "name": "Mybox",
+    "agency": "Made by Mad",
+    "type": "App, Branding, AI",
+    "caseUrl": "/mybox/"
+  },
+  {
+    "num": 17,
+    "year": 2025,
+    "name": "Secret Kitchen",
+    "agency": "Made by Mad",
+    "type": "App, Branding, AI",
+    "caseUrl": null
+  },
+  {
+    "num": 16,
+    "year": 2025,
+    "name": "Mezhdu Prochim",
+    "agency": "Freelance",
+    "type": "Web, Workshop, Readymag",
+    "caseUrl": "/mezhdu-prochim/"
+  },
+  {
+    "num": 15,
+    "year": 2023,
+    "name": "Roger Excoffon Workshop",
+    "agency": "Course project",
+    "type": "Typeface",
+    "caseUrl": null
+  },
+  {
+    "num": 14,
+    "year": 2023,
+    "name": "Schrift Foundry",
+    "agency": "Schrift Collective",
+    "type": "Web, Design system",
+    "caseUrl": "/schrift-foundry/"
+  },
+  {
+    "num": 13,
+    "year": 2023,
+    "name": "Schrift Publishers",
+    "agency": "Schrift Collective",
+    "type": "Web",
+    "caseUrl": null
+  },
+  {
+    "num": 12,
+    "year": 2023,
+    "name": "Specimen",
+    "agency": "Schrift Collective",
+    "type": "Type",
+    "caseUrl": null
+  },
+  {
+    "num": 11,
+    "year": 2022,
+    "name": "Schrift Shop",
+    "agency": "Schrift Collective",
+    "type": "Web, Management",
+    "caseUrl": null
+  },
+  {
+    "num": 10,
+    "year": 2022,
+    "name": "Overbest",
+    "agency": "A–W",
+    "type": "Logo, Branding",
+    "caseUrl": null
+  },
+  {
+    "num": 9,
+    "year": 2021,
+    "name": "Utochka",
+    "agency": "Course project",
+    "type": "Typeface",
+    "caseUrl": null
+  },
+  {
+    "num": 8,
+    "year": 2021,
+    "name": "Xplain Bio",
+    "agency": "A–W",
+    "type": "Logo, Web",
+    "caseUrl": null
+  },
+  {
+    "num": 7,
+    "year": 2020,
+    "name": "Top 2019",
+    "agency": "Schrift Collective",
+    "type": "Web",
+    "caseUrl": null
+  },
+  {
+    "num": 6,
+    "year": 2020,
+    "name": "MOS",
+    "agency": "Course project",
+    "type": "Typeface",
+    "caseUrl": null
+  },
+  {
+    "num": 5,
+    "year": 2020,
+    "name": "Protocol",
+    "agency": "GLYF",
+    "type": "Logo, Web",
+    "caseUrl": null
+  },
+  {
+    "num": 4,
+    "year": 2020,
+    "name": "BMA",
+    "agency": "GLYF",
+    "type": "Logo, Web",
+    "caseUrl": null
+  },
+  {
+    "num": 3,
+    "year": 2020,
+    "name": "Pressa",
+    "agency": "GLYF",
+    "type": "Logo, App",
+    "caseUrl": null
+  },
+  {
+    "num": 2,
+    "year": 2019,
+    "name": "Wellbecks’",
+    "agency": "GLYF",
+    "type": "Logo, Web",
+    "caseUrl": null
+  },
+  {
+    "num": 1,
+    "year": 2019,
+    "name": "DEEP",
+    "agency": "GLYF",
+    "type": "Web",
+    "caseUrl": null
+  }
+]
