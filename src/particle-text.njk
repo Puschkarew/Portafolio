@@ -7,25 +7,13 @@ headerVariant: case
     <main id="main-content" class="site-main">
       <section class="section section--hero hero case-hero case-hero--particle-text" aria-labelledby="particle-text-title" data-hero-debug="off">
         <div class="case-hero__panel case-hero__media-panel">
-          <figure class="case-hero__media case-hero__media--stacked">
-            <img
-              class="case-hero__media-layer case-hero__media-layer--back"
-              src="{{ "/assets/figma/case-particle-text-hero-layer-01.jpg" | url }}"
-              alt=""
-              width="3840"
-              height="2160"
-              decoding="async"
-              fetchpriority="high"
-            />
-            <img
-              class="case-hero__media-layer case-hero__media-layer--front"
-              src="{{ "/assets/figma/case-particle-text-hero-layer-02.jpg" | url }}"
-              alt="Particle Text hero: glowing typographic particles on a blue field"
-              width="3832"
-              height="2068"
-              decoding="async"
-              fetchpriority="high"
-            />
+          <figure class="case-hero__media">
+            <iframe
+              class="case-hero__physics-frame case-hero__particle-text-frame"
+              title="Particle Text: interactive WebGL particles from an SVG silhouette"
+              src="{{ "/assets/particle-text/embed.html" | url }}"
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
           </figure>
         </div>
 
