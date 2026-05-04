@@ -2013,6 +2013,76 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   color: var(--color-black);
 }
 
+.case-hero--particle-text {
+  --particle-text-surface: #edf0f6;
+  --particle-text-accent: #287dfe;
+  --case-hero-glow: #62748e;
+
+  background: var(--particle-text-surface);
+  color: var(--color-black);
+  box-shadow: inset 0 0 24px 0 var(--case-hero-glow);
+}
+
+.case-hero--particle-text .case-hero__media-panel {
+  background: var(--particle-text-surface);
+}
+
+.case-hero--particle-text .case-hero__text-panel {
+  background: var(--particle-text-surface);
+}
+
+.case-hero--particle-text .case-hero__media {
+  position: relative;
+  background: var(--particle-text-accent);
+}
+
+.case-hero--particle-text .case-hero__media--stacked .case-hero__media-layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.case-hero--particle-text .case-hero__media--stacked .case-hero__media-layer--back {
+  z-index: 0;
+}
+
+.case-hero--particle-text .case-hero__media--stacked .case-hero__media-layer--front {
+  z-index: 1;
+}
+
+.case-hero--particle-text .case-hero__title {
+  grid-column: 1 / -1;
+  color: var(--color-black);
+}
+
+.case-hero__title-accent {
+  color: var(--particle-text-accent, #287dfe);
+}
+
+.case-hero--particle-text .case-hero__title-muted {
+  color: var(--color-black);
+}
+
+.case-hero--particle-text .case-hero__summary {
+  grid-column: 5 / span 8;
+  color: var(--color-black);
+}
+
+.case-hero--particle-text .case-hero__link {
+  color: inherit;
+}
+
+.case-hero--particle-text + .case-content-shell {
+  --case-content-glow: #287dfe;
+}
+
+.particle-text-details {
+  min-block-size: 0;
+}
+
 .case-hero--mos {
   --mos-title-muted: #767676;
   --case-hero-glow: #99a1af;

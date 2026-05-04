@@ -1,0 +1,82 @@
+---
+layout: base.njk
+title: Particle Text
+permalink: /particle-text/
+headerVariant: case
+---
+    <main id="main-content" class="site-main">
+      <section class="section section--hero hero case-hero case-hero--particle-text" aria-labelledby="particle-text-title" data-hero-debug="off">
+        <div class="case-hero__panel case-hero__media-panel">
+          <figure class="case-hero__media case-hero__media--stacked">
+            <img
+              class="case-hero__media-layer case-hero__media-layer--back"
+              src="{{ "/assets/figma/case-particle-text-hero-layer-01.jpg" | url }}"
+              alt=""
+              width="3840"
+              height="2160"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <img
+              class="case-hero__media-layer case-hero__media-layer--front"
+              src="{{ "/assets/figma/case-particle-text-hero-layer-02.jpg" | url }}"
+              alt="Particle Text hero: glowing typographic particles on a blue field"
+              width="3832"
+              height="2068"
+              decoding="async"
+              fetchpriority="high"
+            />
+          </figure>
+        </div>
+
+        <div class="case-hero__panel case-hero__text-panel">
+          <div class="case-hero__grid">
+            <h1 id="particle-text-title" class="type-display-2xl case-hero__title">
+              <span class="case-hero__title-accent">Particle Text.</span>
+              <span class="case-hero__title-muted">A WebGL playground for breaking SVG shapes into motion.</span>
+            </h1>
+          </div>
+
+          <div class="case-hero__grid">
+            <div class="type-heading-lg case-hero__summary">
+              <p>
+                A small experiment where thousands of points are sampled from an SVG silhouette and simulated in 3D with Three.js. The default shape, Break the Shape, becomes a responsive field of particles: it can be pushed by the cursor, spread through scroll, hit by radial waves, and scattered by click explosions before finding its way back.
+              </p>
+              <p>
+                <a class="case-hero__link" href="https://github.com/Puschkarew/ParticleText">github.com/Puschkarew/ParticleText</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-content-shell" aria-label="Case content">
+        <div class="case-content">
+          <section class="case-text-block case-text-block--lead-span-8" aria-label="Particle Text project narrative">
+            <div class="type-heading-lg case-lead-prose">
+              <p>
+                The challenge was to make the effect feel expressive without turning it into visual noise. The system needed to preserve the recognisable structure of the original SVG while giving every particle enough behaviour to feel alive. I built the prototype around adjustable motion parameters — force, damping, chaos, glow, return speed, particle count, depth, and load easing — so the interaction could be tuned directly in the browser.
+              </p>
+              <p>
+                The result is a compact no-build WebGL demo: a full playground for experimenting with the behaviour, and a minimal embed.html version that can be dropped into another website as a clean iframe. It works as a typographic toy, a motion study, and a reusable prototype for particle-based visual moments in the browser.
+              </p>
+            </div>
+          </section>
+
+          <section class="case-details particle-text-details" aria-label="Particle Text credits">
+            <section class="case-details__section case-details__section--details" aria-labelledby="particle-text-details-heading">
+              <h2 id="particle-text-details-heading" class="type-display-md case-details__heading">Details</h2>
+              <div class="case-details__item">
+                <p><em>Scope</em><br />Concept, design, front-end development</p>
+              </div>
+              <div class="case-details__item">
+                <p><em>Technology</em><br />Three.js, Vanilla JavaScript, HTML5 Canvas</p>
+              </div>
+              <div class="case-details__item">
+                <p><em>Year</em><br />2026</p>
+              </div>
+            </section>
+          </section>
+        </div>
+      </section>
+    </main>
