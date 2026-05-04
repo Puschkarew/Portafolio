@@ -518,7 +518,8 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 }
 
 html.has-scroll-reveal .case-hero.case-hero--mos .case-hero__media,
-html.has-scroll-reveal .case-content .mos-media {
+html.has-scroll-reveal .case-content .mos-media,
+html.has-scroll-reveal .case-content .schrift-shop-media {
   transform-origin: center;
 }
 
@@ -2016,24 +2017,11 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 .case-hero--particle-text {
   --particle-text-surface: #edf0f6;
   --particle-text-accent: #1b43ff;
-  --case-hero-glow: #62748e;
-  --hero-glow-shadow:
-    inset 0 1px 0 0 rgb(255 255 255 / 0.55),
-    inset 0 0 0 1px rgb(0 0 0 / 0.05),
-    inset 0 0 56px 0 rgb(98 116 142 / 0.22),
-    inset 0 -36px 80px -12px rgb(27 67 255 / 0.14);
+  --case-hero-glow: #1b43ff;
 
   background: var(--particle-text-surface);
   color: var(--color-black);
-  box-shadow: var(--hero-glow-shadow);
-}
-
-.case-hero--particle-text .case-hero__media-panel {
-  background: var(--particle-text-surface);
-}
-
-.case-hero--particle-text .case-hero__text-panel {
-  background: var(--particle-text-surface);
+  box-shadow: inset 0 0 24px 0 var(--case-hero-glow);
 }
 
 .case-hero--particle-text .case-hero__media {
@@ -2049,8 +2037,8 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   color: var(--color-black);
 }
 
-.case-hero__title-accent {
-  color: var(--particle-text-accent, #1b43ff);
+.case-hero--particle-text .case-hero__title-accent {
+  color: var(--particle-text-accent);
 }
 
 .case-hero--particle-text .case-hero__title-muted {
@@ -2097,6 +2085,32 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-hero--mos .case-hero__summary {
+  grid-column: 5 / span 8;
+  color: var(--color-black);
+}
+
+.case-hero--schrift-shop {
+  --schrift-shop-muted: #767676;
+  --case-hero-glow: color-mix(in srgb, var(--color-olive-400) 62%, #6f6f68);
+
+  background: #fff;
+  color: var(--color-black);
+  box-shadow: inset 0 0 24px 0 var(--case-hero-glow);
+}
+
+.case-hero--schrift-shop .case-hero__media {
+  background: var(--color-black);
+}
+
+.case-hero--schrift-shop .case-hero__title {
+  grid-column: 1 / -1;
+}
+
+.case-hero--schrift-shop .case-hero__title-muted {
+  color: var(--schrift-shop-muted);
+}
+
+.case-hero--schrift-shop .case-hero__summary {
   grid-column: 5 / span 8;
   color: var(--color-black);
 }
@@ -2440,6 +2454,10 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .case-hero--mos + .case-content-shell {
   --case-content-glow: #99a1af;
+}
+
+.case-hero--schrift-shop + .case-content-shell {
+  --case-content-glow: color-mix(in srgb, var(--color-olive-400) 55%, #505050);
 }
 
 .case-hero--top-2019 + .case-content-shell {
@@ -3706,6 +3724,51 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   min-block-size: 0;
 }
 
+.schrift-shop-details {
+  min-block-size: 0;
+}
+
+.schrift-shop-media-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-grid-gap);
+  row-gap: var(--space-800);
+  inline-size: 100%;
+}
+
+.schrift-shop-media {
+  margin: 0;
+  overflow: clip;
+  border-radius: var(--radius-sm);
+}
+
+.schrift-shop-media img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.schrift-shop-media--01 {
+  grid-column: 1 / -1;
+  aspect-ratio: 1440 / 900;
+}
+
+.schrift-shop-media--02 {
+  grid-column: 1 / -1;
+  aspect-ratio: 1440 / 820;
+}
+
+.schrift-shop-media--03 {
+  grid-column: 3 / span 8;
+  aspect-ratio: 960 / 1200;
+}
+
+.schrift-shop-media--04 {
+  grid-column: 1 / -1;
+  aspect-ratio: 1440 / 960;
+}
+
 .mybox-details {
   min-block-size: 0;
 }
@@ -3848,6 +3911,10 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
+  .schrift-shop-media-grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
   .mos-media--01,
   .mos-media--02,
   .mos-media--03,
@@ -3865,7 +3932,18 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
     grid-column: 1 / -1;
   }
 
+  .schrift-shop-media--01,
+  .schrift-shop-media--02,
+  .schrift-shop-media--03,
+  .schrift-shop-media--04 {
+    grid-column: 1 / -1;
+  }
+
   .case-hero--mos .case-hero__summary {
+    grid-column: 1 / -1;
+  }
+
+  .case-hero--schrift-shop .case-hero__summary {
     grid-column: 1 / -1;
   }
 
@@ -4123,6 +4201,11 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 
   .mos-media-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: var(--space-600);
+  }
+
+  .schrift-shop-media-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     row-gap: var(--space-600);
   }

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900" fill="none" aria-hidden="true">
+  <rect width="1440" height="900" fill="#1a1a1a"/>
+  <rect x="120" y="100" width="1200" height="700" rx="16" fill="#2e2e2c"/>
+  <text x="720" y="460" text-anchor="middle" fill="#abab9c" font-family="system-ui,sans-serif" font-size="32">Media 01  replace</text>
+</svg>
