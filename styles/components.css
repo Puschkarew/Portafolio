@@ -1179,11 +1179,18 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 }
 
-/* Source order of blocks = mobile order; desktop: explicit grid areas (3×3 + Experience span) */
+/* Mobile: Experience, then mid column (Hard / Languages / Hardware), then end column (Soft / Links / Courses); 96px gaps per Figma 546:144 / 567:182 */
 .about-table__grid {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1600);
+  gap: var(--space-2400);
+  min-width: 0;
+}
+
+.about-table__col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2400);
   min-width: 0;
 }
 
@@ -1353,46 +1360,21 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   .about-table__grid {
     display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: auto auto auto;
-    row-gap: 0;
     column-gap: var(--space-grid-gap);
+    align-items: stretch;
   }
 
   .about-table__block--experience {
     grid-column: 1 / span 6;
-    grid-row: 1 / -1;
-    align-self: stretch;
     gap: 0;
   }
 
-  .about-table__block--hard {
+  .about-table__col--mid {
     grid-column: 7 / span 3;
-    grid-row: 1;
   }
 
-  .about-table__block--languages {
-    grid-column: 7 / span 3;
-    grid-row: 2;
-  }
-
-  .about-table__block--hardware {
-    grid-column: 7 / span 3;
-    grid-row: 3;
-  }
-
-  .about-table__block--soft {
+  .about-table__col--end {
     grid-column: 10 / span 3;
-    grid-row: 1;
-  }
-
-  .about-table__block--links {
-    grid-column: 10 / span 3;
-    grid-row: 2;
-  }
-
-  .about-table__block--courses {
-    grid-column: 10 / span 3;
-    grid-row: 3;
   }
 
   .about-table__divider--experience {
@@ -1401,7 +1383,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 
   .about-table__block--experience .about-table__list {
-    margin-block-start: 15px;
+    margin-block-start: var(--space-400);
     gap: var(--space-1200);
   }
 
@@ -1438,7 +1420,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   }
 
   .about-table__block:not(.about-table__block--experience) > .about-table__divider + * {
-    margin-block-start: 15px;
+    margin-block-start: var(--space-400);
   }
 
   .about-table__subsection {
