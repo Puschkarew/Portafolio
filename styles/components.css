@@ -2015,12 +2015,17 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .case-hero--particle-text {
   --particle-text-surface: #edf0f6;
-  --particle-text-accent: #287dfe;
+  --particle-text-accent: #1b43ff;
   --case-hero-glow: #62748e;
+  --hero-glow-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.55),
+    inset 0 0 0 1px rgb(0 0 0 / 0.05),
+    inset 0 0 56px 0 rgb(98 116 142 / 0.22),
+    inset 0 -36px 80px -12px rgb(27 67 255 / 0.14);
 
   background: var(--particle-text-surface);
   color: var(--color-black);
-  box-shadow: inset 0 0 24px 0 var(--case-hero-glow);
+  box-shadow: var(--hero-glow-shadow);
 }
 
 .case-hero--particle-text .case-hero__media-panel {
@@ -2045,7 +2050,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-hero__title-accent {
-  color: var(--particle-text-accent, #287dfe);
+  color: var(--particle-text-accent, #1b43ff);
 }
 
 .case-hero--particle-text .case-hero__title-muted {
@@ -2062,7 +2067,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-hero--particle-text + .case-content-shell {
-  --case-content-glow: #287dfe;
+  --case-content-glow: #1b43ff;
 }
 
 .particle-text-details {
