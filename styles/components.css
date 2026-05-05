@@ -3997,11 +3997,14 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   block-size: 100%;
   opacity: 0;
   border-radius: 0;
+  position: relative;
+  z-index: 0;
 }
 
 .schrift-shop-comp__slideshow > img.is-active,
 .schrift-shop-comp__slideshow > .pimg.is-active {
   opacity: 1;
+  z-index: 1;
 }
 
 .schrift-shop-comp__slideshow .pimg__full,
@@ -4010,23 +4013,7 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   block-size: 100%;
   object-fit: contain;
   border-radius: 0;
-}
-
-/* Slideshow needs hard cuts: avoid placeholder/full opacity fades. */
-.schrift-shop-comp__slideshow .pimg__placeholder,
-.schrift-shop-comp__slideshow .pimg__full {
   transition: none;
-}
-
-.schrift-shop-comp__slideshow > img,
-.schrift-shop-comp__slideshow > .pimg {
-  position: relative;
-  z-index: 0;
-}
-
-.schrift-shop-comp__slideshow > img.is-active,
-.schrift-shop-comp__slideshow > .pimg.is-active {
-  z-index: 1;
 }
 
 /* Schrift Shop — Gill tiles (background + no rounding) */
@@ -4089,6 +4076,12 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 .schrift-shop-comp__ph--on-dark {
   background-color: var(--color-black);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+}
+
+/* On dark stage frames, avoid white hairline borders around media. */
+.schrift-shop-comp__frame--stage-dark .schrift-shop-comp__ph--edge,
+.schrift-shop-comp__frame--stage-dark .schrift-shop-comp__ph--on-dark {
+  box-shadow: none;
 }
 
 .schrift-shop-comp__ph--1464-888 {
