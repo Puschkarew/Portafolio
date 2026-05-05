@@ -8,6 +8,8 @@
     return root.querySelector('.pimg__full')
   }
 
+  const isSlideshowRoot = (root) => Boolean(root?.closest?.('[data-slideshow="schrift-shop"]'))
+
   const markLoaded = (root) => {
     if (!root) return
     root.classList.add(loadedClass)
@@ -27,13 +29,32 @@
       return
     }
 
-    full.addEventListener('load', () => markLoaded(root), { once: true })
-    full.addEventListener('error', () => markError(root), { once: true })
+    full.addEventListener(
+      'load',
+      () => {
+        markLoaded(root)
+      },
+      { once: true }
+    )
+    full.addEventListener(
+      'error',
+      () => {
+        markError(root)
+      },
+      { once: true }
+    )
   }
 
   const init = () => {
     const roots = Array.from(document.querySelectorAll('[data-progressive-image="true"]'))
     if (roots.length === 0) return
+
+    const slideshowRoots = roots.filter((root) => isSlideshowRoot(root))
+
+    // Slideshow overlays keep all slides in the same viewport footprint,
+    // but only the active one is visible. Load & mark slides immediately
+    // so we don't flash the placeholder when switching.
+    slideshowRoots.forEach((root) => void handleOne(root))
 
     if (typeof IntersectionObserver !== 'function') {
       roots.forEach((root) => void handleOne(root))
