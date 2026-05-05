@@ -73,22 +73,6 @@ module.exports = function (eleventyConfig) {
       const outputDir = path.join(__dirname, "dist", "assets", "img")
       const urlPath = "/assets/img"
 
-      // sharp: avoid AVIF/WebP failures on huge sources
-      const allowAvif = Boolean(
-        numericWidth &&
-          numericHeight &&
-          numericWidth <= 4096 &&
-          numericHeight <= 4096 &&
-          numericWidth * numericHeight <= 16_000_000
-      )
-      const allowTranscodedFull = Boolean(
-        numericWidth &&
-          numericHeight &&
-          numericWidth <= 8192 &&
-          numericHeight <= 8192 &&
-          numericWidth * numericHeight <= 30_000_000
-      )
-
       // SVG: no raster placeholder; just opt into runtime fade-in
       if (isSvgPath(src)) {
         const fullUrl = withPathPrefix(String(src))
@@ -124,53 +108,11 @@ module.exports = function (eleventyConfig) {
       const placeholder = Object.values(placeholderStats)[0]?.[0]
       const placeholderUrl = placeholder?.url ? withPathPrefix(placeholder.url) : ""
 
-      if (!allowTranscodedFull) {
-        const fullUrl = withPathPrefix(String(src))
-        const fullAttrs = [
-          `src="${fullUrl}"`,
-          `alt="${String(resolvedAlt).replaceAll('"', "&quot;")}"`,
-          numericWidth ? `width="${numericWidth}"` : "",
-          numericHeight ? `height="${numericHeight}"` : "",
-          loading ? `loading="${loading}"` : "",
-          decoding ? `decoding="${decoding}"` : "",
-          fetchpriority ? `fetchpriority="${fetchpriority}"` : "",
-          `class="pimg__full${resolvedImgClassName}"`,
-          extraAttrs || ""
-        ]
-          .filter(Boolean)
-          .join(" ")
-
-        return `
-<span class="pimg${resolvedWrapperClassName}" data-progressive-image="true">
-  ${placeholderUrl ? `<img class="pimg__placeholder" src="${placeholderUrl}" alt="" aria-hidden="true" decoding="async" />` : ""}
-  <img ${fullAttrs} />
-</span>`.trim()
-      }
-
-      const fullFormats = isPngPath(src)
-        ? [allowAvif ? "avif" : null, "webp", "png"].filter(Boolean)
-        : [allowAvif ? "avif" : null, "webp", "jpeg"].filter(Boolean)
-
-      const fullStats = await Image(inputPath, {
-        widths: numericWidth ? [numericWidth] : [null],
-        formats: fullFormats,
-        outputDir,
-        urlPath
-      })
-
-      const sources = []
-      for (const format of ["avif", "webp"]) {
-        const entry = fullStats[format]?.[0]
-        if (!entry) continue
-        sources.push(`<source type="${entry.sourceType}" srcset="${withPathPrefix(entry.url)}" />`)
-      }
-
-      const fallbackFormat = isPngPath(src) ? "png" : "jpeg"
-      const fallback = fullStats[fallbackFormat]?.[0] ?? Object.values(fullStats).flat()[0]
-      const fallbackUrl = fallback?.url ? withPathPrefix(fallback.url) : withPathPrefix(String(src))
-
+      // Full images are never resized/transcoded by default.
+      // Keep author-provided widths/heights for layout stability, but point at the original asset.
+      const fullUrl = withPathPrefix(String(src))
       const fullAttrs = [
-        `src="${fallbackUrl}"`,
+        `src="${fullUrl}"`,
         `alt="${String(resolvedAlt).replaceAll('"', "&quot;")}"`,
         numericWidth ? `width="${numericWidth}"` : "",
         numericHeight ? `height="${numericHeight}"` : "",
@@ -186,10 +128,7 @@ module.exports = function (eleventyConfig) {
       return `
 <span class="pimg${resolvedWrapperClassName}" data-progressive-image="true">
   ${placeholderUrl ? `<img class="pimg__placeholder" src="${placeholderUrl}" alt="" aria-hidden="true" decoding="async" />` : ""}
-  <picture class="pimg__picture">
-    ${sources.join("\n    ")}
-    <img ${fullAttrs} />
-  </picture>
+  <img ${fullAttrs} />
 </span>`.trim()
     }
   )
