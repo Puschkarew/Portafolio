@@ -694,19 +694,22 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   opacity: 0;
 }
 
-img[data-progressive-image="true"].pimg__full {
-  opacity: 0;
-  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1);
+/* Solo progressive images (e.g. SVG) should never start hidden */
+img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
+  opacity: 1;
 }
 
-img[data-progressive-image="true"].pimg__full.is-loaded {
+.pimg.is-error .pimg__full {
+  opacity: 0;
+}
+
+.pimg.is-error .pimg__placeholder {
   opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .pimg__placeholder,
-  .pimg__full,
-  img[data-progressive-image="true"].pimg__full {
+  .pimg__full {
     transition: none;
   }
 

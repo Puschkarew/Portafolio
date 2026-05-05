@@ -95,6 +95,7 @@ module.exports = function (eleventyConfig) {
           fetchpriority ? `fetchpriority="${fetchpriority}"` : "",
           `class="pimg__full${resolvedImgClassName}"`,
           `data-progressive-image="true"`,
+          `data-progressive-solo="true"`,
           extraAttrs || ""
         ]
           .filter(Boolean)
