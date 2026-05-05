@@ -4178,8 +4178,15 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   background: var(--color-black);
 }
 
+/* Progressive overlay uses .pimg { display: grid }; do not force display:block on .pimg here. */
+.humans-media > .pimg {
+  display: grid;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 0;
+}
+
 .humans-media img,
-.humans-media .pimg,
 .humans-media .pimg__full,
 .humans-media .pimg__placeholder {
   display: block;
@@ -4255,6 +4262,20 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 .humans-media--screensaver {
   grid-column: 5 / span 8;
   aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.humans-media__embed {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .humans-media--screensaver .humans-media__embed {
+    display: none;
+  }
 }
 
 .humans-media--phone-chair {
