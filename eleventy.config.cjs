@@ -20,8 +20,8 @@ const joinWithPrefix = (prefix, url) => {
 
 const toLocalInputPath = (src) => {
   const raw = String(src)
-  if (raw.startsWith("/")) return path.join(__dirname, raw)
-  return path.join(__dirname, raw)
+  const normalized = raw.startsWith("/") ? raw.slice(1) : raw
+  return path.join(__dirname, normalized)
 }
 
 const stripUrlSuffix = (src) => String(src).split("#")[0].split("?")[0]
@@ -35,6 +35,8 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("scripts")
   eleventyConfig.addPassthroughCopy("styles")
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough")
+
+  const urlFilter = eleventyConfig.getFilter?.("url")
 
   eleventyConfig.addNunjucksAsyncShortcode(
     "progressiveImage",
@@ -55,6 +57,11 @@ module.exports = function (eleventyConfig) {
       }
 
       const pathPrefix = this?.ctx?.eleventy?.pathPrefix
+      const withPathPrefix = (url) => {
+        const resolved = String(url || "")
+        if (typeof urlFilter === "function") return urlFilter(resolved)
+        return joinWithPrefix(pathPrefix, resolved)
+      }
 
       const resolvedAlt = alt ?? ""
       const resolvedWrapperClassName = wrapperClassName ? ` ${wrapperClassName}` : ""
@@ -84,7 +91,7 @@ module.exports = function (eleventyConfig) {
 
       // SVG: no raster placeholder; just opt into runtime fade-in
       if (isSvgPath(src)) {
-        const fullUrl = joinWithPrefix(pathPrefix, String(src))
+        const fullUrl = withPathPrefix(String(src))
         const fullAttrs = [
           `src="${fullUrl}"`,
           `alt="${String(resolvedAlt).replaceAll('"', "&quot;")}"`,
@@ -115,10 +122,10 @@ module.exports = function (eleventyConfig) {
         sharpWebpOptions: { quality: 30 }
       })
       const placeholder = Object.values(placeholderStats)[0]?.[0]
-      const placeholderUrl = placeholder?.url ? joinWithPrefix(pathPrefix, placeholder.url) : ""
+      const placeholderUrl = placeholder?.url ? withPathPrefix(placeholder.url) : ""
 
       if (!allowTranscodedFull) {
-        const fullUrl = joinWithPrefix(pathPrefix, String(src))
+        const fullUrl = withPathPrefix(String(src))
         const fullAttrs = [
           `src="${fullUrl}"`,
           `alt="${String(resolvedAlt).replaceAll('"', "&quot;")}"`,
@@ -155,12 +162,12 @@ module.exports = function (eleventyConfig) {
       for (const format of ["avif", "webp"]) {
         const entry = fullStats[format]?.[0]
         if (!entry) continue
-        sources.push(`<source type="${entry.sourceType}" srcset="${joinWithPrefix(pathPrefix, entry.url)}" />`)
+        sources.push(`<source type="${entry.sourceType}" srcset="${withPathPrefix(entry.url)}" />`)
       }
 
       const fallbackFormat = isPngPath(src) ? "png" : "jpeg"
       const fallback = fullStats[fallbackFormat]?.[0] ?? Object.values(fullStats).flat()[0]
-      const fallbackUrl = fallback?.url ? joinWithPrefix(pathPrefix, fallback.url) : joinWithPrefix(pathPrefix, String(src))
+      const fallbackUrl = fallback?.url ? withPathPrefix(fallback.url) : withPathPrefix(String(src))
 
       const fullAttrs = [
         `src="${fallbackUrl}"`,
