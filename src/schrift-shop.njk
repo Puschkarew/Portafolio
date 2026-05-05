@@ -8,7 +8,7 @@ headerVariant: case
       <section class="section section--hero hero case-hero case-hero--schrift-shop" aria-labelledby="schrift-shop-title" data-hero-debug="off">
         <div class="case-hero__panel case-hero__media-panel">
           <figure class="case-hero__media">
-            <img src="{{ "/assets/figma/Schrift Shop/Hero cover.jpg" | url }}" alt="Schrift Shop storefront and typography-led ecommerce hero visual" width="5760" height="3448" decoding="async" fetchpriority="high" />
+            {% progressiveImage "/assets/figma/Schrift Shop/Hero cover.jpg", "Schrift Shop storefront and typography-led ecommerce hero visual", 5760, 3448, "", "", "", "async", "high" %}
           </figure>
         </div>
 
@@ -47,16 +47,20 @@ headerVariant: case
             <div class="schrift-shop-comp__grid">
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--full" data-reveal="scale">
                 <figure class="schrift-shop-comp__slot schrift-shop-comp__slot--bleed">
-                  <img src="{{ "/assets/figma/Schrift Shop/MM_Laptop_LT-B-04.jpg" | url }}" alt="Schrift Shop storefront layout on laptop" width="6000" height="4002" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Schrift Shop/MM_Laptop_LT-B-04.jpg", "Schrift Shop storefront layout on laptop", 6000, 4002, "", "", "lazy", "async" %}
                 </figure>
               </div>
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--full" data-reveal="scale">
                 <div class="schrift-shop-comp__frame schrift-shop-comp__frame--surface schrift-shop-comp__frame--padded-xl">
-                  <div class="schrift-shop-comp__slideshow" data-slideshow="schrift-shop" aria-hidden="true">
-                    <img class="is-active" src="{{ "/assets/figma/Schrift Shop/Slide 01.png" | url }}" alt="" width="4096" height="3990" loading="lazy" decoding="async" />
-                    <img src="{{ "/assets/figma/Schrift Shop/Slide 02.png" | url }}" alt="" width="4096" height="3990" loading="lazy" decoding="async" />
-                    <img src="{{ "/assets/figma/Schrift Shop/Slide 03.png" | url }}" alt="" width="4096" height="3990" loading="lazy" decoding="async" />
-                    <img src="{{ "/assets/figma/Schrift Shop/Slide 04.png" | url }}" alt="" width="4096" height="3990" loading="lazy" decoding="async" />
+                  <div
+                    class="schrift-shop-comp__slideshow schrift-shop-comp__ph--4096-3990 schrift-shop-comp__ph--edge"
+                    data-slideshow="schrift-shop"
+                    aria-hidden="true"
+                  >
+                    {% progressiveImage "/assets/figma/Schrift Shop/Slide 01.png", "", 4096, 3990, "", "schrift-shop-comp__slide", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                    {% progressiveImage "/assets/figma/Schrift Shop/Slide 02.png", "", 4096, 3990, "", "schrift-shop-comp__slide", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                    {% progressiveImage "/assets/figma/Schrift Shop/Slide 03.png", "", 4096, 3990, "", "schrift-shop-comp__slide", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                    {% progressiveImage "/assets/figma/Schrift Shop/Slide 04.png", "", 4096, 3990, "", "schrift-shop-comp__slide", "lazy", "async", "", "aria-hidden=\"true\"" %}
                   </div>
                 </div>
               </div>
@@ -81,17 +85,17 @@ headerVariant: case
             <div class="schrift-shop-comp__grid">
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--full" data-reveal="scale">
                 <figure class="schrift-shop-comp__slot schrift-shop-comp__slot--bleed">
-                  <img src="{{ "/assets/figma/Schrift Shop/grajd_shrift_07.png" | url }}" alt="" width="5363" height="5363" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Schrift Shop/grajd_shrift_07.png", "", 5363, 5363, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </figure>
               </div>
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--span-6" data-reveal="scale">
                 <div class="schrift-shop-comp__frame schrift-shop-comp__frame--surface schrift-shop-comp__frame--surface-gill schrift-shop-comp__frame--fill">
-                  <img src="{{ "/assets/figma/Schrift Shop/gill-7.png" | url }}" alt="" width="5304" height="5304" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Schrift Shop/gill-7.png", "", 5304, 5304, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </div>
               </div>
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--span-6" data-reveal="scale">
                 <div class="schrift-shop-comp__frame schrift-shop-comp__frame--surface schrift-shop-comp__frame--surface-gill schrift-shop-comp__frame--fill">
-                  <img src="{{ "/assets/figma/Schrift Shop/gill-3.png" | url }}" alt="" width="5304" height="5304" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Schrift Shop/gill-3.png", "", 5304, 5304, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </div>
               </div>
             </div>
@@ -109,7 +113,7 @@ headerVariant: case
             <div class="schrift-shop-comp__grid">
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--inset-10" data-reveal="scale">
                 <div class="schrift-shop-comp__frame schrift-shop-comp__frame--stage-dark schrift-shop-comp__frame--padded-xl">
-                  <img src="{{ "/assets/figma/Schrift Shop/Product Page.png" | url }}" alt="" width="5760" height="28188" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Schrift Shop/Product Page.png", "", 5760, 28188, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </div>
               </div>
               <div class="schrift-shop-comp__cell schrift-shop-comp__cell--full" data-reveal="scale">

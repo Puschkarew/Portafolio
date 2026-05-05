@@ -12,7 +12,7 @@ title: Portfolio — Home
           </div>
 
           <div class="hero__profile" aria-hidden="true">
-            <img src="{{ "/assets/figma/Image Profile.png" | url }}" alt="Portrait illustration of Vladimir Pushkarev" width="326" height="326" decoding="async" fetchpriority="high" />
+            {% progressiveImage "/assets/figma/Image Profile.png", "Portrait illustration of Vladimir Pushkarev", 326, 326, "", "", "", "async", "high" %}
           </div>
 
           <div class="hero__grid">
@@ -48,13 +48,13 @@ title: Portfolio — Home
 
           <div class="project-background-art project-background-art--featured" data-art-for="featured">
             <div class="project-background-art__inner">
-              <img src="{{ "/assets/figma/Section/Schrift Collective Background.svg" | url }}" alt="" width="1336" height="996" loading="lazy" decoding="async" />
+              {% progressiveImage "/assets/figma/Section/Schrift Collective Background.svg", "", 1336, 996, "", "", "lazy", "async" %}
             </div>
           </div>
 
           <div class="project-background-art project-background-art--madebymad" data-art-for="madebymad">
             <div class="project-background-art__inner">
-              <img src="{{ "/assets/figma/Bike.png" | url }}" alt="" width="1428" height="1060" loading="lazy" decoding="async" />
+              {% progressiveImage "/assets/figma/Bike.png", "", 1428, 1060, "", "", "lazy", "async" %}
             </div>
           </div>
 
@@ -66,7 +66,7 @@ title: Portfolio — Home
 
           <div class="project-background-art project-background-art--curves" data-art-for="curves">
             <div class="project-background-art__inner">
-              <img src="{{ "/assets/figma/Image%20In%20Curves.svg" | url }}" alt="" width="2185" height="1448" loading="lazy" decoding="async" />
+              {% progressiveImage "/assets/figma/Image In Curves.svg", "", 2185, 1448, "", "", "lazy", "async" %}
             </div>
           </div>
         </div>
@@ -75,7 +75,7 @@ title: Portfolio — Home
       <section class="section section--featured" aria-label="Schrift Collective" data-project="featured">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
-            <img src="{{ "/assets/figma/Section/Schrift Collective Background.svg" | url }}" alt="" width="1336" height="996" loading="lazy" decoding="async" />
+            {% progressiveImage "/assets/figma/Section/Schrift Collective Background.svg", "", 1336, 996, "", "", "lazy", "async" %}
           </div>
           <div class="container container--wide section-header__content">
             <div class="section-header__intro">
@@ -94,7 +94,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/schrift-foundry/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--schrift-foundry">
-                  <img src="{{ "/assets/figma/card-skrift-foundry.png" | url }}" alt="Schrift Foundry project preview" width="1095" height="698" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-skrift-foundry.png", "Schrift Foundry project preview", 1095, 698, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-schrift-foundry" class="type-caption tag__text">Schrift Foundry</h3></div>
@@ -107,7 +107,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/top-2019/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--top2019">
-                  <img src="{{ "/assets/figma/Image%20Top%202019.svg" | url }}" alt="Top 2019 project preview" width="603" height="603" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Image Top 2019.svg", "Top 2019 project preview", 603, 603, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-top-2019" class="type-caption tag__text">Top 2019</h3></div>
@@ -119,7 +119,7 @@ title: Portfolio — Home
           <article class="card card--schrift-publishers" aria-labelledby="project-schrift-publishers" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--schrift-publishers">
-                <img src="{{ "/assets/figma/card-skrift-publishers.png" | url }}" alt="Schrift Publishers project preview" width="1095" height="600" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-skrift-publishers.png", "Schrift Publishers project preview", 1095, 600, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-schrift-publishers" class="type-caption tag__text">Schrift Publishers</h3></div>
@@ -130,7 +130,7 @@ title: Portfolio — Home
           <article class="card card--specimen" aria-labelledby="project-specimen" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--specimen">
-                <img src="{{ "/assets/figma/card-specimen.png" | url }}" alt="Specimen project preview" width="480" height="678" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-specimen.png", "Specimen project preview", 480, 678, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-specimen" class="type-caption tag__text">Specimen</h3></div>
@@ -142,7 +142,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/schrift-shop/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--schrift-shop">
-                  <img src="{{ "/assets/figma/card-skrift-shop.png" | url }}" alt="Schrift Shop project preview" width="1095" height="661" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-skrift-shop.png", "Schrift Shop project preview", 1095, 661, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-schrift-shop" class="type-caption tag__text">Schrift Shop</h3></div>
@@ -156,7 +156,7 @@ title: Portfolio — Home
       <section class="section section--madebymad" aria-label="Made by Mad" data-project="madebymad">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
-            <img src="{{ "/assets/figma/Bike.png" | url }}" alt="" width="1428" height="1060" loading="lazy" decoding="async" />
+            {% progressiveImage "/assets/figma/Bike.png", "", 1428, 1060, "", "", "lazy", "async" %}
           </div>
           <div class="container container--wide section-header__content">
             <div class="section-header__intro">
@@ -174,7 +174,7 @@ title: Portfolio — Home
           <article class="card card--humans" aria-labelledby="project-humans" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--humans">
-                <img src="{{ "/assets/figma/card-humans.png" | url }}" alt="Humans project preview" width="1095" height="620" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-humans.png", "Humans project preview", 1095, 620, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-humans" class="type-caption tag__text">Humans</h3></div>
@@ -186,7 +186,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/mybox/" | url }}">
             <div class="card__clip">
               <div class="card__media media--mybox">
-                <img src="{{ "/assets/figma/card-mybox.png" | url }}" alt="Mybox project preview" width="480" height="760" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-mybox.png", "Mybox project preview", 480, 760, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-mybox" class="type-caption tag__text">Mybox</h3></div>
@@ -198,7 +198,7 @@ title: Portfolio — Home
           <article class="card card--madebymad" aria-labelledby="project-made-by-mad" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--madebymad">
-                <img src="{{ "/assets/figma/card-madebymad.png" | url }}" alt="Made by Mad studio project preview" width="1095" height="640" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-madebymad.png", "Made by Mad studio project preview", 1095, 640, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-made-by-mad" class="type-caption tag__text">Made by Mad</h3></div>
@@ -209,7 +209,7 @@ title: Portfolio — Home
           <article class="card card--secretkitchen" aria-labelledby="project-secret-kitchen" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--secretkitchen">
-                <img src="{{ "/assets/figma/card-secretkitchen.png" | url }}" alt="Secret Kitchen project preview" width="726" height="726" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-secretkitchen.png", "Secret Kitchen project preview", 726, 726, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-secret-kitchen" class="type-caption tag__text">Secret Kitchen</h3></div>
@@ -239,7 +239,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/particle-text/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--particle">
-                  <img src="{{ "/assets/figma/card-particle-text.png" | url }}" alt="Particle Text project preview" width="1095" height="687" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-particle-text.png", "Particle Text project preview", 1095, 687, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-particle-text" class="type-caption tag__text">Particle Text</h3></div>
@@ -261,7 +261,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/mezhdu-prochim/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--mezhdu">
-                  <img src="{{ "/assets/figma/card-mezhdu-prochim.png" | url }}" alt="Mezhdu Prochim project preview" width="1095" height="640" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-mezhdu-prochim.png", "Mezhdu Prochim project preview", 1095, 640, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-mezhdu-prochim" class="type-caption tag__text">Mezhdu Prochim</h3></div>
@@ -284,7 +284,7 @@ title: Portfolio — Home
       <section class="section section--curves" aria-label="In Curves" data-project="curves">
         <div class="section-header">
           <div class="section-header__art" aria-hidden="true">
-            <img src="{{ "/assets/figma/Image%20In%20Curves.svg" | url }}" alt="" width="2185" height="1448" loading="lazy" decoding="async" />
+            {% progressiveImage "/assets/figma/Image In Curves.svg", "", 2185, 1448, "", "", "lazy", "async" %}
           </div>
           <div class="container container--wide section-header__content">
             <div class="section-header__intro">
@@ -303,7 +303,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/utochka/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--utochka">
-                  <img src="{{ "/assets/figma/Utochka Image.svg" | url }}" alt="Utochka type project preview" width="1095" height="687" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/Utochka Image.svg", "Utochka type project preview", 1095, 687, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-utochka" class="type-caption tag__text">Utochka</h3></div>
@@ -316,7 +316,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/mos/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--mos">
-                  <img src="{{ "/assets/figma/card-mos.png" | url }}" alt="MOS logo project preview" width="480" height="640" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-mos.png", "MOS logo project preview", 480, 640, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-mos" class="type-caption tag__text">MOS</h3></div>
@@ -328,7 +328,7 @@ title: Portfolio — Home
           <article class="card card--roger" aria-labelledby="project-roger-excoffon-workshop" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--roger">
-                <img src="{{ "/assets/figma/card-roger-excoffon.png" | url }}" alt="Roger Excoffon Workshop project preview" width="1095" height="640" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-roger-excoffon.png", "Roger Excoffon Workshop project preview", 1095, 640, "", "", "lazy", "async" %}
               </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-roger-excoffon-workshop" class="type-caption tag__text">Roger Excoffon Workshop</h3></div>
@@ -339,12 +339,12 @@ title: Portfolio — Home
           <article class="card card--untitled" aria-labelledby="project-untitled-font" data-reveal="scale">
             <div class="card__clip">
               <div class="card__media media--untitled">
-                <img src="{{ "/assets/figma/card-untitled-base.png" | url }}" alt="Untitled Font project preview" width="726" height="726" loading="lazy" decoding="async" />
+                {% progressiveImage "/assets/figma/card-untitled-base.png", "Untitled Font project preview", 726, 726, "", "", "lazy", "async" %}
                 <div class="card__untitled-overlay" aria-hidden="true">
-                  <img src="{{ "/assets/figma/card-untitled-imported.png" | url }}" alt="" width="726" height="726" loading="lazy" decoding="async" />
-                  <img src="{{ "/assets/figma/card-untitled-lines.png" | url }}" alt="" width="726" height="726" loading="lazy" decoding="async" />
-                  <img src="{{ "/assets/figma/card-untitled-handles.png" | url }}" alt="" width="726" height="726" loading="lazy" decoding="async" />
-                  <img src="{{ "/assets/figma/card-untitled-anchors.png" | url }}" alt="" width="726" height="726" loading="lazy" decoding="async" />
+                  {% progressiveImage "/assets/figma/card-untitled-imported.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                  {% progressiveImage "/assets/figma/card-untitled-lines.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                  {% progressiveImage "/assets/figma/card-untitled-handles.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                  {% progressiveImage "/assets/figma/card-untitled-anchors.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </div>
               </div>
               <div class="card__tag">

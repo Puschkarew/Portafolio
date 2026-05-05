@@ -649,6 +649,91 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   object-fit: cover;
 }
 
+/* Progressive images (blur-up / LQIP) */
+.pimg {
+  display: grid;
+  inline-size: 100%;
+  max-inline-size: 100%;
+}
+
+.pimg__placeholder,
+.pimg__picture,
+.pimg > .pimg__full {
+  grid-area: 1 / 1;
+}
+
+.pimg__placeholder {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  filter: blur(18px);
+  transform: scale(1.05);
+  opacity: 1;
+  transition: opacity 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pimg__picture {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.pimg__full {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+  opacity: 0;
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pimg.is-loaded .pimg__full {
+  opacity: 1;
+}
+
+.pimg.is-loaded .pimg__placeholder {
+  opacity: 0;
+}
+
+img[data-progressive-image="true"].pimg__full {
+  opacity: 0;
+  transition: opacity 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+img[data-progressive-image="true"].pimg__full.is-loaded {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pimg__placeholder,
+  .pimg__full,
+  img[data-progressive-image="true"].pimg__full {
+    transition: none;
+  }
+
+  .pimg__placeholder {
+    filter: none;
+    transform: none;
+  }
+}
+
+/* Make existing media layouts aware of .pimg wrappers */
+.card__media > .pimg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.card__media img,
+.card__media .pimg__full,
+.card__media .pimg__placeholder {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
 .card__tag {
   position: absolute;
   inset-block-start: 0;
@@ -722,6 +807,19 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .hero__profile img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.hero__profile > .pimg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.hero__profile img,
+.hero__profile .pimg__full,
+.hero__profile .pimg__placeholder {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
@@ -1515,6 +1613,12 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   block-size: auto;
 }
 
+.section-header__art .pimg__full,
+.section-header__art .pimg__placeholder {
+  inline-size: min(1272px, 100%);
+  block-size: auto;
+}
+
 /* Made by Mad — header art (Figma 1282:2643, design width 1512) */
 @media (max-width: 1023px) {
   .section--madebymad .section-header__art {
@@ -1856,6 +1960,20 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-hero__media img {
+  object-fit: cover;
+}
+
+.case-hero__media > .pimg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.case-hero__media img,
+.case-hero__media .pimg__full,
+.case-hero__media .pimg__placeholder {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
 }
 
@@ -2641,6 +2759,19 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   object-fit: cover;
 }
 
+.case-reference-illustration > .pimg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.case-reference-illustration .pimg__full,
+.case-reference-illustration .pimg__placeholder {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
 .case-reference-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -2667,6 +2798,22 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .case-reference-item img,
 .case-reference-poster__frame img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.case-reference-item > .pimg,
+.case-reference-poster__frame > .pimg {
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.case-reference-item .pimg__full,
+.case-reference-item .pimg__placeholder,
+.case-reference-poster__frame .pimg__full,
+.case-reference-poster__frame .pimg__placeholder {
   display: block;
   inline-size: 100%;
   block-size: 100%;
@@ -2708,6 +2855,18 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-reference-poster__frame img {
+  aspect-ratio: 537 / 742;
+  inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--radius-sm);
+}
+
+.case-reference-poster__frame > .pimg {
+  block-size: auto;
+}
+
+.case-reference-poster__frame .pimg__full,
+.case-reference-poster__frame .pimg__placeholder {
   aspect-ratio: 537 / 742;
   inline-size: 100%;
   block-size: auto;
@@ -3828,17 +3987,26 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   overflow: clip;
 }
 
-.schrift-shop-comp__slideshow > img {
+.schrift-shop-comp__slideshow > img,
+.schrift-shop-comp__slideshow > .pimg {
   grid-area: 1 / 1;
   inline-size: 100%;
   block-size: 100%;
-  object-fit: contain;
   opacity: 0;
   border-radius: 0;
 }
 
-.schrift-shop-comp__slideshow > img.is-active {
+.schrift-shop-comp__slideshow > img.is-active,
+.schrift-shop-comp__slideshow > .pimg.is-active {
   opacity: 1;
+}
+
+.schrift-shop-comp__slideshow .pimg__full,
+.schrift-shop-comp__slideshow .pimg__placeholder {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  border-radius: 0;
 }
 
 /* Schrift Shop — Gill tiles (background + no rounding) */

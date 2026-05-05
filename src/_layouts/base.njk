@@ -31,7 +31,7 @@
         </div>
 
         <div class="footer__model" aria-hidden="true">
-          <img src="{{ "/assets/figma/footer-model.png" | url }}" alt="" width="1752" height="1800" loading="lazy" decoding="async" />
+          {% progressiveImage "/assets/figma/footer-model.png", "", 1752, 1800, "", "", "lazy", "async" %}
         </div>
       </div>
     </footer>
@@ -106,6 +106,7 @@
     <script src="{{ "/scripts/mobile-menu.js" | url }}" defer></script>
     <script src="{{ "/assets/humans-shader/humans-shader-embed.js" | url }}" defer></script>
     <script src="{{ "/scripts/odds-humans-shader-init.js" | url }}" defer></script>
+    <script src="{{ "/scripts/progressive-image.js" | url }}" defer></script>
     <script src="{{ "/scripts/project-sticky-background.js?v=no-header-themes" | url }}" defer></script>
     <script src="{{ "/scripts/scroll-reveal.js?v=caselayout-media-reveal" | url }}" defer></script>
     <script src="{{ "/scripts/schrift-shop-slideshow.js" | url }}" defer></script>
