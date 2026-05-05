@@ -1,0 +1,15 @@
+/*
+ * Schrift Shop — shadows (Figma 2155:19364).
+ * inset 0 0 24px #f2f4f7; контентная полоса — тот же #f2f4f7 (как Dev box-shadow 0 0 24px).
+ *
+ * Wire-up in head после components.css, например src/_layouts/base.njk:
+ * <link rel="stylesheet" href="{{ "/styles/case-schrift-shop-shadows.css" | url }}" />
+ * Затем при желании влей эти блоки в styles/components.css и удали этот файл и link.
+ */
+.case-hero--schrift-shop {
+  --case-hero-glow: var(--color-surface-featured-raw);
+}
+
+.case-hero--schrift-shop + .case-content-shell {
+  --case-content-glow: var(--color-surface-featured-raw);
+}

@@ -519,7 +519,7 @@ html.has-scroll-reveal .scroll-reveal-target.is-revealed {
 
 html.has-scroll-reveal .case-hero.case-hero--mos .case-hero__media,
 html.has-scroll-reveal .case-content .mos-media,
-html.has-scroll-reveal .case-content .schrift-shop-media {
+html.has-scroll-reveal .case-content .schrift-shop-comp [data-reveal="scale"] {
   transform-origin: center;
 }
 
@@ -2457,7 +2457,8 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .case-hero--schrift-shop + .case-content-shell {
-  --case-content-glow: color-mix(in srgb, var(--color-olive-400) 55%, #505050);
+  /* Figma Dev — reveal: 0 0 24px #f2f4f7; gradient uses same base as hero inset */
+  --case-content-glow: var(--color-surface-featured-raw);
 }
 
 .case-hero--top-2019 + .case-content-shell {
@@ -3728,7 +3729,12 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   min-block-size: 0;
 }
 
-.schrift-shop-media-grid {
+/* Schrift Shop — composite media sections (Figma 2155-19394, 2214-1838, 2214-1885, 2214-1924) */
+.schrift-shop-comp {
+  inline-size: 100%;
+}
+
+.schrift-shop-comp__grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: var(--space-grid-gap);
@@ -3736,37 +3742,119 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   inline-size: 100%;
 }
 
-.schrift-shop-media {
+.schrift-shop-comp__cell {
+  min-inline-size: 0;
+}
+
+.schrift-shop-comp__cell--full {
+  grid-column: 1 / -1;
+}
+
+.schrift-shop-comp__cell--span-6 {
+  grid-column: span 6;
+}
+
+.schrift-shop-comp__cell--inset-10 {
+  grid-column: 2 / span 10;
+}
+
+.schrift-shop-comp__row {
+  grid-column: 1 / -1;
+  min-inline-size: 0;
+}
+
+.schrift-shop-comp__row-split {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: var(--space-grid-gap);
+  row-gap: var(--space-800);
+  align-items: start;
+}
+
+.schrift-shop-comp__row-split > * {
+  grid-column: span 6;
+  min-inline-size: 0;
+}
+
+.schrift-shop-comp__row--align-end .schrift-shop-comp__row-split > *:first-child {
+  align-self: end;
+}
+
+.schrift-shop-comp__slot {
   margin: 0;
+  display: block;
   overflow: clip;
   border-radius: var(--radius-sm);
 }
 
-.schrift-shop-media img {
+.schrift-shop-comp__frame {
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  overflow: clip;
+  inline-size: 100%;
+}
+
+.schrift-shop-comp__frame--surface {
+  background-color: var(--color-surface-featured-raw);
+}
+
+.schrift-shop-comp__frame--stage-dark {
+  background-color: var(--color-black);
+}
+
+.schrift-shop-comp__frame--padded-xl {
+  padding-inline: var(--space-1600);
+  padding-block: var(--space-600);
+}
+
+.schrift-shop-comp__frame--fill {
+  inline-size: 100%;
+}
+
+.schrift-shop-comp__ph {
   display: block;
   inline-size: 100%;
-  block-size: 100%;
-  object-fit: cover;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-black);
+  border: none;
+  border-radius: var(--radius-sm);
 }
 
-.schrift-shop-media--01 {
-  grid-column: 1 / -1;
-  aspect-ratio: 1440 / 900;
+.schrift-shop-comp__ph--edge {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
-.schrift-shop-media--02 {
-  grid-column: 1 / -1;
-  aspect-ratio: 1440 / 820;
+.schrift-shop-comp__ph--on-dark {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
 }
 
-.schrift-shop-media--03 {
-  grid-column: 3 / span 8;
-  aspect-ratio: 960 / 1200;
+.schrift-shop-comp__ph--1464-888 {
+  aspect-ratio: 1464 / 888;
 }
 
-.schrift-shop-media--04 {
-  grid-column: 1 / -1;
-  aspect-ratio: 1440 / 960;
+.schrift-shop-comp__ph--4096-3990 {
+  aspect-ratio: 4096 / 3990;
+}
+
+.schrift-shop-comp__ph--square {
+  aspect-ratio: 1 / 1;
+}
+
+.schrift-shop-comp__ph--1089-4096 {
+  aspect-ratio: 1089 / 4096;
+}
+
+.schrift-shop-comp__ph--1656-4096 {
+  aspect-ratio: 1656 / 4096;
+}
+
+.schrift-shop-comp__ph--2880-2826 {
+  aspect-ratio: 2880 / 2826;
+}
+
+.schrift-shop-comp__ph--1067-1600 {
+  aspect-ratio: 1067 / 1600;
 }
 
 .mybox-details {
@@ -3911,8 +3999,22 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
     grid-template-columns: repeat(8, minmax(0, 1fr));
   }
 
-  .schrift-shop-media-grid {
+  .schrift-shop-comp__grid {
     grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .schrift-shop-comp__cell--full,
+  .schrift-shop-comp__cell--span-6,
+  .schrift-shop-comp__cell--inset-10 {
+    grid-column: 1 / -1;
+  }
+
+  .schrift-shop-comp__row-split {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .schrift-shop-comp__row-split > * {
+    grid-column: 1 / -1;
   }
 
   .mos-media--01,
@@ -3929,13 +4031,6 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   .mos-media--12,
   .mos-media--13,
   .mos-media--14 {
-    grid-column: 1 / -1;
-  }
-
-  .schrift-shop-media--01,
-  .schrift-shop-media--02,
-  .schrift-shop-media--03,
-  .schrift-shop-media--04 {
     grid-column: 1 / -1;
   }
 
