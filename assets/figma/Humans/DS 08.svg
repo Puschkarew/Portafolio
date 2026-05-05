@@ -1,0 +1,59 @@
+<svg width="1000" height="1000" viewBox="0 0 1000 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1000" height="1000" fill="#D5F9FF"/>
+<g filter="url(#filter0_g_2238_7170)">
+<line x1="261" y1="200" x2="261" y2="800" stroke="white" stroke-width="2"/>
+<line x1="321" y1="200" x2="321" y2="800" stroke="white" stroke-width="2"/>
+<line x1="381" y1="200" x2="381" y2="800" stroke="white" stroke-width="2"/>
+<line x1="441" y1="200" x2="441" y2="800" stroke="white" stroke-width="2"/>
+<line x1="561" y1="200" x2="561" y2="800" stroke="white" stroke-width="2"/>
+<line x1="621" y1="200" x2="621" y2="800" stroke="white" stroke-width="2"/>
+<line x1="681" y1="200" x2="681" y2="800" stroke="white" stroke-width="2"/>
+<line x1="741" y1="200" x2="741" y2="800" stroke="white" stroke-width="2"/>
+<line x1="860" y1="501" x2="140" y2="501" stroke="white" stroke-width="2"/>
+<line x1="800" y1="261" x2="200" y2="261" stroke="white" stroke-width="2"/>
+<line x1="800" y1="321" x2="200" y2="321" stroke="white" stroke-width="2"/>
+<line x1="800" y1="381" x2="200" y2="381" stroke="white" stroke-width="2"/>
+<line x1="800" y1="441" x2="200" y2="441" stroke="white" stroke-width="2"/>
+<line x1="800" y1="561" x2="200" y2="561" stroke="white" stroke-width="2"/>
+<line x1="800" y1="621" x2="200" y2="621" stroke="white" stroke-width="2"/>
+<line x1="800" y1="681" x2="200" y2="681" stroke="white" stroke-width="2"/>
+<line x1="800" y1="741" x2="200" y2="741" stroke="white" stroke-width="2"/>
+<path d="M500 800C665.685 800 800 665.685 800 500C800 334.315 665.685 200 500 200C334.315 200 200 334.315 200 500C200 665.685 334.315 800 500 800Z" stroke="#FF4788" stroke-width="2"/>
+<path d="M500 710C615.98 710 710 615.98 710 500C710 384.02 615.98 290 500 290C384.02 290 290 384.02 290 500C290 615.98 384.02 710 500 710Z" stroke="#FF4788" stroke-width="2"/>
+<path d="M500 650C582.843 650 650 582.843 650 500C650 417.157 582.843 350 500 350C417.157 350 350 417.157 350 500C350 582.843 417.157 650 500 650Z" stroke="#FF4788" stroke-width="2"/>
+<rect x="200" y="200" width="600" height="600" stroke="#FF4788" stroke-width="2"/>
+<rect x="140.086" y="141.498" width="2" height="1016" transform="rotate(-45 140.086 141.498)" fill="#FF4788"/>
+<rect width="2" height="1016" transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 859.916 141.498)" fill="#FF4788"/>
+<rect x="499" y="140" width="2" height="720" fill="#FF4788"/>
+<rect x="860" y="499" width="2" height="720" transform="rotate(90 860 499)" fill="#FF4788"/>
+</g>
+<g clip-path="url(#clip0_2238_7170)">
+<g filter="url(#filter1_i_2238_7170)">
+<path d="M380 650H620C659 650 676 629 680 590L710 260H290L320 590C324 629 341 650 380 650ZM260 770H740V710H260V770ZM650 470H770C809 470 830 449 830 410V320C830 281 809 260 770 260H650V320H770V410H650V470Z" fill="#FF6900"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_g_2238_7170" x="133" y="133" width="734" height="734" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.99900001287460327 0.99900001287460327" numOctaves="3" seed="997" />
+<feDisplacementMap in="shape" scale="14" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect1_texture_2238_7170">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+<filter id="filter1_i_2238_7170" x="260" y="260" width="570" height="510" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="16"/>
+<feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.910925 0 0 0 0 0.236497 0 0 0 1 0"/>
+<feBlend mode="normal" in2="shape" result="effect1_innerShadow_2238_7170"/>
+</filter>
+<clipPath id="clip0_2238_7170">
+<rect width="570" height="510" fill="white" transform="translate(260 260)"/>
+</clipPath>
+</defs>
+</svg>

@@ -172,14 +172,16 @@ title: Portfolio — Home
 
         <div class="cards-grid cards-grid--mad container--fullbleed">
           <article class="card card--humans" aria-labelledby="project-humans" data-reveal="scale">
-            <div class="card__clip">
-              <div class="card__media media--humans">
-                {% progressiveImage "/assets/figma/card-humans.png", "Humans project preview", 1095, 620, "", "", "lazy", "async" %}
+            <a class="card__link" href="{{ "/humans/" | url }}">
+              <div class="card__clip">
+                <div class="card__media media--humans">
+                  {% progressiveImage "/assets/figma/card-humans.png", "Humans project preview", 1095, 620, "", "", "lazy", "async" %}
+                </div>
+                <div class="card__tag">
+                  <div class="tag"><h3 id="project-humans" class="type-caption tag__text">Humans</h3></div>
+                </div>
               </div>
-              <div class="card__tag">
-                <div class="tag"><h3 id="project-humans" class="type-caption tag__text">Humans</h3></div>
-              </div>
-            </div>
+            </a>
           </article>
 
           <article class="card card--mybox" aria-labelledby="project-mybox" data-reveal="scale">

@@ -31,6 +31,8 @@ jobs:
         run: npm ci
 
       - name: Build
+        env:
+          SITE_BUILD_AT: ${{ github.event.head_commit.timestamp }}
         run: npm run build-ghpages
 
       - name: Setup Pages
