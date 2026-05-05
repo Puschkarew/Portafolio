@@ -32,6 +32,7 @@ The GitHub workflow treats these as smoke-relevant:
 - `src/`
 - `eleventy.config.cjs`
 - `styles/`
+- `select-icons/`
 - `scripts/`
 - `tests/`
 - `playwright.config.ts`

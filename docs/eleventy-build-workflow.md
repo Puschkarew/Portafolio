@@ -15,7 +15,8 @@ This project is a hand-coded site that now uses Eleventy only as a static build 
 - `src/index.njk` contains the home page main content.
 - `src/_layouts/base.njk` owns the document shell, stylesheet links, footer, header layers, and script order.
 - `src/_data/site.json` contains small site-level metadata.
-- `assets/`, `fonts/`, `styles/`, and `scripts/` are copied through unchanged with passthrough copy.
+- `assets/`, `fonts/`, `styles/`, `scripts/`, and `select-icons/` are copied through unchanged with passthrough copy.
+- `select-icons/` holds the vendored Select-Icons canvas widget bundle (`embed.html`, `app.js`, `styles.css`, `icons/`, `.htmlvalidate.json`) used by the Humans case page screensaver. Treat upstream markup and scripts as third-party content; the bundled `.htmlvalidate.json` only relaxes `aria-label-misuse` for this subtree so `npm run lint:html` matches upstream `embed.html` without editing it.
 
 ## Commands
 

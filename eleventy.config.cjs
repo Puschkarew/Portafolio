@@ -34,6 +34,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("fonts")
   eleventyConfig.addPassthroughCopy("scripts")
   eleventyConfig.addPassthroughCopy("styles")
+  eleventyConfig.addPassthroughCopy("select-icons")
   eleventyConfig.setServerPassthroughCopyBehavior("passthrough")
 
   const urlFilter = eleventyConfig.getFilter?.("url")

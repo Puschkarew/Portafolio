@@ -46,7 +46,7 @@ jobs:
             echo "changelog_changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-          if echo "$CHANGED" | grep -Eq '^(eleventy\.config\.cjs|src/|styles/|tests/|scripts/|playwright\.config\.ts|package\.json|package-lock\.json|docs/figma-audit/build-dod\.md|docs/figma-audit/changelog\.md|docs/figma-audit/user-tasks\.md|docs/figma-audit/components-checklist\.md|docs/figma-audit/layout-rules\.md|docs/figma-audit/hardcodes-map\.md|docs/figma-audit/parity-backlog\.md)$'; then
+          if echo "$CHANGED" | grep -Eq '^(eleventy\.config\.cjs|src/|styles/|select-icons/|tests/|scripts/|playwright\.config\.ts|package\.json|package-lock\.json|docs/figma-audit/build-dod\.md|docs/figma-audit/changelog\.md|docs/figma-audit/user-tasks\.md|docs/figma-audit/components-checklist\.md|docs/figma-audit/layout-rules\.md|docs/figma-audit/hardcodes-map\.md|docs/figma-audit/parity-backlog\.md)$'; then
             echo "run_smoke=true" >> "$GITHUB_OUTPUT"
           else
             echo "run_smoke=false" >> "$GITHUB_OUTPUT"
