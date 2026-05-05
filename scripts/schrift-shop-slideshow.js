@@ -92,14 +92,14 @@
       if (!full?.decode) return
       try {
         await full.decode()
-      }
+      } catch {}
       return
     }
 
     if (!slide.decode) return
     try {
       await slide.decode()
-    }
+    } catch {}
   }
 
   const waitForReadySlides = async (slides, minReady) => {
