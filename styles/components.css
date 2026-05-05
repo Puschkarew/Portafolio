@@ -2091,7 +2091,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .case-hero--schrift-shop {
   --schrift-shop-muted: #767676;
-  --case-hero-glow: color-mix(in srgb, var(--color-olive-400) 62%, #6f6f68);
+  --case-hero-glow: var(--color-surface-featured-raw);
 
   background: #fff;
   color: var(--color-black);
@@ -2104,6 +2104,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .case-hero--schrift-shop .case-hero__title {
   grid-column: 1 / -1;
+  color: var(--color-black);
 }
 
 .case-hero--schrift-shop .case-hero__title-muted {
@@ -3787,6 +3788,13 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   border-radius: var(--radius-sm);
 }
 
+.schrift-shop-comp__slot > img,
+.schrift-shop-comp__frame > img {
+  display: block;
+  inline-size: 100%;
+  block-size: auto;
+}
+
 .schrift-shop-comp__frame {
   box-sizing: border-box;
   border-radius: var(--radius-sm);
@@ -3809,6 +3817,49 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 
 .schrift-shop-comp__frame--fill {
   inline-size: 100%;
+}
+
+/* Schrift Shop — slideshow (4 slides, cut every 1.25s) */
+.schrift-shop-comp__slideshow {
+  display: grid;
+  inline-size: 100%;
+  aspect-ratio: 4096 / 3990;
+  border-radius: 0;
+  overflow: clip;
+}
+
+.schrift-shop-comp__slideshow > img {
+  grid-area: 1 / 1;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: contain;
+  opacity: 0;
+  border-radius: 0;
+}
+
+.schrift-shop-comp__slideshow > img.is-active {
+  opacity: 1;
+}
+
+/* Schrift Shop — Gill tiles (background + no rounding) */
+.schrift-shop-comp__frame--surface-gill {
+  background-color: #f2f4f7;
+  border-radius: 0;
+}
+
+.schrift-shop-comp__frame--surface-gill img {
+  border-radius: 0;
+}
+
+.schrift-shop-comp[data-figma-node="2214-1838"] .schrift-shop-comp__frame--surface-gill {
+  aspect-ratio: 1 / 1;
+  overflow: clip;
+}
+
+.schrift-shop-comp[data-figma-node="2214-1838"] .schrift-shop-comp__frame--surface-gill > img {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
 }
 
 .schrift-shop-comp__ph {
