@@ -4035,16 +4035,39 @@ img[data-progressive-image="true"].pimg__full.is-loaded {
   inline-size: 100%;
   margin: 0;
   padding: 0;
-  background-color: var(--color-black);
+  background-color: var(--color-white);
   border: none;
   border-radius: var(--radius-sm);
+}
+
+/* When progressive-image wrapper is also used as a placeholder frame, keep pimg's grid overlay. */
+.schrift-shop-comp__ph.pimg {
+  display: grid;
+}
+
+/* If media sits inside a framed background, remove inner rounding. */
+.schrift-shop-comp__frame--stage-dark .schrift-shop-comp__ph,
+.schrift-shop-comp__frame--surface .schrift-shop-comp__ph {
+  border-radius: 0;
+}
+
+.schrift-shop-comp__frame--stage-dark .schrift-shop-comp__ph :is(.pimg__full, .pimg__placeholder, .pimg__picture),
+.schrift-shop-comp__frame--surface .schrift-shop-comp__ph :is(.pimg__full, .pimg__placeholder, .pimg__picture),
+.schrift-shop-comp__frame--stage-dark .schrift-shop-comp__ph.pimg > .pimg__full,
+.schrift-shop-comp__frame--surface .schrift-shop-comp__ph.pimg > .pimg__full {
+  border-radius: 0;
 }
 
 .schrift-shop-comp__ph--edge {
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
 }
 
+.schrift-shop-comp__ph--surface {
+  background-color: #f2f4f7;
+}
+
 .schrift-shop-comp__ph--on-dark {
+  background-color: var(--color-black);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.38);
 }
 
