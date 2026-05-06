@@ -1,6 +1,7 @@
 ;(() => {
   const loadedClass = 'is-loaded'
   const errorClass = 'is-error'
+  const handledRoots = new WeakSet()
 
   const getFullImage = (root) => {
     if (!root) return null
@@ -20,19 +21,55 @@
     root.classList.add(errorClass)
   }
 
-  const handleOne = async (root) => {
+  const waitForNextPaint = () =>
+    new Promise((resolve) => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(resolve)
+      })
+    })
+
+  const revealWhenReady = async (root, full) => {
+    if (!full.naturalWidth) {
+      markError(root)
+      return
+    }
+
+    if (typeof full.decode === 'function') {
+      try {
+        await full.decode()
+      } catch {
+        if (!full.naturalWidth) {
+          markError(root)
+          return
+        }
+      }
+    }
+
+    await waitForNextPaint()
+    markLoaded(root)
+  }
+
+  const handleOne = (root) => {
+    if (!root || handledRoots.has(root)) return
+    handledRoots.add(root)
+
     const full = getFullImage(root)
     if (!full) return
 
     if (full.complete && full.naturalWidth > 0) {
-      markLoaded(root)
+      void revealWhenReady(root, full)
+      return
+    }
+
+    if (full.complete) {
+      markError(root)
       return
     }
 
     full.addEventListener(
       'load',
       () => {
-        markLoaded(root)
+        void revealWhenReady(root, full)
       },
       { once: true }
     )
@@ -54,10 +91,10 @@
     // Slideshow overlays keep all slides in the same viewport footprint,
     // but only the active one is visible. Load & mark slides immediately
     // so we don't flash the placeholder when switching.
-    slideshowRoots.forEach((root) => void handleOne(root))
+    slideshowRoots.forEach(handleOne)
 
     if (typeof IntersectionObserver !== 'function') {
-      roots.forEach((root) => void handleOne(root))
+      roots.forEach(handleOne)
       return
     }
 
@@ -66,7 +103,7 @@
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return
           observer.unobserve(entry.target)
-          void handleOne(entry.target)
+          handleOne(entry.target)
         })
       },
       {
@@ -85,4 +122,3 @@
     init()
   }
 })()
-

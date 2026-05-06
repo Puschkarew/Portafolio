@@ -654,6 +654,8 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   display: grid;
   inline-size: 100%;
   max-inline-size: 100%;
+  overflow: hidden;
+  overflow: clip;
 }
 
 .pimg__placeholder,
@@ -669,7 +671,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   filter: blur(96px);
   transform: scale(1.05);
   opacity: 1;
-  transition: opacity 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 450ms cubic-bezier(0.16, 1, 0.3, 1) 120ms;
 }
 
 .pimg__picture {
@@ -683,10 +685,10 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   inline-size: 100%;
   block-size: auto;
   opacity: 0;
-  filter: blur(96px);
+  filter: blur(24px);
   transition:
-    opacity 600ms cubic-bezier(0.16, 1, 0.3, 1),
-    filter 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 500ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 500ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .pimg.is-loaded .pimg__full {
