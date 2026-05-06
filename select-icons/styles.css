@@ -95,7 +95,7 @@ h1 {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 4px;
   border: 1px solid rgba(10, 52, 44, 0.2);
   overflow: hidden;
   touch-action: none;
