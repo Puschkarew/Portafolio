@@ -198,14 +198,16 @@ title: Portfolio — Home
           </article>
 
           <article class="card card--madebymad" aria-labelledby="project-made-by-mad" data-reveal="scale">
-            <div class="card__clip">
-              <div class="card__media media--madebymad">
-                {% progressiveImage "/assets/figma/card-madebymad.png", "Made by Mad studio project preview", 1095, 640, "", "", "lazy", "async" %}
+            <a class="card__link" href="{{ "/made-by-mad/" | url }}">
+              <div class="card__clip">
+                <div class="card__media media--madebymad">
+                  {% progressiveImage "/assets/figma/card-madebymad.png", "Made by Mad studio project preview", 1095, 640, "", "", "lazy", "async" %}
+                </div>
+                <div class="card__tag">
+                  <div class="tag"><h3 id="project-made-by-mad" class="type-caption tag__text">Made by Mad</h3></div>
+                </div>
               </div>
-              <div class="card__tag">
-                <div class="tag"><h3 id="project-made-by-mad" class="type-caption tag__text">Made by Mad</h3></div>
-              </div>
-            </div>
+            </a>
           </article>
 
           <article class="card card--secretkitchen" aria-labelledby="project-secret-kitchen" data-reveal="scale">
