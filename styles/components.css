@@ -3713,6 +3713,14 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   border-radius: var(--radius-sm);
 }
 
+.mybox-media video {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+}
+
 .mybox-media--placeholder {
   grid-column: 1 / -1;
   aspect-ratio: 1464 / 820;
