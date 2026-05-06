@@ -4176,8 +4176,12 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   margin: 0;
   inline-size: 100%;
   min-inline-size: 0;
+
+  --humans-media-bg: var(--color-black);
   border-radius: var(--radius-sm);
-  background: var(--color-black);
+  background: var(--humans-media-bg);
+  overflow: hidden;
+  overflow: clip;
 }
 
 /* Progressive overlay uses .pimg { display: grid }; do not force display:block on .pimg here. */
@@ -4195,7 +4199,7 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   inline-size: 100%;
   block-size: 100%;
   object-fit: cover;
-  border-radius: var(--radius-sm);
+  border-radius: 0;
 }
 
 .humans-media--laptop,
@@ -4242,21 +4246,25 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .humans-media--icon-wifi {
+  --humans-media-bg: #3326af;
   grid-column: 1 / span 4;
   aspect-ratio: 1;
 }
 
 .humans-media--icon-bus {
+  --humans-media-bg: #ca3a65;
   grid-column: 5 / span 4;
   aspect-ratio: 1;
 }
 
 .humans-media--icon-lamp {
+  --humans-media-bg: #feffb6;
   grid-column: 9 / span 4;
   aspect-ratio: 1;
 }
 
 .humans-media--icon-coffee {
+  --humans-media-bg: #d5f9ff;
   grid-column: 1 / span 4;
   aspect-ratio: 1;
 }
