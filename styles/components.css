@@ -2075,6 +2075,16 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   background: var(--mybox-orange-950);
 }
 
+.case-hero--mybox .case-hero__media > .pimg {
+  align-items: center;
+}
+
+.case-hero--mybox .case-hero__media :is(img, .pimg__full, .pimg__placeholder) {
+  block-size: auto;
+  min-block-size: 100%;
+  object-position: 50% 50%;
+}
+
 .case-hero--mybox .case-hero__title {
   color: var(--mybox-orange-500);
 }
