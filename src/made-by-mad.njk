@@ -129,3 +129,34 @@ headerVariant: case
       </section>
     </main>
 
+    <script>
+      // #region agent log
+      ;(() => {
+        const runId = "pre-fix"
+        const hypothesisId = "H1_pathPrefix"
+        const target = document.querySelector(".made-by-mad-ph--hero")
+        const computed = target ? getComputedStyle(target).backgroundImage : ""
+
+        fetch("http://127.0.0.1:7866/ingest/a09f6552-8ba6-4f94-9de9-01af8100faed", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Debug-Session-Id": "31f3b2"
+          },
+          body: JSON.stringify({
+            sessionId: "31f3b2",
+            runId,
+            hypothesisId,
+            location: "src/made-by-mad.njk:inline",
+            message: "Made by Mad hero backgroundImage computed",
+            data: {
+              pathname: window.location.pathname,
+              origin: window.location.origin,
+              computedBackgroundImage: computed
+            },
+            timestamp: Date.now()
+          })
+        }).catch(() => {})
+      })()
+      // #endregion
+    </script>
