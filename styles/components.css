@@ -4192,17 +4192,27 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   inline-size: 100%;
 }
 
-/* Schrift Shop — slideshow (4 slides, cut every 1.25s) */
-.schrift-shop-comp__slideshow {
+/* Case slideshows — hard cut every 1.25s */
+.schrift-shop-comp__slideshow,
+.humans-media__slideshow {
   display: grid;
   inline-size: 100%;
-  aspect-ratio: 4096 / 3990;
   border-radius: 0;
   overflow: clip;
 }
 
+.schrift-shop-comp__slideshow {
+  aspect-ratio: 4096 / 3990;
+}
+
+.humans-media__slideshow {
+  block-size: 100%;
+}
+
 .schrift-shop-comp__slideshow > img,
-.schrift-shop-comp__slideshow > .pimg {
+.schrift-shop-comp__slideshow > .pimg,
+.humans-media__slideshow > img,
+.humans-media__slideshow > .pimg {
   grid-area: 1 / 1;
   inline-size: 100%;
   block-size: 100%;
@@ -4213,18 +4223,31 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .schrift-shop-comp__slideshow > img.is-active,
-.schrift-shop-comp__slideshow > .pimg.is-active {
+.schrift-shop-comp__slideshow > .pimg.is-active,
+.humans-media__slideshow > img.is-active,
+.humans-media__slideshow > .pimg.is-active {
   opacity: 1;
   z-index: 1;
 }
 
 .schrift-shop-comp__slideshow .pimg__full,
-.schrift-shop-comp__slideshow .pimg__placeholder {
+.schrift-shop-comp__slideshow .pimg__placeholder,
+.humans-media__slideshow .pimg__full,
+.humans-media__slideshow .pimg__placeholder {
   inline-size: 100%;
   block-size: 100%;
-  object-fit: contain;
   border-radius: 0;
   transition: none;
+}
+
+.schrift-shop-comp__slideshow .pimg__full,
+.schrift-shop-comp__slideshow .pimg__placeholder {
+  object-fit: contain;
+}
+
+.humans-media__slideshow .pimg__full,
+.humans-media__slideshow .pimg__placeholder {
+  object-fit: cover;
 }
 
 /* Schrift Shop — Gill tiles (background + no rounding) */

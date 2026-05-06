@@ -195,7 +195,7 @@
   }
 
   const init = () => {
-    const roots = Array.from(document.querySelectorAll('[data-slideshow="schrift-shop"]'))
+    const roots = Array.from(document.querySelectorAll('[data-slideshow]'))
     roots.forEach((root) => initSlideshow(root))
   }
 
@@ -205,4 +205,3 @@
     init()
   }
 })()
-
