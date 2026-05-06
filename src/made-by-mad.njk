@@ -8,7 +8,9 @@ headerVariant: case
       <section class="section section--hero hero case-hero case-hero--made-by-mad" aria-labelledby="made-by-mad-title" data-hero-debug="off">
         <div class="case-hero__panel case-hero__media-panel">
           <figure class="case-hero__media made-by-mad-hero-media">
-            <div class="made-by-mad-ph made-by-mad-ph--hero" role="img" aria-label="Made by Mad hero media placeholder"></div>
+            <div class="made-by-mad-ph made-by-mad-ph--hero">
+              {% progressiveImage "/assets/figma/Made by Mad/ARTD C04 Device 035.jpg", "Made by Mad hero media", 1464, 803, "", "", "eager", "async" %}
+            </div>
           </figure>
         </div>
 
@@ -54,32 +56,48 @@ headerVariant: case
 
           <section class="made-by-mad-media-grid" aria-label="Made by Mad media">
             <figure class="made-by-mad-media made-by-mad-media--01" aria-label="Media placeholder 1">
-              <div class="made-by-mad-ph made-by-mad-ph--wide-1464-915" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--wide-1464-915" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/Illustration 1.svg", "", 1464, 915, "", "", "lazy", "async" %}
+              </div>
             </figure>
 
             <figure class="made-by-mad-media made-by-mad-media--02" aria-label="Media placeholder 2">
-              <div class="made-by-mad-ph made-by-mad-ph--480-625" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--480-625" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/Illustration 2.png", "", 480, 625, "", "", "lazy", "async" %}
+              </div>
             </figure>
             <figure class="made-by-mad-media made-by-mad-media--03" aria-label="Media placeholder 3">
-              <div class="made-by-mad-ph made-by-mad-ph--480-887" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--480-887" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/Illustration 3.png", "", 480, 887, "", "", "lazy", "async" %}
+              </div>
             </figure>
             <figure class="made-by-mad-media made-by-mad-media--04" aria-label="Media placeholder 4">
-              <div class="made-by-mad-ph made-by-mad-ph--480-434" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--480-434" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/Illustration 4.png", "", 480, 434, "", "", "lazy", "async" %}
+              </div>
             </figure>
 
             <figure class="made-by-mad-media made-by-mad-media--05" aria-label="Media placeholder 5">
               <div class="made-by-mad-media-duo" aria-hidden="true">
-                <div class="made-by-mad-ph made-by-mad-ph--931-1334"></div>
-                <div class="made-by-mad-ph made-by-mad-ph--393-774 made-by-mad-ph--phone"></div>
+                <div class="made-by-mad-ph made-by-mad-ph--931-1334">
+                  {% progressiveImage "/assets/figma/Made by Mad/Illustration 5.png", "", 931, 1334, "", "", "lazy", "async" %}
+                </div>
+                <div class="made-by-mad-ph made-by-mad-ph--393-774 made-by-mad-ph--phone">
+                  {% progressiveImage "/assets/figma/Made by Mad/Illustration 6.png", "", 393, 774, "", "", "lazy", "async" %}
+                </div>
               </div>
             </figure>
 
             <figure class="made-by-mad-media made-by-mad-media--06" aria-label="Media placeholder 6">
-              <div class="made-by-mad-ph made-by-mad-ph--wide-1464-915" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--wide-1464-915" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/Illustration 6.svg", "", 1464, 915, "", "", "lazy", "async" %}
+              </div>
             </figure>
 
             <figure class="made-by-mad-media made-by-mad-media--07" aria-label="Media placeholder 7">
-              <div class="made-by-mad-ph made-by-mad-ph--1464-976" aria-hidden="true"></div>
+              <div class="made-by-mad-ph made-by-mad-ph--1464-976" aria-hidden="true">
+                {% progressiveImage "/assets/figma/Made by Mad/MM_Phone_PH-TGPD-01.jpg", "", 1464, 976, "", "", "lazy", "async" %}
+              </div>
             </figure>
           </section>
 
@@ -128,35 +146,3 @@ headerVariant: case
         </div>
       </section>
     </main>
-
-    <script>
-      // #region agent log
-      ;(() => {
-        const runId = "pre-fix"
-        const hypothesisId = "H1_pathPrefix"
-        const target = document.querySelector(".made-by-mad-ph--hero")
-        const computed = target ? getComputedStyle(target).backgroundImage : ""
-
-        fetch("http://127.0.0.1:7866/ingest/a09f6552-8ba6-4f94-9de9-01af8100faed", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-Debug-Session-Id": "31f3b2"
-          },
-          body: JSON.stringify({
-            sessionId: "31f3b2",
-            runId,
-            hypothesisId,
-            location: "src/made-by-mad.njk:inline",
-            message: "Made by Mad hero backgroundImage computed",
-            data: {
-              pathname: window.location.pathname,
-              origin: window.location.origin,
-              computedBackgroundImage: computed
-            },
-            timestamp: Date.now()
-          })
-        }).catch(() => {})
-      })()
-      // #endregion
-    </script>

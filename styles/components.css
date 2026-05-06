@@ -2312,25 +2312,33 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .made-by-mad-ph {
+  position: relative;
   inline-size: 100%;
   block-size: 100%;
   background-color: var(--color-black);
-  background-image: var(--made-by-mad-image);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: var(--made-by-mad-fit, contain);
   border-radius: var(--radius-sm);
+  overflow: clip;
+}
+
+.made-by-mad-ph > .pimg {
+  position: relative;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .made-by-mad-ph--hero {
   aspect-ratio: 1464 / 803;
   border-radius: var(--radius-sm);
-  --made-by-mad-image: url("../assets/figma/Made by Mad/ARTD C04 Device 035.jpg");
   --made-by-mad-fit: cover;
 }
 
-.made-by-mad-media--01 .made-by-mad-ph--wide-1464-915 {
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 1.svg");
+.made-by-mad-ph :is(.pimg__full, .pimg__placeholder) {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: var(--made-by-mad-fit, contain);
+  object-position: var(--made-by-mad-position, center);
 }
 
 .made-by-mad-ph--wide-1464-915 {
@@ -2339,33 +2347,27 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .made-by-mad-ph--1464-976 {
   aspect-ratio: 1464 / 976;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/MM_Phone_PH-TGPD-01.jpg");
   --made-by-mad-fit: cover;
 }
 
 .made-by-mad-ph--480-625 {
   aspect-ratio: 480 / 625;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 2.png");
 }
 
 .made-by-mad-ph--480-887 {
   aspect-ratio: 480 / 887;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 3.png");
 }
 
 .made-by-mad-ph--480-434 {
   aspect-ratio: 480 / 434;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 4.png");
 }
 
 .made-by-mad-ph--931-1334 {
   aspect-ratio: 931 / 1334;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 5.png");
 }
 
 .made-by-mad-ph--393-774 {
   aspect-ratio: 393 / 774;
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 6.png");
 }
 
 .made-by-mad-ph--phone {
@@ -2393,7 +2395,7 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 .made-by-mad-media--03 .made-by-mad-ph,
 .made-by-mad-media--04 .made-by-mad-ph {
   background-color: transparent;
-  background-position: top center;
+  --made-by-mad-position: top center;
 }
 
 .made-by-mad-media--05 {
@@ -2424,10 +2426,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .made-by-mad-media--06 {
   grid-column: 1 / -1;
-}
-
-.made-by-mad-media--06 .made-by-mad-ph--wide-1464-915 {
-  --made-by-mad-image: url("../assets/figma/Made by Mad/Illustration 6.svg");
 }
 
 .made-by-mad-media--07 {
