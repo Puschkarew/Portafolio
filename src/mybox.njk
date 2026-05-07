@@ -104,16 +104,13 @@ headerVariant: case
 
             <figure class="mybox-media mybox-media--drink">
               {% progressiveImage "/assets/figma/mybox/Illustration 07.png", "MyBox branded drink photography on an orange glass surface", 717, 1024, "", "", "lazy", "async" %}
-            </figure>
-
-            {# Collage tiles: paths must exist on disk; edit array in src/_data/mybox.json (key collage). ProgressiveImage fails build if src is missing. #}
-            <div class="mybox-collage" role="img" aria-label="MyBox food photography collage">
-              {% if mybox.collage and (mybox.collage | length) > 0 %}
-              {% for collageSrc in mybox.collage %}
-              {% set i = loop.index %}
+            </figure><div class="mybox-collage" role="img" aria-label="MyBox food photography collage">
+              {%- if mybox.collage and (mybox.collage | length) > 0 -%}
+              {%- for collageSrc in mybox.collage -%}
+              {%- set i = loop.index -%}
               <figure class="mybox-collage__item mybox-collage__item--{% if i < 10 %}0{% endif %}{{ i }}">{% progressiveImage collageSrc, "", 1254, 1254, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}</figure>
-              {% endfor %}
-              {% endif %}
+              {%- endfor -%}
+              {%- endif -%}
             </div>
 
             <figure class="mybox-media mybox-media--chair-phone">

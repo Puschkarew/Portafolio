@@ -330,7 +330,6 @@
     color-mix(in srgb, var(--color-hero-glow) 0%, transparent) 100%
   );
   --hero-headline-color: var(--color-text-brand-blue);
-  --hero-accent-color: var(--color-text-accent-red);
   --hero-padding-block-start: 84px;
   --hero-padding-block-end: 64px;
   --hero-padding-block-end-mobile: 0;
