@@ -331,14 +331,16 @@ title: Portfolio — Home
           </article>
 
           <article class="card card--roger" aria-labelledby="project-roger-excoffon-workshop" data-reveal="scale">
-            <div class="card__clip">
-              <div class="card__media media--roger">
-                {% progressiveImage "/assets/figma/card-roger-excoffon.png", "Roger Excoffon Workshop project preview", 1095, 640, "", "", "lazy", "async" %}
+            <a class="card__link" href="{{ "/roger/" | url }}">
+              <div class="card__clip">
+                <div class="card__media media--roger">
+                  {% progressiveImage "/assets/figma/card-roger-excoffon.png", "Roger Excoffon Workshop project preview", 1095, 640, "", "", "lazy", "async" %}
+                </div>
+                <div class="card__tag">
+                  <div class="tag"><h3 id="project-roger-excoffon-workshop" class="type-caption tag__text">Roger Excoffon Workshop</h3></div>
+                </div>
               </div>
-              <div class="card__tag">
-                <div class="tag"><h3 id="project-roger-excoffon-workshop" class="type-caption tag__text">Roger Excoffon Workshop</h3></div>
-              </div>
-            </div>
+            </a>
           </article>
 
           <article class="card card--untitled" aria-labelledby="project-untitled-font" data-reveal="scale">
