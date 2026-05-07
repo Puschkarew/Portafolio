@@ -1,7 +1,1 @@
 #:schema https://developers.openai.com/codex/config-schema.json
-
-# Project-scoped Codex defaults for this portfolio repo.
-# Codex loads this file only after the project is trusted.
-model = "gpt-5.5"
-model_reasoning_effort = "medium"
-model_verbosity = "medium"

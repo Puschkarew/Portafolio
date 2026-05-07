@@ -82,6 +82,8 @@ jobs:
       - name: Install browser
         run: npx playwright install chromium firefox --with-deps
       - name: Run smoke suite
+        env:
+          PLAYWRIGHT_PROJECTS: chromium,firefox
         run: npm run smoke
       - name: Live parity reminder (local gate)
         run: echo "Reminder: run npm run verify:slice locally (with LIVE_PARITY_SLICE) before closing each vertical slice."

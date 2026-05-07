@@ -4,6 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ title | default(site.title) }}</title>
+    <meta name="description" content="{{ description | default(site.description) }}" />
+    <meta name="author" content="{{ site.author | default(site.name) }}" />
+{% if robots %}
+    <meta name="robots" content="{{ robots }}" />
+{% endif %}
+    <link rel="canonical" href="{{ site.url }}{{ (canonical | default(page.url)) | url }}" />
+    <meta property="og:site_name" content="{{ site.name }}" />
+    <meta property="og:locale" content="{{ site.locale }}" />
+    <meta property="og:type" content="{{ ogType | default("website") }}" />
+    <meta property="og:title" content="{{ title | default(site.title) }}" />
+    <meta property="og:description" content="{{ description | default(site.description) }}" />
+    <meta property="og:url" content="{{ site.url }}{{ (canonical | default(page.url)) | url }}" />
+    <meta property="og:image" content="{{ site.url }}{{ (image | default(site.image)) | url }}" />
+    <meta property="og:image:alt" content="{{ imageAlt | default(site.imageAlt) }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ title | default(site.title) }}" />
+    <meta name="twitter:description" content="{{ description | default(site.description) }}" />
+    <meta name="twitter:image" content="{{ site.url }}{{ (image | default(site.image)) | url }}" />
+    <meta name="theme-color" content="{{ site.themeColor }}" />
+    <link rel="icon" href="{{ "/assets/favicon.svg" | url }}" type="image/svg+xml" />
     <link rel="stylesheet" href="{{ "/styles/fonts.css" | url }}" />
     <link rel="stylesheet" href="{{ "/styles/tokens.css" | url }}" />
     <link rel="stylesheet" href="{{ "/styles/layout.css" | url }}" />
@@ -67,7 +87,7 @@
             <li><a class="mobile-menu__link type-display-xl" href="{{ "/about/" | url }}">About</a></li>
             <li><a class="mobile-menu__link type-display-xl" href="{{ "/index/" | url }}">Index</a></li>
             <li><a class="mobile-menu__link type-display-xl" href="#">CV</a></li>
-            <li><a class="mobile-menu__link type-display-xl" href="#">Get in touch</a></li>
+            <li><a class="mobile-menu__link type-display-xl" href="mailto:puschkarev.vv@gmail.com">Get in touch</a></li>
           </ul>
         </nav>
       </div>
@@ -96,7 +116,7 @@
                 </li>
               </ul>
             </nav>
-            <a class="nav-link site-header__contact" href="#contact"><span class="site-header__text">Get in touch</span></a>
+            <a class="nav-link site-header__contact" href="mailto:puschkarev.vv@gmail.com"><span class="site-header__text">Get in touch</span></a>
             <a class="nav-link site-header__mobile-trigger" href="#work"><span class="site-header__text">Menu</span></a>
           </div>
         </div>

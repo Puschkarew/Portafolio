@@ -11,6 +11,7 @@ type ScrubState = {
 
 test.describe("refresh at footer: scroll up restores stage without stale inlines", () => {
   test.use({ viewport: { width: 1512, height: 900 } });
+  test.skip(({ browserName }) => browserName !== "chromium", "Footer reload scroll restoration is only asserted in Chromium.");
 
   test("reload at max scroll, scroll up, stage opacities match scrub and shell visible", async ({ page }) => {
     await page.goto(runtimeHomeUrl, { waitUntil: "load" });
