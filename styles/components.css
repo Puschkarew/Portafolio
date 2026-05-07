@@ -2994,10 +2994,16 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .case-content-shell {
   --case-content-glow: #505050;
+
+  /* Matches the visual falloff of the case hero's native inset 0 0 24px shadow. */
   --case-content-reveal-shadow-background: linear-gradient(
     to top,
-    color-mix(in srgb, var(--case-content-glow) 56%, transparent) 0%,
-    color-mix(in srgb, var(--case-content-glow) 24%, transparent) 44%,
+    color-mix(in srgb, var(--case-content-glow) 47%, transparent) 0%,
+    color-mix(in srgb, var(--case-content-glow) 36%, transparent) 17%,
+    color-mix(in srgb, var(--case-content-glow) 24%, transparent) 35%,
+    color-mix(in srgb, var(--case-content-glow) 15%, transparent) 52%,
+    color-mix(in srgb, var(--case-content-glow) 8%, transparent) 70%,
+    color-mix(in srgb, var(--case-content-glow) 4%, transparent) 87%,
     color-mix(in srgb, var(--case-content-glow) 0%, transparent) 100%
   );
 
@@ -3051,7 +3057,7 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .case-hero--top-2019 + .case-content-shell {
-  --case-content-glow: #ff5c00;
+  --case-content-glow: #ffdf20;
 }
 
 .case-content {
