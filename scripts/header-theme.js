@@ -98,7 +98,28 @@
     for (i = 0; i < GLASS_SOURCES.length; i += 1) {
       g = GLASS_SOURCES[i];
       src = headerEl ? headerEl.querySelector(g.selector) : null;
-      setGlassItemRect(glassItemsByName[g.name], src ? src.getBoundingClientRect() : { width: 0, height: 0 });
+      if (!src) {
+        setGlassItemRect(glassItemsByName[g.name], { width: 0, height: 0 });
+        continue;
+      }
+
+      var srcRect = src.getBoundingClientRect();
+      var nextWidth = srcRect.width;
+      if (g.name === "project") {
+        var overflowRight = Math.max(0, (src.scrollWidth || 0) - (src.clientWidth || 0));
+        var srcStyles = window.getComputedStyle ? getComputedStyle(src) : null;
+        var padR = srcStyles ? parseFloat(srcStyles.paddingRight) || 0 : 0;
+        nextWidth = srcRect.width + overflowRight + (overflowRight > 0 ? padR : 0);
+      }
+
+      var nextRect = {
+        left: srcRect.left,
+        top: srcRect.top,
+        width: nextWidth,
+        height: srcRect.height
+      };
+
+      setGlassItemRect(glassItemsByName[g.name], nextRect);
     }
   }
 
@@ -121,7 +142,16 @@
       if (pair.source.getAttribute("href") !== pair.clone.getAttribute("href")) {
         pair.clone.setAttribute("href", pair.source.getAttribute("href") || "#");
       }
-      setHitLinkRect(pair.clone, pair.source.getBoundingClientRect());
+      var sourceRect = pair.source.getBoundingClientRect();
+      var sourceScrollWidth = pair.source.scrollWidth || 0;
+      var nextRect = {
+        left: sourceRect.left,
+        top: sourceRect.top,
+        width: Math.max(sourceRect.width, sourceScrollWidth),
+        height: sourceRect.height
+      };
+
+      setHitLinkRect(pair.clone, nextRect);
     }
   }
 
