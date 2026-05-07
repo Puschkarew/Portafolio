@@ -637,7 +637,7 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
 }
 
 .media--mybox {
-  aspect-ratio: 480 / 760;
+  aspect-ratio: 1 / 1;
 }
 
 .media--madebymad {
@@ -1905,11 +1905,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
   .cards-grid--mad .card--madebymad {
     grid-column: 4 / span 9;
-    grid-row: 4;
-  }
-
-  .cards-grid--mad .card--secretkitchen {
-    grid-column: 1 / span 6;
     grid-row: 3;
   }
 
@@ -2356,6 +2351,8 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .roger-ph--hero {
   --ph-ratio: 1512 / 911;
+
+  background: url("/assets/figma/roger/hero.jpg") center / cover no-repeat;
 }
 
 .roger-ph--ratio-2880x1800 {
@@ -3038,6 +3035,10 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .case-hero--mos + .case-content-shell {
   --case-content-glow: #99a1af;
+}
+
+.case-hero--roger + .case-content-shell {
+  --case-content-glow: #2f54a0;
 }
 
 .case-hero--schrift-shop + .case-content-shell {
