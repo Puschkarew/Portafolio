@@ -5600,4 +5600,18 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
     height: auto;
     transform: none;
   }
+
+  .footer__model > .pimg {
+    position: absolute;
+    inset: 0;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+
+  .footer__model :is(.pimg__placeholder, .pimg__full) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: contain;
+    object-position: center center;
+  }
 }
