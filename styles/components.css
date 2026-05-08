@@ -5431,10 +5431,18 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
   .case-details {
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: var(--space-1600);
   }
 
   .case-details__art {
     inline-size: min(78vw, 320px);
+  }
+
+  .schrift-foundry-details .case-details__art {
+    inset-block-start: clamp(112px, 15dvh, 149px);
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    inline-size: min(61vw, 251px);
   }
 
   .case-details__section {
