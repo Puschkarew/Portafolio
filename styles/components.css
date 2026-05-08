@@ -1246,6 +1246,10 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
     display: inline;
   }
 
+  .index-table__item--no-viewcase .index-table__line--row {
+    color: var(--color-text-muted);
+  }
+
   .index-table__grid--head .index-table__cell--num,
   .index-table__grid--head .index-table__cell--agency,
   .index-table__grid--head .index-table__cell--type,
