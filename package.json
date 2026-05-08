@@ -4,9 +4,10 @@
   "description": "Portfolio handoff and quality gate scaffolding.",
   "scripts": {
     "clean": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
-    "build": "npm run clean && eleventy",
+    "build": "npm run clean && eleventy && npm run optimize:large-assets",
     "build-ghpages": "npm run clean && eleventy --pathprefix=/Portafolio/",
     "dev": "eleventy --serve",
+    "optimize:large-assets": "node scripts/quality/optimize-large-assets.mjs",
     "smoke": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:perf",
     "verify:slice": "npm run smoke:visual && npm run smoke:a11y && npm run smoke:token-semantic && npm run smoke:live",
     "lint:css": "stylelint \"styles/**/*.css\"",
@@ -30,8 +31,11 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.1.5",
     "@11ty/eleventy-img": "^4.0.2",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@playwright/test": "^1.59.1",
+    "@resvg/resvg-js": "^2.6.2",
     "html-validate": "^9.7.1",
+    "sharp": "^0.34.5",
     "stylelint": "^16.26.1",
     "stylelint-config-standard": "^39.0.1"
   }
