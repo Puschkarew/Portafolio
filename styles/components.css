@@ -3098,7 +3098,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 
 .case-prose {
   grid-column: 5 / span 6;
-  font-feature-settings: "onum" 1, "pnum" 1;
 }
 
 .case-prose p {
@@ -3495,7 +3494,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 .case-lead-prose {
   grid-column: 5 / span 7;
   max-inline-size: 1087px;
-  font-feature-settings: "onum" 1, "pnum" 1;
 }
 
 .case-lead-prose p {
@@ -3565,7 +3563,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   font-size: var(--type-body-lg-size);
   line-height: var(--type-body-lg-line-height);
   letter-spacing: var(--type-body-lg-tracking);
-  font-feature-settings: "onum" 1, "pnum" 1;
 }
 
 .case-details__item p {
@@ -4134,7 +4131,6 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
   align-self: center;
   padding-inline: var(--space-1600);
   text-align: center;
-  font-feature-settings: "onum" 1, "pnum" 1;
 }
 
 .mybox-media-copy p {
