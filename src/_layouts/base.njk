@@ -23,7 +23,11 @@
     <meta name="twitter:description" content="{{ description | default(site.description) }}" />
     <meta name="twitter:image" content="{{ site.url }}{{ (image | default(site.image)) | url }}" />
     <meta name="theme-color" content="{{ site.themeColor }}" />
-    <link rel="icon" href="{{ "/assets/favicon.svg" | url }}" type="image/svg+xml" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="{{ "/styles/fonts.css" | url }}" />
     <link rel="stylesheet" href="{{ "/styles/tokens.css" | url }}" />
     <link rel="stylesheet" href="{{ "/styles/layout.css" | url }}" />

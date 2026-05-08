@@ -31,6 +31,7 @@ const isPngPath = (src) => String(src).toLowerCase().endsWith(".png")
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets")
+  eleventyConfig.addPassthroughCopy({ public: "." })
   eleventyConfig.addPassthroughCopy("fonts")
   eleventyConfig.addPassthroughCopy("scripts")
   eleventyConfig.addPassthroughCopy("styles")
