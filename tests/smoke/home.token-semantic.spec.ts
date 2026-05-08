@@ -36,7 +36,7 @@ const desktopExpectations: TokenExpectation[] = [
   {
     selector: ".hero__description",
     role: "body",
-    familyIncludes: "Society Trial",
+    familyIncludes: "Society",
     weight: "400",
     sizePx: 20,
     lineHeightPx: 30,
@@ -182,7 +182,7 @@ test("about page uses Body/LG underline for table links", async ({ page }) => {
     const expectedSize = isMobile ? 18 : 20;
     const expectedLineHeight = isMobile ? 26 : 30;
 
-    expect(styles.fontFamily).toContain("Society Trial");
+    expect(styles.fontFamily).toContain("Society");
     expect(styles.fontWeight).toBe("400");
     expect(styles.fontStyle).toBe("normal");
     expect(Math.abs(toPx(styles.fontSize) - expectedSize)).toBeLessThanOrEqual(toleranceFor("size"));

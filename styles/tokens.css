@@ -81,7 +81,7 @@
 
   /* 2. Typography — families */
   --font-family-sans: "American Grotesk", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-family-serif: "Society Trial", "Georgia", "Times New Roman", serif;
+  --font-family-serif: "Society", "Georgia", "Times New Roman", serif;
 
   /* 2.1 Typography — weights */
   --font-weight-regular: 400;

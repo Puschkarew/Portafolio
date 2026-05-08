@@ -1,6 +1,5 @@
 /*
- * Local OTF webfonts in /fonts (temporary trial files).
- * Browsers accept OpenType with format("opentype"). For production you may switch to woff2.
+ * Licensed local webfonts in /fonts.
  */
 
 @font-face {
@@ -8,7 +7,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../fonts/AmericanGrotesk-NormalRegular.otf") format("opentype");
+  src: url("../fonts/american-grotesk-regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -16,21 +15,21 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../fonts/AmericanGrotesk-NormalMedium.otf") format("opentype");
+  src: url("../fonts/american-grotesk-medium.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Society Trial";
+  font-family: "Society";
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../fonts/Society-Regular-trial.otf") format("opentype");
+  src: url("../fonts/Society-Regular.woff2") format("woff2");
 }
 
 @font-face {
-  font-family: "Society Trial";
+  font-family: "Society";
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: url("../fonts/Society-Italic-trial.otf") format("opentype");
+  src: url("../fonts/Society-Italic.woff2") format("woff2");
 }
