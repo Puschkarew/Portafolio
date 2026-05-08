@@ -688,6 +688,14 @@ html.has-scroll-reveal .mezhdu-collage-composition .mezhdu-collage-composition__
   object-fit: cover;
 }
 
+.card__media video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
 /* Progressive images (blur-up / LQIP) */
 .pimg {
   display: grid;

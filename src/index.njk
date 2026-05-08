@@ -238,7 +238,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/particle-text/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--particle">
-                  {% progressiveImage "/assets/figma/card-particle-text.png", "Particle Text project preview", 1095, 687, "", "", "lazy", "async" %}
+                  {% progressiveImage "/assets/figma/bts.jpg", "Particle Text project preview", 3634, 1878, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-particle-text" class="type-caption tag__text">Particle Text</h3></div>
@@ -249,7 +249,20 @@ title: Portfolio — Home
 
           <article class="card card--shader" aria-labelledby="project-3dgs-shader" data-reveal="scale">
             <div class="card__clip">
-              <div class="card__media media--shader"></div>
+              <div class="card__media media--shader">
+                <!-- [html-validate-disable-next no-autoplay: Decorative card media is muted, looped, and inline.] -->
+                <video
+                  class="card__video"
+                  src="{{ "/assets/figma/3dgs.mp4" | url }}"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-hidden="true"
+                  tabindex="-1"
+                ></video>
+              </div>
               <div class="card__tag">
                 <div class="tag"><h3 id="project-3dgs-shader" class="type-caption tag__text">3DGS Shader</h3></div>
               </div>
@@ -328,7 +341,7 @@ title: Portfolio — Home
             <a class="card__link" href="{{ "/roger/" | url }}">
               <div class="card__clip">
                 <div class="card__media media--roger">
-                  {% progressiveImage "/assets/figma/card-roger-excoffon.png", "Roger Excoffon Workshop project preview", 1095, 640, "", "", "lazy", "async" %}
+                  {% progressiveImage "/assets/figma/roger/main_cover.png", "Roger Excoffon Workshop project preview", 4096, 2560, "", "", "lazy", "async" %}
                 </div>
                 <div class="card__tag">
                   <div class="tag"><h3 id="project-roger-excoffon-workshop" class="type-caption tag__text">Roger Excoffon Workshop</h3></div>
@@ -345,7 +358,7 @@ title: Portfolio — Home
                   {% progressiveImage "/assets/figma/card-untitled-imported.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                   {% progressiveImage "/assets/figma/card-untitled-lines.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                   {% progressiveImage "/assets/figma/card-untitled-handles.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
-                  {% progressiveImage "/assets/figma/card-untitled-anchors.png", "", 726, 726, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
+                    {% progressiveImage "/assets/figma/mk_cover.png", "", 4096, 4096, "", "", "lazy", "async", "", "aria-hidden=\"true\"" %}
                 </div>
               </div>
               <div class="card__tag">
