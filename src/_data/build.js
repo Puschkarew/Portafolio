@@ -20,7 +20,7 @@ const resolveBuildDate = () => {
   return new Date()
 }
 
-/** en-GB + optional SITE_BUILD_TZ (default Central Europe: Berlin / Paris / Madrid) */
+/** en-GB + optional SITE_BUILD_TZ (default Central Europe: Berlin / Paris / Madrid). SSR label only; browsers replace with local time via scripts/site-build-local-time.js when JS runs. */
 const formatSiteBuildLabel = (date) => {
   const tz = process.env.SITE_BUILD_TZ?.trim() || "Europe/Berlin"
   const dtf = new Intl.DateTimeFormat("en-GB", {

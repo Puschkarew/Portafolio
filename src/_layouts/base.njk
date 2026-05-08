@@ -47,7 +47,7 @@
               Society by <strong><a class="footer__meta-link" href="https://www.allcapstype.com/" target="_blank" rel="noopener noreferrer">AllCaps</a></strong>
             </p>
             <p id="contact-details">
-              <time datetime="{{ build.siteBuildAtIso }}">{{ build.siteBuildLabel }}</time>
+              <time datetime="{{ build.siteBuildAtIso }}" data-site-build-time>{{ build.siteBuildLabel }}</time>
             </p>
           </div>
         </div>
@@ -85,7 +85,7 @@
           <ul class="mobile-menu__list">
             <li><a class="mobile-menu__link type-display-xl" href="{{ "/about/" | url }}">About</a></li>
             <li><a class="mobile-menu__link type-display-xl" href="{{ "/index/" | url }}">Index</a></li>
-            <li><a class="mobile-menu__link type-display-xl" href="#">CV</a></li>
+            <li><a class="mobile-menu__link type-display-xl" href="{{ "/CV/Vladimir%20Puschkarew%20CV.pdf" | url }}">CV</a></li>
             <li><a class="mobile-menu__link type-display-xl" href="mailto:puschkarev.vv@gmail.com">Get in touch</a></li>
           </ul>
         </nav>
@@ -111,7 +111,7 @@
                   <a class="nav-link site-header__link" href="{{ "/index/" | url }}"><span class="site-header__text">Index</span></a>
                 </li>
                 <li>
-                  <a class="nav-link site-header__link" href="#footer-meta"><span class="site-header__text">CV</span></a>
+                  <a class="nav-link site-header__link" href="{{ "/CV/Vladimir%20Puschkarew%20CV.pdf" | url }}"><span class="site-header__text">CV</span></a>
                 </li>
               </ul>
             </nav>
@@ -131,6 +131,7 @@
     <script src="{{ "/scripts/progressive-image.js" | url }}" defer></script>
     <script src="{{ "/scripts/project-sticky-background.js?v=no-header-themes" | url }}" defer></script>
     <script src="{{ "/scripts/scroll-reveal.js?v=caselayout-media-reveal" | url }}" defer></script>
+    <script src="{{ "/scripts/site-build-local-time.js" | url }}" defer></script>
     <script src="{{ "/scripts/schrift-shop-slideshow.js?v=slideshow-decode-cut" | url }}" defer></script>
     <script src="{{ "/scripts/top-2019-hero.js" | url }}" defer></script>
   </body>
