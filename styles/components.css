@@ -1650,11 +1650,11 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .section-header__content .section-title {
-  color: var(--section-accent, var(--color-text-primary));
+  color: var(--section-title-color, var(--section-accent, var(--color-text-primary)));
 }
 
 .section-header__content .type-body-lg {
-  color: var(--section-text, var(--color-text-primary));
+  color: var(--section-body-color, var(--section-text, var(--color-text-primary)));
 }
 
 .section-header__intro {
@@ -1672,7 +1672,7 @@ img[data-progressive-image="true"][data-progressive-solo="true"].pimg__full {
 }
 
 .section-header__meta {
-  color: var(--section-meta, var(--color-text-muted));
+  color: var(--section-meta-color, var(--section-meta, var(--color-text-muted)));
 }
 
 .section-header__art {

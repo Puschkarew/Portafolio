@@ -3,7 +3,6 @@
  * @see artifacts/project-sticky-transition-blur-handoff-2026-04-24.md
  */
 (function () {
-  var PROJECT_ORDER = ["featured", "madebymad", "odds", "curves"];
   var PRELUDE = "prelude";
   var TRANSITION_RATIO = 0.5;
   var ART_MAX_BLUR_PX = 32;
@@ -13,6 +12,7 @@
   var refMap = null;
   var colorTable = null;
   var projectRows = null;
+  var projectOrder = [];
   var lastPair = { from: PRELUDE, to: "featured", t: 0 };
   var lastDisplayId = "featured";
   var lastMode = "disabled";
@@ -63,14 +63,11 @@
   }
 
   function prevId(id) {
-    if (id === "featured") {
-      return PRELUDE;
-    }
-    var i = PROJECT_ORDER.indexOf(id);
+    var i = projectOrder.indexOf(id);
     if (i <= 0) {
       return PRELUDE;
     }
-    return PROJECT_ORDER[i - 1];
+    return projectOrder[i - 1];
   }
 
   function layerOpacity(id, pair) {
@@ -118,7 +115,7 @@
 
   function cacheColorTable() {
     var out = Object.create(null);
-    var keys = [PRELUDE].concat(PROJECT_ORDER);
+    var keys = [PRELUDE].concat(projectOrder);
     var k;
     for (k = 0; k < keys.length; k += 1) {
       if (refMap && refMap[keys[k]]) {
@@ -151,6 +148,7 @@
     var root = document.querySelector(".projects-area");
     if (!root) {
       projectRows = [];
+      projectOrder = [];
       return;
     }
     var list = root.querySelectorAll("section[data-project]");
@@ -170,6 +168,9 @@
       });
     }
     projectRows = out;
+    projectOrder = out.map(function (row) {
+      return row.id;
+    });
     recomputeStartScrollY();
   }
 
@@ -201,77 +202,56 @@
   }
 
   /**
-   * Pairs: i=0 prelude->featured, 1 featured->madebymad, ...
-   * S[i] = startScrollY for PROJECT_ORDER[i].
+   * Pairs: i=0 prelude->first project, 1 first->second, ...
+   * S[i] = startScrollY for projectRows[i].
    */
   function pairFromScroll(scrollY, transitionPx, isRm) {
-    if (!projectRows || projectRows.length !== PROJECT_ORDER.length) {
+    if (!projectRows || projectRows.length === 0) {
       return { from: PRELUDE, to: "featured", t: 0, displayId: "featured" };
     }
     var S = projectRows;
     var T = transitionPx;
-    var s0 = S[0].startScrollY;
-    var s1 = S[1].startScrollY;
-    var s2 = S[2].startScrollY;
-    var s3 = S[3].startScrollY;
+    var firstId = S[0].id;
+    var i;
 
-    if (scrollY < s0) {
-      return { from: PRELUDE, to: "featured", t: 0, displayId: "featured" };
+    if (scrollY < S[0].startScrollY) {
+      return { from: PRELUDE, to: firstId, t: 0, displayId: firstId };
     }
-    if (scrollY < s0 + T) {
-      return {
-        from: PRELUDE,
-        to: "featured",
-        t: tForWindow(scrollY, s0, T, isRm),
-        displayId: "featured"
-      };
+
+    for (i = 0; i < S.length; i += 1) {
+      var current = S[i];
+      var from = i === 0 ? PRELUDE : S[i - 1].id;
+      var to = current.id;
+      var next = S[i + 1];
+
+      if (scrollY < current.startScrollY + T) {
+        return {
+          from: from,
+          to: to,
+          t: tForWindow(scrollY, current.startScrollY, T, isRm),
+          displayId: to
+        };
+      }
+
+      if (next && scrollY < next.startScrollY) {
+        return { from: to, to: next.id, t: 0, displayId: next.id };
+      }
     }
-    if (scrollY < s1) {
-      return { from: "featured", to: "madebymad", t: 0, displayId: "madebymad" };
-    }
-    if (scrollY < s1 + T) {
-      return {
-        from: "featured",
-        to: "madebymad",
-        t: tForWindow(scrollY, s1, T, isRm),
-        displayId: "madebymad"
-      };
-    }
-    if (scrollY < s2) {
-      return { from: "madebymad", to: "odds", t: 0, displayId: "odds" };
-    }
-    if (scrollY < s2 + T) {
-      return {
-        from: "madebymad",
-        to: "odds",
-        t: tForWindow(scrollY, s2, T, isRm),
-        displayId: "odds"
-      };
-    }
-    if (scrollY < s3) {
-      return { from: "odds", to: "curves", t: 0, displayId: "curves" };
-    }
-    if (scrollY < s3 + T) {
-      return {
-        from: "odds",
-        to: "curves",
-        t: tForWindow(scrollY, s3, T, isRm),
-        displayId: "curves"
-      };
-    }
-    return { from: "odds", to: "curves", t: 1, displayId: "curves" };
+
+    var last = S[S.length - 1].id;
+    return { from: prevId(last), to: last, t: 1, displayId: last };
   }
 
   function canEvaluateDetach() {
-    return Boolean(elProjectsArea && projectRows && projectRows.length >= 4);
+    return Boolean(elProjectsArea && projectRows && projectRows.length > 0);
   }
 
   function shouldDetach(scrollY, transitionPx) {
     if (!canEvaluateDetach()) {
       return false;
     }
-    var s3 = projectRows[3].startScrollY;
-    if (scrollY < s3 + transitionPx) {
+    var last = projectRows[projectRows.length - 1];
+    if (scrollY < last.startScrollY + transitionPx) {
       return false;
     }
     var b = elProjectsArea.getBoundingClientRect().bottom;
@@ -282,8 +262,8 @@
     if (!canEvaluateDetach()) {
       return true;
     }
-    var s3 = projectRows[3].startScrollY;
-    if (scrollY < s3 + transitionPx - DETACH_SCROLL_SLACK) {
+    var last = projectRows[projectRows.length - 1];
+    if (scrollY < last.startScrollY + transitionPx - DETACH_SCROLL_SLACK) {
       return true;
     }
     var b = elProjectsArea.getBoundingClientRect().bottom;
@@ -291,23 +271,14 @@
   }
 
   function clearSectionTextColors() {
-    var sels = ["h2.section-title", "p.prose.section-title", "p.section-header__meta"];
     if (!projectRows) {
       return;
     }
     var i;
     for (i = 0; i < projectRows.length; i += 1) {
-      var content = projectRows[i].section.querySelector(".section-header__content");
-      if (!content) {
-        continue;
-      }
-      var j;
-      for (j = 0; j < sels.length; j += 1) {
-        var el = content.querySelector(sels[j]);
-        if (el) {
-          el.style.removeProperty("color");
-        }
-      }
+      projectRows[i].section.style.removeProperty("--section-title-color");
+      projectRows[i].section.style.removeProperty("--section-body-color");
+      projectRows[i].section.style.removeProperty("--section-meta-color");
     }
   }
 
@@ -321,22 +292,9 @@
     var cTitle = lerpColor(c0.title, c1.title, a);
     var cBody = lerpColor(c0.body, c1.body, a);
     var cMeta = lerpColor(c0.meta, c1.meta, a);
-    var content = section.querySelector(".section-header__content");
-    if (!content) {
-      return;
-    }
-    var tEl = content.querySelector("h2.section-title");
-    var bEl = content.querySelector("p.prose.section-title");
-    var mEl = content.querySelector("p.section-header__meta");
-    if (tEl) {
-      tEl.style.setProperty("color", rgbString(cTitle), "important");
-    }
-    if (bEl) {
-      bEl.style.setProperty("color", rgbString(cBody), "important");
-    }
-    if (mEl) {
-      mEl.style.setProperty("color", rgbString(cMeta), "important");
-    }
+    section.style.setProperty("--section-title-color", rgbString(cTitle));
+    section.style.setProperty("--section-body-color", rgbString(cBody));
+    section.style.setProperty("--section-meta-color", rgbString(cMeta));
   }
 
   function applyStage(pair) {
@@ -396,8 +354,9 @@
 
     if (document.documentElement.classList.contains("is-project-stage-detached")) {
       clearSectionTextColors();
-      lastPair = { from: "odds", to: "curves", t: 1 };
-      lastDisplayId = "curves";
+      var lastProjectId = projectRows[projectRows.length - 1].id;
+      lastPair = { from: prevId(lastProjectId), to: lastProjectId, t: 1 };
+      lastDisplayId = lastProjectId;
       lastMode = currentMode();
       return;
     }
@@ -418,8 +377,6 @@
 
   function runFrame() {
     raf = 0;
-    var transitionPx = window.innerHeight * TRANSITION_RATIO;
-    recomputeStartScrollY();
     compute();
   }
 
@@ -438,8 +395,8 @@
   }
 
   function onResize() {
-    cacheColorTable();
     cacheProjectRows();
+    cacheColorTable();
     schedule();
   }
 
@@ -477,7 +434,7 @@
     }
     elProjectsArea = document.querySelector(".projects-area");
     cacheProjectRows();
-    if (!projectRows || projectRows.length !== PROJECT_ORDER.length) {
+    if (!projectRows || projectRows.length === 0) {
       return;
     }
     reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

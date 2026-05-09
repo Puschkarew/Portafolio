@@ -4,6 +4,16 @@ on:
   pull_request:
   push:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: portfolio-quality-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   detect_changes:
@@ -22,12 +32,15 @@ jobs:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             BASE="${{ github.event.pull_request.base.sha }}"
             HEAD="${{ github.event.pull_request.head.sha }}"
-          else
+          elif [ "${{ github.event_name }}" = "push" ]; then
             BASE="${{ github.event.before }}"
             HEAD="${{ github.sha }}"
             if [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
               BASE="$(git rev-parse HEAD~1)"
             fi
+          else
+            BASE="$(git rev-parse HEAD~1)"
+            HEAD="${{ github.sha }}"
           fi
 
           CHANGED="$(git diff --name-only "$BASE" "$HEAD")"
@@ -46,7 +59,7 @@ jobs:
             echo "changelog_changed=false" >> "$GITHUB_OUTPUT"
           fi
 
-          if echo "$CHANGED" | grep -Eq '^(eleventy\.config\.cjs|src/|styles/|select-icons/|tests/|scripts/|playwright\.config\.ts|package\.json|package-lock\.json|docs/figma-audit/build-dod\.md|docs/figma-audit/changelog\.md|docs/figma-audit/user-tasks\.md|docs/figma-audit/components-checklist\.md|docs/figma-audit/layout-rules\.md|docs/figma-audit/hardcodes-map\.md|docs/figma-audit/parity-backlog\.md)$'; then
+          if echo "$CHANGED" | grep -Eq '^(\.github/workflows/|eleventy\.config\.cjs|src/|styles/|select-icons/|tests/|scripts/|playwright\.config\.ts|package\.json|package-lock\.json|docs/figma-audit/build-dod\.md|docs/figma-audit/changelog\.md|docs/figma-audit/user-tasks\.md|docs/figma-audit/components-checklist\.md|docs/figma-audit/layout-rules\.md|docs/figma-audit/hardcodes-map\.md|docs/figma-audit/parity-backlog\.md)$'; then
             echo "run_smoke=true" >> "$GITHUB_OUTPUT"
           else
             echo "run_smoke=false" >> "$GITHUB_OUTPUT"
@@ -86,7 +99,8 @@ jobs:
           PLAYWRIGHT_PROJECTS: chromium,firefox
         run: npm run smoke
       - name: Live parity reminder (local gate)
-        run: echo "Reminder: run npm run verify:slice locally (with LIVE_PARITY_SLICE) before closing each vertical slice."
+        run: |
+          echo "Reminder: run npm run verify:slice locally (with LIVE_PARITY_SLICE) before closing each vertical slice."
 
   lightweight:
     runs-on: ubuntu-latest
@@ -94,3 +108,75 @@ jobs:
     if: needs.detect_changes.outputs.run_smoke != 'true'
     steps:
       - run: echo "No smoke-relevant changes detected. Contract integrity checks still passed."
+
+  quality_passed:
+    runs-on: ubuntu-latest
+    needs: [detect_changes, contract_integrity, smoke, lightweight]
+    if: always()
+    steps:
+      - name: Confirm required gates passed
+        env:
+          CONTRACT_RESULT: ${{ needs.contract_integrity.result }}
+          SMOKE_RESULT: ${{ needs.smoke.result }}
+          LIGHTWEIGHT_RESULT: ${{ needs.lightweight.result }}
+          RUN_SMOKE: ${{ needs.detect_changes.outputs.run_smoke }}
+        shell: bash
+        run: |
+          if [ "$CONTRACT_RESULT" != "success" ]; then
+            echo "contract_integrity did not pass: $CONTRACT_RESULT"
+            exit 1
+          fi
+
+          if [ "$RUN_SMOKE" = "true" ]; then
+            if [ "$SMOKE_RESULT" != "success" ]; then
+              echo "smoke did not pass: $SMOKE_RESULT"
+              exit 1
+            fi
+          else
+            if [ "$LIGHTWEIGHT_RESULT" != "success" ]; then
+              echo "lightweight did not pass: $LIGHTWEIGHT_RESULT"
+              exit 1
+            fi
+          fi
+
+  build_pages:
+    runs-on: ubuntu-latest
+    needs: quality_passed
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build GitHub Pages artifact
+        env:
+          SITE_BUILD_AT: ${{ github.event.head_commit.timestamp }}
+        run: npm run build-ghpages
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy_pages:
+    runs-on: ubuntu-latest
+    needs: build_pages
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

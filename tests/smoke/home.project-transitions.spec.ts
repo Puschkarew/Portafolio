@@ -31,6 +31,10 @@ test.describe("home project scroll transitions (desktop stage)", () => {
     expect(s0.transitionPx).toBe(900 * 0.5);
 
     const projects = s0.projects;
+    const domProjectIds = await page.evaluate(() =>
+      [...document.querySelectorAll(".projects-area section[data-project]")].map((el) => el.getAttribute("data-project"))
+    );
+    expect(projects.map((p) => p.id)).toEqual(domProjectIds);
     expect(projects.map((p) => p.id)).toEqual(["featured", "madebymad", "odds", "curves"]);
     const sFeat = projects[0].startY;
     const sMad = projects[1].startY;
@@ -270,5 +274,26 @@ test.describe("home project scroll transitions (mobile stage)", () => {
       return meta ? getComputedStyle(meta).color : "";
     });
     expect(midMadMeta).not.toBe(beforeMadMeta);
+
+    const textContract = await page.evaluate(() => {
+      const section = document.querySelector('[data-project="madebymad"]') as HTMLElement | null;
+      const title = section?.querySelector("h2.section-title") as HTMLElement | null;
+      const body = section?.querySelector("p.prose.section-title") as HTMLElement | null;
+      const meta = section?.querySelector("p.section-header__meta") as HTMLElement | null;
+      return {
+        titleInline: title?.style.color || "",
+        bodyInline: body?.style.color || "",
+        metaInline: meta?.style.color || "",
+        titleVar: section?.style.getPropertyValue("--section-title-color") || "",
+        bodyVar: section?.style.getPropertyValue("--section-body-color") || "",
+        metaVar: section?.style.getPropertyValue("--section-meta-color") || ""
+      };
+    });
+    expect(textContract.titleInline).toBe("");
+    expect(textContract.bodyInline).toBe("");
+    expect(textContract.metaInline).toBe("");
+    expect(textContract.titleVar).not.toBe("");
+    expect(textContract.bodyVar).not.toBe("");
+    expect(textContract.metaVar).not.toBe("");
   });
 });

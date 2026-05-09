@@ -181,6 +181,14 @@
     }
   }
 
+  function hitSourceName(sourceLink, index) {
+    if (sourceLink.matches(".site-header__project")) return "project";
+    if (sourceLink.matches(".site-header__contact")) return "contact";
+    if (sourceLink.matches(".site-header__mobile-trigger")) return "mobile-trigger";
+    if (sourceLink.matches(".site-header__link")) return "nav-" + index;
+    return "link-" + index;
+  }
+
   function buildOverlayNodes() {
     if (!headerEl) return;
     var existingTextLayer = headerEl.querySelector(".site-header__visual-text-layer");
@@ -217,6 +225,7 @@
       a = document.createElement("a");
       a.className = "site-header__hit-link";
       a.href = sourceLinks[h].getAttribute("href") || "#";
+      a.setAttribute("data-header-hit-source", hitSourceName(sourceLinks[h], h));
       a.setAttribute("aria-hidden", "true");
       a.tabIndex = -1;
       hitLayer.appendChild(a);

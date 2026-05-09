@@ -5,7 +5,9 @@ test("mobile menu uses fixed visual blend text and locks page scroll", async ({ 
   await page.setViewportSize({ width: 390, height: 852 });
   await page.goto(runtimeHomeUrl);
 
-  await page.locator(".site-header__hit-link").last().click({ force: true });
+  const mobileHitLink = page.locator('.site-header__hit-link[data-header-hit-source="mobile-trigger"]');
+  await expect(mobileHitLink).toBeAttached({ timeout: 15_000 });
+  await mobileHitLink.click({ force: true });
   await expect(page.locator(".mobile-menu")).toBeVisible();
 
   const state = await page.evaluate(() => {
@@ -14,6 +16,7 @@ test("mobile menu uses fixed visual blend text and locks page scroll", async ({ 
     const firstVisualText = visualTexts[0];
     const closeButton = document.querySelector(".mobile-menu__close") as HTMLElement | null;
     const firstLink = document.querySelector(".mobile-menu__link") as HTMLElement | null;
+    const mobileHitLinks = document.querySelectorAll('.site-header__hit-link[data-header-hit-source="mobile-trigger"]');
     const menuRect = menu?.getBoundingClientRect();
     const visualStyle = firstVisualText ? getComputedStyle(firstVisualText) : null;
 
@@ -40,6 +43,7 @@ test("mobile menu uses fixed visual blend text and locks page scroll", async ({ 
           }
         : null,
       menuZIndex: menu ? Number(getComputedStyle(menu).zIndex) : null,
+      mobileHitLinkCount: mobileHitLinks.length,
       sourceCloseColor: closeButton ? getComputedStyle(closeButton).color : null,
       sourceLinkColor: firstLink ? getComputedStyle(firstLink).color : null,
       activeClass: document.documentElement.classList.contains("is-mobile-menu-open"),
@@ -52,6 +56,7 @@ test("mobile menu uses fixed visual blend text and locks page scroll", async ({ 
   expect(state.menuRect).toEqual(state.viewport);
   expect(state.htmlOverflow).toBe("hidden");
   expect(state.bodyOverflow).toBe("hidden");
+  expect(state.mobileHitLinkCount).toBe(1);
   expect(state.visualTextCount).toBe(5);
   expect(state.firstVisualText).toMatchObject({
     display: "block",
