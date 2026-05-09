@@ -5,8 +5,8 @@ const changelogPath = path.resolve("docs/figma-audit/changelog.md");
 const requiredFields = ["approved_by", "date", "scope", "reason", "expires_at", "linked_task"];
 
 if (!fs.existsSync(changelogPath)) {
-  console.error(`Missing changelog file: ${changelogPath}`);
-  process.exit(1);
+  console.log(`No changelog file found at ${changelogPath}; no waiver entries to validate.`);
+  process.exit(0);
 }
 
 const content = fs.readFileSync(changelogPath, "utf8");

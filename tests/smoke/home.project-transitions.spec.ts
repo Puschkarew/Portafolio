@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { runtimeHomeUrl } from "./runtime-home";
 
 type ScrubState = {
@@ -7,6 +7,55 @@ type ScrubState = {
   projects: { id: string; startY: number }[];
   pair: { from: string; to: string; t: number };
 };
+
+async function readScrubState(page: Page) {
+  return page.evaluate(() => {
+    return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState();
+  });
+}
+
+async function scrollToAndWait(page: Page, y: number) {
+  await page.evaluate((targetY) => {
+    window.scrollTo(0, targetY);
+  }, y);
+  await page.waitForFunction(
+    (targetY) => {
+      return Math.abs(window.scrollY - (targetY as number)) < 2;
+    },
+    y
+  );
+}
+
+async function scrollToAndWaitForPair(
+  page: Page,
+  y: number,
+  expected: { from: string; to: string; t?: number; precision?: number }
+) {
+  await scrollToAndWait(page, y);
+  await expect
+    .poll(
+      async () => {
+        const state = await readScrubState(page);
+        return `${state.pair.from}->${state.pair.to}`;
+      },
+      { timeout: 3_000 }
+    )
+    .toBe(`${expected.from}->${expected.to}`);
+
+  if (typeof expected.t === "number") {
+    await expect
+      .poll(
+        async () => {
+          const state = await readScrubState(page);
+          return state.pair.t;
+        },
+        { timeout: 3_000 }
+      )
+      .toBeCloseTo(expected.t, expected.precision ?? 1);
+  }
+
+  return (await readScrubState(page)).pair;
+}
 
 test.describe("home project scroll transitions (desktop stage)", () => {
   test.use({ viewport: { width: 1512, height: 900 } });
@@ -24,9 +73,7 @@ test.describe("home project scroll transitions (desktop stage)", () => {
           .projects.length === 4
     );
 
-    const s0 = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState();
-    });
+    const s0 = await readScrubState(page);
     expect(s0.mode).toBe("desktop");
     expect(s0.transitionPx).toBe(900 * 0.5);
 
@@ -40,66 +87,26 @@ test.describe("home project scroll transitions (desktop stage)", () => {
     const sMad = projects[1].startY;
     const T = s0.transitionPx;
 
-    await page.evaluate((y) => {
-      window.scrollTo(0, y);
-    }, sFeat - 10);
-    let pair = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().pair;
-    });
+    let pair = await scrollToAndWaitForPair(page, sFeat - 10, { from: "prelude", to: "featured", t: 0 });
     expect(pair.t).toBe(0);
 
-    await page.evaluate((y) => {
-      window.scrollTo(0, y);
-    }, sFeat + T * 0.5);
-    await page.waitForFunction(
-      (y) => {
-        return Math.abs(window.scrollY - (y as number)) < 2;
-      },
-      sFeat + T * 0.5
-    );
-    await new Promise((r) => {
-      setTimeout(r, 100);
-    });
-    pair = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().pair;
-    });
+    pair = await scrollToAndWaitForPair(page, sFeat + T * 0.5, { from: "prelude", to: "featured", t: 0.5 });
     expect(pair.t).toBeCloseTo(0.5, 1);
 
     /* Just below s0+T: t→1 (prelude→featured). At exactly s0+T the state becomes (featured, madebymad) t=0 — same art layers. */
-    await page.evaluate((y) => {
-      window.scrollTo(0, y);
-    }, sFeat + T - 1);
-    await new Promise((r) => setTimeout(r, 100));
-    pair = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().pair;
-    });
+    pair = await scrollToAndWaitForPair(page, sFeat + T - 1, { from: "prelude", to: "featured", t: 1 });
     expect(pair.from).toBe("prelude");
     expect(pair.to).toBe("featured");
     expect(pair.t).toBeCloseTo(1, 1);
 
     /* Halfway between end of first 50vh window and start of madebymad: settled (featured, madebymad) t=0. */
     const ySettledFbm = sFeat + T + (sMad - (sFeat + T)) * 0.5;
-    await page.evaluate((y) => {
-      window.scrollTo(0, y);
-    }, ySettledFbm);
-    await new Promise((r) => setTimeout(r, 100));
-    const tLo = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().pair.t;
-    });
-    expect(tLo).toBe(0);
+    pair = await scrollToAndWaitForPair(page, ySettledFbm, { from: "featured", to: "madebymad", t: 0 });
+    expect(pair.t).toBe(0);
 
-    const sMadebymad = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().projects[1]
-        .startY;
-    });
+    const sMadebymad = (await readScrubState(page)).projects[1].startY;
     const yMidFbm = sMadebymad + T * 0.5;
-    await page.evaluate((y) => {
-      window.scrollTo(0, y);
-    }, yMidFbm);
-    await new Promise((r) => setTimeout(r, 100));
-    const tMidF = await page.evaluate(() => {
-      return (window as unknown as { __portfolioProjectScrub: { getState: () => ScrubState } }).__portfolioProjectScrub.getState().pair;
-    });
+    const tMidF = await scrollToAndWaitForPair(page, yMidFbm, { from: "featured", to: "madebymad", t: 0.5 });
     expect(tMidF.from).toBe("featured");
     expect(tMidF.to).toBe("madebymad");
     expect(tMidF.t).toBeCloseTo(0.5, 1);
