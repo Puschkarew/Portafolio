@@ -24,7 +24,7 @@ const plannedAssets = [
   { type: "image", source: "/assets/figma/Schrfit Foundry/Plakat.jpg" },
   { type: "image", source: "/assets/figma/Schrfit Foundry/Bering.svg" },
   { type: "image", source: "/assets/figma/Schrift Shop/Product Page.png" },
-  { type: "image", source: "/assets/figma/mybox/Illustration 01.png" },
+  { type: "image", source: "/assets/figma/mybox/Illustration 01.jpg" },
   { type: "image", source: "/assets/figma/mybox/Illustration 08.jpg" },
   { type: "image", source: "/assets/figma/MOS/Slide 04.svg" },
   { type: "image", source: "/assets/figma/MOS/Slide 06.png" },
@@ -32,6 +32,7 @@ const plannedAssets = [
 ]
 
 const unusedLargeAssets = [
+  "/assets/figma/mybox/Illustration 01.png",
   "/assets/figma/mybox/Illustration 08.png",
   "/assets/figma/Made by Mad/CleanShot 2026-05-06 at 14.21.50 2.mp4"
 ]

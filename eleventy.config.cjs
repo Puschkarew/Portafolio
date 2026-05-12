@@ -37,7 +37,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("styles")
   eleventyConfig.addPassthroughCopy("select-icons")
   eleventyConfig.addPassthroughCopy("CV")
-  eleventyConfig.setServerPassthroughCopyBehavior("passthrough")
+  eleventyConfig.setServerPassthroughCopyBehavior("copy")
 
   const urlFilter = eleventyConfig.getFilter?.("url")
 
