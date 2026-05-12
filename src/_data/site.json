@@ -6,7 +6,9 @@
   "name": "Vladimir Pushkarev",
   "author": "Vladimir Pushkarev",
   "description": "Portfolio of Vladimir Pushkarev, featuring type-driven digital design, case studies, experiments, and hand-coded web projects.",
-  "image": "/assets/figma/card-roger-excoffon.png",
-  "imageAlt": "Vladimir Pushkarev portfolio project preview",
+  "image": "/assets/preview/Preview.jpg",
+  "imageAlt": "Vladimir Pushkarev portfolio preview",
+  "imageWidth": "3024",
+  "imageHeight": "1688",
   "themeColor": "#f4f1e8"
 }
