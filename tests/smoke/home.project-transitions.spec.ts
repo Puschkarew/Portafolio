@@ -57,6 +57,23 @@ async function scrollToAndWaitForPair(
   return (await readScrubState(page)).pair;
 }
 
+async function readProjectArtRender(page: Page, id: string) {
+  return page.evaluate((projectId) => {
+    const art = document.querySelector(`[data-art-for="${projectId}"]`) as HTMLElement | null;
+    const visual = art?.querySelector("img, .humans-shader-slot") as HTMLElement | null;
+    const variable = art?.style.getPropertyValue("--project-art-blur") || (art ? getComputedStyle(art).getPropertyValue("--project-art-blur") : "");
+    const filter = visual ? getComputedStyle(visual).filter : "";
+    const match = filter.match(/blur\(([-0-9.]+)px\)/);
+
+    return {
+      blurVariable: Number.parseFloat(variable) || 0,
+      filter,
+      filterBlur: match ? Number.parseFloat(match[1]) || 0 : 0,
+      opacity: art ? Number.parseFloat(art.style.opacity || getComputedStyle(art).opacity) || 0 : 0
+    };
+  }, id);
+}
+
 test.describe("home project scroll transitions (desktop stage)", () => {
   test.use({ viewport: { width: 1512, height: 900 } });
 
@@ -111,21 +128,23 @@ test.describe("home project scroll transitions (desktop stage)", () => {
     expect(tMidF.to).toBe("madebymad");
     expect(tMidF.t).toBeCloseTo(0.5, 1);
 
-    const artBlurF = await page.evaluate(() => {
-      const a = document.querySelector('[data-art-for="featured"]') as HTMLElement | null;
-      const b = document.querySelector('[data-art-for="madebymad"]') as HTMLElement | null;
-      if (!a || !b) {
-        return { af: 0, bf: 0 };
-      }
-      const aBlur = a.style.getPropertyValue("--project-art-blur") || getComputedStyle(a).getPropertyValue("--project-art-blur");
-      const bBlur = b.style.getPropertyValue("--project-art-blur") || getComputedStyle(b).getPropertyValue("--project-art-blur");
-      return {
-        af: Number.parseFloat(aBlur) || 0,
-        bf: Number.parseFloat(bBlur) || 0
-      };
-    });
-    expect(artBlurF.af).toBeCloseTo(16, 0);
-    expect(artBlurF.bf).toBeCloseTo(16, 0);
+    const featuredArt = await readProjectArtRender(page, "featured");
+    const madebymadArt = await readProjectArtRender(page, "madebymad");
+    expect(featuredArt.blurVariable).toBeCloseTo(16, 0);
+    expect(featuredArt.filterBlur).toBeCloseTo(16, 0);
+    expect(madebymadArt.blurVariable).toBeCloseTo(16, 0);
+    expect(madebymadArt.filterBlur).toBeCloseTo(16, 0);
+
+    const sCurves = (await readScrubState(page)).projects[3].startY;
+    const yMidOddsCurves = sCurves + T * 0.5;
+    const tMidCurves = await scrollToAndWaitForPair(page, yMidOddsCurves, { from: "odds", to: "curves", t: 0.5 });
+    expect(tMidCurves.from).toBe("odds");
+    expect(tMidCurves.to).toBe("curves");
+    expect(tMidCurves.t).toBeCloseTo(0.5, 1);
+
+    const curvesArt = await readProjectArtRender(page, "curves");
+    expect(curvesArt.blurVariable).toBeCloseTo(16, 0);
+    expect(curvesArt.filterBlur).toBeCloseTo(16, 0);
   });
 
   test("no html data-header-theme at madebymad pre-sticky, odds pre-sticky, odds mid transition", async ({ page }) => {
