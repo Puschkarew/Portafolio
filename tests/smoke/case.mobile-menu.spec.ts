@@ -6,7 +6,7 @@ const runtimeMyboxUrl = process.env.RUNTIME_HOME_PATH
   ? `file://${path.join(path.dirname(runtimeHomePath), "mybox", "index.html")}`
   : new URL("mybox/", runtimeHomeUrl.replace(/\/?$/, "/")).href
 
-test("case page (Mybox) mobile menu opens from last header hit link", async ({ page }) => {
+test("case page (MYBOX) mobile menu opens from last header hit link", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 852 })
   await page.goto(runtimeMyboxUrl, { waitUntil: "networkidle" })
   const mobileHitLink = page.locator('.site-header__hit-link[data-header-hit-source="mobile-trigger"]')

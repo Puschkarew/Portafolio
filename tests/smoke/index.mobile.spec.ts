@@ -25,8 +25,8 @@ test("Index table mobile shows Name and Year on one row (Figma mobile Index line
   await expect(page.locator(".index-table__item:not(.index-table__item--head) .index-table__cell--type").first()).toBeHidden()
   await expect(page.locator(".index-table__item:not(.index-table__item--head) .index-table__cell--viewcase").first()).toBeHidden()
 
-  const myboxRow = page.locator(".index-table__item").filter({ hasText: "Mybox" }).first()
-  const myboxLink = myboxRow.getByRole("link", { name: "Mybox, 2025" })
+  const myboxRow = page.locator(".index-table__item").filter({ hasText: "MYBOX" }).first()
+  const myboxLink = myboxRow.getByRole("link", { name: "MYBOX, 2025" })
   await expect(myboxLink).toBeVisible()
   await expect(myboxLink).toHaveClass(/index-table__line--linked/)
 

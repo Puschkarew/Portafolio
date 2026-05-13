@@ -6,9 +6,9 @@
   "name": "Vladimir Pushkarev",
   "author": "Vladimir Pushkarev",
   "description": "Portfolio of Vladimir Pushkarev, featuring type-driven digital design, case studies, experiments, and hand-coded web projects.",
-  "image": "/assets/preview/Preview.jpg",
+  "image": "/assets/preview/preview-social.jpg",
   "imageAlt": "Vladimir Pushkarev portfolio preview",
-  "imageWidth": "3024",
-  "imageHeight": "1688",
+  "imageWidth": "1200",
+  "imageHeight": "670",
   "themeColor": "#f4f1e8"
 }

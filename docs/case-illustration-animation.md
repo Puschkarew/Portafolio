@@ -21,9 +21,9 @@ Keep this list aligned with `caseMediaSelector` in `scroll-reveal.js`. Today it 
 | `.case-content .case-reference-poster__frame` | Poster frame wrapper |
 | `.case-content .case-editorial-gallery__item` | Editorial gallery tiles |
 | `.case-content .case-editorial-gallery__detail` | Detail figures |
-| `.case-content .mybox-media` | MyBox exported media modules |
-| `.case-content .mybox-token` | MyBox palette cells |
-| `.case-content .mybox-collage__item` | MyBox collage images with independent reveal |
+| `.case-content .mybox-media` | MYBOX exported media modules |
+| `.case-content .mybox-token` | MYBOX palette cells |
+| `.case-content .mybox-collage__item` | MYBOX collage images with independent reveal |
 | `.case-content .mezhdu-media` | Mezhdu Prochim large exported media modules |
 | `.case-content .mezhdu-social-item` | Mezhdu Prochim social/course tiles |
 | `.case-content .mezhdu-collage__media:not(.mezhdu-collage-composition)` | Mezhdu Prochim collage figure when it is a single media wrapper (no layered composition) |
