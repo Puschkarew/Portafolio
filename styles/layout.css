@@ -21,6 +21,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+::selection {
+  background: var(--color-text-accent-red);
+  color: var(--color-text-inverse);
+}
+
+::-moz-selection {
+  background: var(--color-text-accent-red);
+  color: var(--color-text-inverse);
+}
+
 /* Shared page shell keeps the header in the same stacking context as the page content. */
 .site-shell {
   position: relative;
