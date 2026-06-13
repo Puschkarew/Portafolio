@@ -1,0 +1,4 @@
+Contact: mailto:puschkarev.vv@gmail.com
+Canonical: https://puschkarew.com/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-06-13T23:59:59Z

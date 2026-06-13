@@ -1,6 +1,36 @@
-import * as THREE from 'three';
-import { SVGLoader } from 'three/addons/loaders/SVGLoader.js';
-import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
+import * as THREE from '../vendor/three/three.module.js';
+import { SVGLoader } from '../vendor/three/addons/loaders/SVGLoader.js';
+import * as BufferGeometryUtils from '../vendor/three/addons/utils/BufferGeometryUtils.js';
+
+function renderErrorScreen(nodes) {
+    const panel = document.createElement('div');
+    Object.assign(panel.style, {
+        alignItems: 'center',
+        background: '#222',
+        bottom: '0',
+        color: 'white',
+        display: 'flex',
+        flexDirection: 'column',
+        fontFamily: 'monospace',
+        justifyContent: 'center',
+        left: '0',
+        padding: '20px',
+        position: 'fixed',
+        right: '0',
+        textAlign: 'center',
+        top: '0',
+        zIndex: '10000'
+    });
+    panel.replaceChildren(...nodes);
+    document.body.replaceChildren(panel);
+}
+
+function errorParagraph(text, styles = {}) {
+    const paragraph = document.createElement('p');
+    paragraph.textContent = text;
+    Object.assign(paragraph.style, styles);
+    return paragraph;
+}
 
 // Обработка ошибок загрузки
 window.addEventListener('error', (event) => {
@@ -13,17 +43,18 @@ window.addEventListener('error', (event) => {
     );
     if (isModuleError) {
         const protocol = window.location.protocol;
-        let errorMsg = 'Ошибка загрузки модулей. ';
+        const nodes = [errorParagraph('Ошибка загрузки модулей.')];
         if (protocol === 'file:') {
-            errorMsg += 'Вы открыли файл через file:// протокол. ES модули не работают через file:// из-за CORS ограничений.<br><br>Используйте локальный сервер:<br>';
-            errorMsg += '• Python: <code>python -m http.server 8000</code><br>';
-            errorMsg += '• Node.js: <code>npx http-server</code><br>';
-            errorMsg += '• Затем откройте <code>http://localhost:8000</code>';
+            nodes.push(
+                errorParagraph('Вы открыли файл через file:// протокол. ES модули не работают через file:// из-за CORS ограничений.'),
+                errorParagraph('Используйте локальный сервер: python -m http.server 8000 или npx http-server.'),
+                errorParagraph('Затем откройте http://localhost:8000.')
+            );
         } else {
-            errorMsg += 'Убедитесь, что ваш браузер поддерживает ES модули и import maps.';
+            nodes.push(errorParagraph('Убедитесь, что ваш браузер поддерживает ES модули.'));
         }
-        errorMsg += '<br><br>Проверьте консоль браузера (F12) для деталей.';
-        document.body.innerHTML = '<div style="color: white; padding: 20px; font-family: monospace; background: #222; position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10000;">' + errorMsg + '</div>';
+        nodes.push(errorParagraph('Проверьте консоль браузера (F12) для деталей.'));
+        renderErrorScreen(nodes);
     }
 });
 
@@ -211,19 +242,6 @@ function formatHexColor(value, fallback) {
     return normalizeHexColor(value, fallback).toUpperCase();
 }
 
-function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (char) => {
-        const entities = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#39;'
-        };
-        return entities[char] || char;
-    });
-}
-
 // ========== НАСТРОЙКА SVG ==========
 // Конфигурация пресетов Desktop/Mobile
 const PRESETS = {
@@ -381,8 +399,17 @@ function syncPointColor() {
 }
 
 function renderSvgLoadError() {
-    const escapedSvgPath = escapeHtml(SVG_PATH);
-    document.body.innerHTML = `<div style="color: white; padding: 20px; font-family: monospace; background: #222; position: fixed; top: 0; left: 0; right: 0; bottom: 0; display: flex; align-items: center; justify-content: center; z-index: 10000; flex-direction: column; text-align: center;"><h2>Ошибка загрузки SVG</h2><p>Не удалось загрузить SVG файл "${escapedSvgPath}".</p><p style="color: #999; font-size: 12px; margin-top: 20px;">Проверьте консоль браузера (F12) для деталей.</p></div>`;
+    const title = document.createElement('h2');
+    title.textContent = 'Ошибка загрузки SVG';
+    renderErrorScreen([
+        title,
+        errorParagraph(`Не удалось загрузить SVG файл "${SVG_PATH}".`),
+        errorParagraph('Проверьте консоль браузера (F12) для деталей.', {
+            color: '#999',
+            fontSize: '12px',
+            marginTop: '20px'
+        })
+    ]);
 }
 
 let glowRenderTarget = null;
